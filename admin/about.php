@@ -9,12 +9,12 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright           The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Marquee
- * @since        2.5.0
- * @author     Mage, Mamba
- * @version    $Id $
+ * @package             Marquee
+ * @since               2.5.0
+ * @author              Mage, Mamba
+ * @version             $Id $
  **/
 
 include '../../../include/cp_header.php';
@@ -43,5 +43,3 @@ echo $about_admin->addNavigation('about.php');
 echo $about_admin->renderabout();
 echo "<div class='center smallsmall italic pad5'><b>" . $xoopsModule->getVar("name") . "</b> is maintained by the <a class='tooltip' rel='external' href='http://www.xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>";
 xoops_cp_footer();
-
-?>

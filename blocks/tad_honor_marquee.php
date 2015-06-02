@@ -7,56 +7,55 @@
 // ------------------------------------------------------------------------- //
 
 //區塊主函式 (tad_honor_marquee)
-function tad_honor_marquee($options){
- global $xoopsDB;
+function tad_honor_marquee($options) {
+    global $xoopsDB;
 
-  //{$options[0]} : 取出幾筆榮譽榜資料？
-  $block['options0']=$options[0];
-  //{$options[1]} : 跑馬燈方向
-  $block['options1']=$options[1];
-  //{$options[2]} : 跑馬燈速度
-  $block['options2']=$options[2];
-  //{$options[3]} : 跑馬燈CSS外觀設定
-  $block['options3']=$options[3];
-  //{$options[4]} : 跑馬燈條目CSS外觀設定
-  $block['options4']=$options[4];
-  $sql="select * from `".$xoopsDB->prefix("tad_honor")."` order by `honor_date` desc";
-  $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'],3, mysql_error());
-  $content='';
-  $i=0;
-  while($all = $xoopsDB->fetchArray($result)){
-    $content[$i]=$all;
-    $i++;
-  }
-  $block['bootstrap_version']=$_SESSION['bootstrap'];
-  $block['content']=$content;
-  return $block;
+    //{$options[0]} : 取出幾筆榮譽榜資料？
+    $block['options0'] = $options[0];
+    //{$options[1]} : 跑馬燈方向
+    $block['options1'] = $options[1];
+    //{$options[2]} : 跑馬燈速度
+    $block['options2'] = $options[2];
+    //{$options[3]} : 跑馬燈CSS外觀設定
+    $block['options3'] = $options[3];
+    //{$options[4]} : 跑馬燈條目CSS外觀設定
+    $block['options4'] = $options[4];
+    $sql               = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc";
+    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
+    $content = '';
+    $i       = 0;
+    while ($all = $xoopsDB->fetchArray($result)) {
+        $content[$i] = $all;
+        $i++;
+    }
+    $block['bootstrap_version'] = $_SESSION['bootstrap'];
+    $block['content']           = $content;
+
+    return $block;
 }
 
-
 //區塊編輯函式 (tad_honor_marquee_edit)
-function tad_honor_marquee_edit($options){
+function tad_honor_marquee_edit($options) {
 
+    //"跑馬燈方向"預設值
+    $checked_1_0 = ($options[1] == 'left') ? 'checked' : '';
+    $checked_1_1 = ($options[1] == 'right') ? 'checked' : '';
+    $checked_1_2 = ($options[1] == 'up') ? 'checked' : '';
+    $checked_1_3 = ($options[1] == 'down') ? 'checked' : '';
 
-  //"跑馬燈方向"預設值
-  $checked_1_0=($options[1]=='left')?'checked':'';
-  $checked_1_1=($options[1]=='right')?'checked':'';
-  $checked_1_2=($options[1]=='up')?'checked':'';
-  $checked_1_3=($options[1]=='down')?'checked':'';
+    //"跑馬燈速度"預設值
+    $selected_2_0 = ($options[2] == '2') ? 'selected' : '';
+    $selected_2_1 = ($options[2] == '4') ? 'selected' : '';
+    $selected_2_2 = ($options[2] == '6') ? 'selected' : '';
+    $selected_2_3 = ($options[2] == '8') ? 'selected' : '';
+    $selected_2_4 = ($options[2] == '10') ? 'selected' : '';
 
-  //"跑馬燈速度"預設值
-  $selected_2_0=($options[2]=='2')?'selected':'';
-  $selected_2_1=($options[2]=='4')?'selected':'';
-  $selected_2_2=($options[2]=='6')?'selected':'';
-  $selected_2_3=($options[2]=='8')?'selected':'';
-  $selected_2_4=($options[2]=='10')?'selected':'';
-
-  $form="
+    $form = "
   <table>
     <tr>
       <th>
         <!--取出幾筆榮譽榜資料？-->
-        "._MB_TAD_HONOR_MARQUEE_OPT0."
+        " . _MB_TADHONOR_MARQUEE_OPT0 . "
       </th>
       <td>
         <input type='text' name='options[0]' value='{$options[0]}'>
@@ -65,7 +64,7 @@ function tad_honor_marquee_edit($options){
     <tr>
       <th>
         <!--跑馬燈方向-->
-        "._MB_TAD_HONOR_MARQUEE_OPT1."
+        " . _MB_TADHONOR_MARQUEE_OPT1 . "
       </th>
       <td>
           <input type='radio' name='options[1]' value='left' $checked_1_0> left
@@ -77,7 +76,7 @@ function tad_honor_marquee_edit($options){
     <tr>
       <th>
         <!--跑馬燈速度-->
-        "._MB_TAD_HONOR_MARQUEE_OPT2."
+        " . _MB_TADHONOR_MARQUEE_OPT2 . "
       </th>
       <td>
         <select name='options[2]'>
@@ -92,7 +91,7 @@ function tad_honor_marquee_edit($options){
     <tr>
       <th>
         <!--跑馬燈CSS外觀設定-->
-        "._MB_TAD_HONOR_MARQUEE_OPT3."
+        " . _MB_TADHONOR_MARQUEE_OPT3 . "
       </th>
       <td>
         <textarea name='options[3]'>{$options[3]}</textarea>
@@ -101,7 +100,7 @@ function tad_honor_marquee_edit($options){
     <tr>
       <th>
         <!--跑馬燈條目CSS外觀設定-->
-        "._MB_TAD_HONOR_MARQUEE_OPT4."
+        " . _MB_TADHONOR_MARQUEE_OPT4 . "
       </th>
       <td>
         <textarea name='options[4]'>{$options[4]}</textarea>
@@ -109,7 +108,6 @@ function tad_honor_marquee_edit($options){
     </tr>
   </table>
   ";
-  return $form;
-}
 
-?>
+    return $form;
+}
