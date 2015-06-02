@@ -18,5 +18,4 @@ function mk_dir($dir=""){
     mkdir($dir, 0777);
   }
 }
-*/
-?>
+*/;

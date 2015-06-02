@@ -1,0 +1,6 @@
+"Tad_honor 1.0 version released 2015-01-22"
+=================================================
+1. Be With tadtools 2.63
+2. Support BootStrap2,3 version automatically switch
+3. There are two blocks
+4. Support Search function

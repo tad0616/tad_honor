@@ -1,4 +1,4 @@
-Read Me First
-=============
+README FIRST
+-----------------------
 
-Please make sure that you download the XOOPS Icon Set, and upload it to uploads/images directory
+This module is used to present school's Honor Roll
