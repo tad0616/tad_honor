@@ -7,27 +7,29 @@
 // ------------------------------------------------------------------------- //
 
 //區塊主函式 (tad_honor_list)
-function tad_honor_list($options) {
+function tad_honor_list($options)
+{
     global $xoopsDB;
 
     //{$options[0]} : 顯示幾筆榮譽榜資料？
     $block['options0'] = $options[0];
-    $sql               = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc";
+    $sql = "select  * from `" . $xoopsDB->prefix("tad_honor") . "`  order by `honor_date` desc limit $options[0] ";
     $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
     $content = '';
-    $i       = 0;
+    $i = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;
         $i++;
     }
     $block['bootstrap_version'] = $_SESSION['bootstrap'];
-    $block['content']           = $content;
+    $block['content'] = $content;
 
     return $block;
 }
 
 //區塊編輯函式 (tad_honor_list_edit)
-function tad_honor_list_edit($options) {
+function tad_honor_list_edit($options)
+{
 
     $form = "
   <table>
