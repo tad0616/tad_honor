@@ -1,20 +1,13 @@
 <?php
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 /*-----------引入檔案區--------------*/
-include_once "../../../mainfile.php";
-include_once "../function.php";
-$xoopsOption['template_main'] = (isset($_SESSION['bootstrap']) and $_SESSION['bootstrap'] == '3') ? 'tad_honor_adm_main_b3.html' : 'tad_honor_adm_main.html';
+$xoopsOption['template_main'] = 'tad_honor_adm_main.html';
 include_once "header.php";
-
+include_once "../function.php";
 /*-----------功能函數區--------------*/
 
 //tad_honor編輯表單
-function tad_honor_form($honor_sn = "") {
+function tad_honor_form($honor_sn = "")
+{
     global $xoopsDB, $xoopsTpl, $xoopsModuleConfig;
 
     //抓取預設值
@@ -25,7 +18,6 @@ function tad_honor_form($honor_sn = "") {
     }
 
     //預設值設定
-
 
     //設定 honor_sn 欄位的預設值
     $honor_sn = !isset($DBV['honor_sn']) ? $honor_sn : $DBV['honor_sn'];
@@ -92,7 +84,7 @@ function tad_honor_form($honor_sn = "") {
     $xoopsTpl->assign('up_honor_sn_form', $up_honor_sn_form);
 
     //加入Token安全機制
-    include_once(XOOPS_ROOT_PATH . "/class/xoopsformloader.php");
+    include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
     $token      = new XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign("token_form", $token_form);
@@ -104,20 +96,22 @@ function tad_honor_form($honor_sn = "") {
 }
 
 //以流水號取得某筆tad_honor資料
-function get_tad_honor($honor_sn = "") {
+function get_tad_honor($honor_sn = "")
+{
     global $xoopsDB;
     if (empty($honor_sn)) {
         return;
     }
-    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-    $data = $xoopsDB->fetchArray($result);
+    $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
+    $result = $xoopsDB->query($sql) or web_error($sql);
+    $data   = $xoopsDB->fetchArray($result);
 
     return $data;
 }
 
 //新增資料到tad_honor中
-function insert_tad_honor() {
+function insert_tad_honor()
+{
     global $xoopsDB, $xoopsUser;
 
     //取得使用者編號
@@ -129,7 +123,7 @@ function insert_tad_honor() {
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts                   =& MyTextSanitizer::getInstance();
+    $myts                   = MyTextSanitizer::getInstance();
     $_POST['honor_title']   = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date']    = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
@@ -138,11 +132,10 @@ function insert_tad_honor() {
     $sql = "insert into `" . $xoopsDB->prefix("tad_honor") . "`
   (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`)
   values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
-    $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
+    $xoopsDB->query($sql) or web_error($sql);
 
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
-
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
@@ -154,7 +147,8 @@ function insert_tad_honor() {
 }
 
 //更新tad_honor某一筆資料
-function update_tad_honor($honor_sn = "") {
+function update_tad_honor($honor_sn = "")
+{
     global $xoopsDB, $xoopsUser;
 
     //取得使用者編號
@@ -166,7 +160,7 @@ function update_tad_honor($honor_sn = "") {
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts                   =& MyTextSanitizer::getInstance();
+    $myts                   = MyTextSanitizer::getInstance();
     $_POST['honor_title']   = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date']    = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
@@ -180,8 +174,7 @@ function update_tad_honor($honor_sn = "") {
    `honor_url` = '{$_POST['honor_url']}' ,
    `honor_uid` = '{$uid}'
   where `honor_sn` = '$honor_sn'";
-    $xoopsDB->queryF($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-
+    $xoopsDB->queryF($sql) or web_error($sql);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
@@ -192,13 +185,14 @@ function update_tad_honor($honor_sn = "") {
 }
 
 //刪除tad_honor某筆資料資料
-function delete_tad_honor($honor_sn = "") {
+function delete_tad_honor($honor_sn = "")
+{
     global $xoopsDB, $isAdmin;
     if (empty($honor_sn)) {
         return;
     }
     $sql = "delete from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
+    $xoopsDB->queryF($sql) or web_error($sql);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
@@ -207,26 +201,26 @@ function delete_tad_honor($honor_sn = "") {
 }
 
 //以流水號秀出某筆tad_honor資料內容
-function show_one_tad_honor($honor_sn = "") {
+function show_one_tad_honor($honor_sn = "")
+{
     global $xoopsDB, $xoopsTpl, $isAdmin;
 
     if (empty($honor_sn)) {
         return;
     } else {
-        $honor_sn = (int)($honor_sn);
+        $honor_sn = (int) ($honor_sn);
     }
 
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-    $all = $xoopsDB->fetchArray($result);
+    $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
+    $result = $xoopsDB->query($sql) or web_error($sql);
+    $all    = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
     foreach ($all as $k => $v) {
         $$k = $v;
     }
-
 
     //計數器欄位值 +1
     add_tad_honor_counter($honor_sn);
@@ -272,20 +266,22 @@ function show_one_tad_honor($honor_sn = "") {
 }
 
 //新增tad_honor計數器
-function add_tad_honor_counter($honor_sn = '') {
+function add_tad_honor_counter($honor_sn = '')
+{
     global $xoopsDB;
     if (empty($honor_sn)) {
         return;
     }
     $sql = "update `" . $xoopsDB->prefix("tad_honor") . "` set `honor_counter` = `honor_counter` + 1 where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
+    $xoopsDB->queryF($sql) or web_error($sql);
 }
 
 //列出所有tad_honor資料
-function list_tad_honor() {
+function list_tad_honor()
+{
     global $xoopsDB, $xoopsTpl, $isAdmin;
 
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
@@ -293,12 +289,12 @@ function list_tad_honor() {
     $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` ";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
-    $PageBar = getPageBar($sql, 20, 10, null, null, $bootstrap);
+    $PageBar = getPageBar($sql, 20, 10, null, null, 3);
     $bar     = $PageBar['bar'];
     $sql     = $PageBar['sql'];
     $total   = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
+    $result = $xoopsDB->query($sql) or web_error($sql);
 
     $all_content = "";
     $i           = 0;
@@ -307,7 +303,6 @@ function list_tad_honor() {
         foreach ($all as $k => $v) {
             $$k = $v;
         }
-
 
         //過濾讀出的變數值
         $honor_title   = $myts->htmlSpecialChars($honor_title);
@@ -349,19 +344,11 @@ function list_tad_honor() {
 
 /*-----------執行動作判斷區----------*/
 $op       = empty($_REQUEST['op']) ? "" : $_REQUEST['op'];
-$honor_sn = empty($_REQUEST['honor_sn']) ? "" : (int)($_REQUEST['honor_sn']);
-$files_sn = empty($_REQUEST['files_sn']) ? "" : (int)($_REQUEST['files_sn']);
+$honor_sn = empty($_REQUEST['honor_sn']) ? "" : (int) ($_REQUEST['honor_sn']);
+$files_sn = empty($_REQUEST['files_sn']) ? "" : (int) ($_REQUEST['files_sn']);
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
-
-
-    //替換資料
-    //case "replace_tad_honor":
-    //replace_tad_honor();
-    //header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
-    //break;
-
     //新增資料
     case "insert_tad_honor":
         $honor_sn = insert_tad_honor();
@@ -374,11 +361,9 @@ switch ($op) {
         header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
         break;
 
-
     case "tad_honor_form":
         tad_honor_form($honor_sn);
         break;
-
 
     case "delete_tad_honor":
         delete_tad_honor($honor_sn);
@@ -391,7 +376,6 @@ switch ($op) {
         exit;
         break;
 
-
     default:
         if (empty($honor_sn)) {
             list_tad_honor();
@@ -401,7 +385,7 @@ switch ($op) {
         }
         break;
 
-    /*---判斷動作請貼在上方---*/
+        /*---判斷動作請貼在上方---*/
 }
 
 /*-----------秀出結果區--------------*/

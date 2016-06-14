@@ -1,13 +1,7 @@
 <?php
-
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 //區塊主函式 (tad_honor_marquee)
-function tad_honor_marquee($options) {
+function tad_honor_marquee($options)
+{
     global $xoopsDB;
 
     //{$options[0]} : 取出幾筆榮譽榜資料？
@@ -21,21 +15,21 @@ function tad_honor_marquee($options) {
     //{$options[4]} : 跑馬燈條目CSS外觀設定
     $block['options4'] = $options[4];
     $sql               = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc";
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-    $content = '';
-    $i       = 0;
+    $result            = $xoopsDB->query($sql) or web_error($sql);
+    $content           = '';
+    $i                 = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;
         $i++;
     }
-    $block['bootstrap_version'] = $_SESSION['bootstrap'];
-    $block['content']           = $content;
+    $block['content'] = $content;
 
     return $block;
 }
 
 //區塊編輯函式 (tad_honor_marquee_edit)
-function tad_honor_marquee_edit($options) {
+function tad_honor_marquee_edit($options)
+{
 
     //"跑馬燈方向"預設值
     $checked_1_0 = ($options[1] == 'left') ? 'checked' : '';

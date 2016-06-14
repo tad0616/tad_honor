@@ -1,11 +1,4 @@
 <?php
-
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 //區塊主函式 (tad_honor_list)
 function tad_honor_list($options)
 {
@@ -13,15 +6,14 @@ function tad_honor_list($options)
 
     //{$options[0]} : 顯示幾筆榮譽榜資料？
     $block['options0'] = $options[0];
-    $sql = "select  * from `" . $xoopsDB->prefix("tad_honor") . "`  order by `honor_date` desc limit $options[0] ";
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-    $content = '';
-    $i = 0;
+    $sql               = "select  * from `" . $xoopsDB->prefix("tad_honor") . "`  order by `honor_date` desc limit $options[0] ";
+    $result            = $xoopsDB->query($sql) or web_error($sql);
+    $content           = '';
+    $i                 = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;
         $i++;
     }
-    $block['bootstrap_version'] = $_SESSION['bootstrap'];
     $block['content'] = $content;
 
     return $block;

@@ -1,24 +1,19 @@
 <?php
-//  ------------------------------------------------------------------------ //
-// ¥»¼Ò²Õ¥Ñ tad »s§@
-// »s§@¤é´Á¡G2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-include_once XOOPS_ROOT_PATH."/modules/tadtools/language/{$xoopsConfig['language']}/modinfo_common.php";
+include_once XOOPS_ROOT_PATH . "/modules/tadtools/language/{$xoopsConfig['language']}/modinfo_common.php";
 
-define('_MI_TADHONOR_NAME','ºaÅAº]');
-define('_MI_TADHONOR_AUTHOR','ºaÅAº]');
-define('_MI_TADHONOR_CREDITS','');
-define('_MI_TADHONOR_DESC','ºaÅAº]¼Ò²Õ');
-define('_MI_TADHONOR_AUTHOR_WEB','Tad ±Ð§÷ºô');
-define('_MI_TADHONOR_ADMENU1', "ºaÅAº]ºÞ²z");
-define('_MI_TADHONOR_ADMENU1_DESC', "ºaÅAº]ºÞ²z");
+define('_MI_TADHONOR_NAME', 'æ¦®è­½æ¦œ');
+define('_MI_TADHONOR_AUTHOR', 'æ¦®è­½æ¦œ');
+define('_MI_TADHONOR_CREDITS', '');
+define('_MI_TADHONOR_DESC', 'æ¦®è­½æ¦œæ¨¡çµ„');
+define('_MI_TADHONOR_AUTHOR_WEB', 'Tad æ•™æç¶²');
+define('_MI_TADHONOR_ADMENU1', "æ¦®è­½æ¦œç®¡ç†");
+define('_MI_TADHONOR_ADMENU1_DESC', "æ¦®è­½æ¦œç®¡ç†");
 
-define('_MI_TADHONOR_LIST_BLOCK_NAME' , '³Ì·sºaÅAº]');
-define('_MI_TADHONOR_LIST_BLOCK_DESC' , '³Ì·sºaÅAº]°Ï¶ô (tad_honor_list)');
+define('_MI_TADHONOR_LIST_BLOCK_NAME', 'æœ€æ–°æ¦®è­½æ¦œ');
+define('_MI_TADHONOR_LIST_BLOCK_DESC', 'æœ€æ–°æ¦®è­½æ¦œå€å¡Š (tad_honor_list)');
 
-define('_MI_TADHONOR_MARQUEE_BLOCK_NAME' , 'ºaÅAº]¶]°¨¿O');
-define('_MI_TADHONOR_MARQUEE_BLOCK_DESC' , 'ºaÅAº]¶]°¨¿O°Ï¶ô (tad_honor_marquee)');
-define('_MI_TADHONOR_HONOR_UNIT' , 'µo¥¬³æ¦ì³]©w');
-define('_MI_TADHONOR_HONOR_UNIT_DESC' , 'µo¥¬³æ¦ì³]©w');
-define('_MI_TADHONOR_HONOR_UNIT_DEFAULT' , '±Ð°È³B;¾Ç°È³B;®Õªø«Ç');
+define('_MI_TADHONOR_MARQUEE_BLOCK_NAME', 'æ¦®è­½æ¦œè·‘é¦¬ç‡ˆ');
+define('_MI_TADHONOR_MARQUEE_BLOCK_DESC', 'æ¦®è­½æ¦œè·‘é¦¬ç‡ˆå€å¡Š (tad_honor_marquee)');
+define('_MI_TADHONOR_HONOR_UNIT', 'ç™¼å¸ƒå–®ä½è¨­å®š');
+define('_MI_TADHONOR_HONOR_UNIT_DESC', 'ç™¼å¸ƒå–®ä½è¨­å®š');
+define('_MI_TADHONOR_HONOR_UNIT_DEFAULT', 'æ•™å‹™è™•;å­¸å‹™è™•;æ ¡é•·å®¤');

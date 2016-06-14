@@ -1,10 +1,4 @@
 <?php
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 define('_MB_TADHONOR_LIST_OPT0', 'Show Hall of Fame marquee?');
 
 define('_MB_TADHONOR_MARQUEE_OPT0', 'Remove the Hall of Fame marquee?');

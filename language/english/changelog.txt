@@ -1,4 +1,13 @@
-"Tad_honor 1.0 version released 2015-01-22"
+Tad Honor 1.1 (2016-05-27 released)
+=================================================
+1.Support PHP7
+2.Remove BootStrap2
+3.Fixed the file can't be download problem
+4.Corrected block set is not working properly
+5.New icons
+
+
+Tad Honor 1.0 (2015-01-22 released)
 =================================================
 1. Be With tadtools 2.63
 2. Support BootStrap2,3 version automatically switch
