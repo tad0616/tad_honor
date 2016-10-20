@@ -24,18 +24,18 @@ function tad_honor_list_edit($options)
 {
 
     $form = "
-  <table>
-    <tr>
-      <th>
-        <!--顯示幾筆榮譽榜資料？-->
-        " . _MB_TADHONOR_LIST_OPT0 . "
-      </th>
-      <td>
-        <input type='text' name='options[0]' value='{$options[0]}'>
-      </td>
-    </tr>
-  </table>
-  ";
+    <table>
+      <tr>
+        <th>
+          <!--顯示幾筆榮譽榜資料？-->
+          " . _MB_TADHONOR_LIST_OPT0 . "
+        </th>
+        <td>
+          <input type='text' name='options[0]' value='{$options[0]}'>
+        </td>
+      </tr>
+    </table>
+    ";
 
     return $form;
 }

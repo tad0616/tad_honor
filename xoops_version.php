@@ -3,7 +3,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADHONOR_NAME;
-$modversion['version']     = '1.1';
+$modversion['version']     = '1.2';
 $modversion['description'] = _MI_TADHONOR_DESC;
 $modversion['author']      = _MI_TADHONOR_AUTHOR;
 $modversion['credits']     = _MI_TADHONOR_CREDITS;
@@ -14,7 +14,7 @@ $modversion['image']       = "images/logo_{$xoopsConfig['language']}.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['release_date']        = '2016-05-27';
+$modversion['release_date']        = '2016-07-07';
 $modversion['module_website_url']  = 'http://tad0616.net';
 $modversion['module_website_name'] = _MI_TADHONOR_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
@@ -58,12 +58,12 @@ $modversion['search']['func'] = "tad_honor_search";
 
 //---樣板設定---//
 $i                                          = 0;
-$modversion['templates'][$i]['file']        = 'tad_honor_adm_main_b3.html';
-$modversion['templates'][$i]['description'] = 'tad_honor_adm_main_b3.html for bootstrap3';
+$modversion['templates'][$i]['file']        = 'tad_honor_adm_main.tpl';
+$modversion['templates'][$i]['description'] = 'tad_honor_adm_main.tpl for bootstrap3';
 
 $i++;
-$modversion['templates'][$i]['file']        = 'tad_honor_index_b3.html';
-$modversion['templates'][$i]['description'] = 'tad_honor_index_b3.html';
+$modversion['templates'][$i]['file']        = 'tad_honor_index.tpl';
+$modversion['templates'][$i]['description'] = 'tad_honor_index.tpl';
 
 //---區塊設定---//
 $i = 0;
@@ -72,7 +72,7 @@ $modversion['blocks'][$i]['file']        = 'tad_honor_list.php';
 $modversion['blocks'][$i]['name']        = _MI_TADHONOR_LIST_BLOCK_NAME;
 $modversion['blocks'][$i]['description'] = _MI_TADHONOR_LIST_BLOCK_DESC;
 $modversion['blocks'][$i]['show_func']   = 'tad_honor_list';
-$modversion['blocks'][$i]['template']    = 'tad_honor_list.html';
+$modversion['blocks'][$i]['template']    = 'tad_honor_list.tpl';
 $modversion['blocks'][$i]['edit_func']   = 'tad_honor_list_edit';
 $modversion['blocks'][$i]['options']     = '10';
 
@@ -81,7 +81,7 @@ $modversion['blocks'][$i]['file']        = 'tad_honor_marquee.php';
 $modversion['blocks'][$i]['name']        = _MI_TADHONOR_MARQUEE_BLOCK_NAME;
 $modversion['blocks'][$i]['description'] = _MI_TADHONOR_MARQUEE_BLOCK_DESC;
 $modversion['blocks'][$i]['show_func']   = 'tad_honor_marquee';
-$modversion['blocks'][$i]['template']    = 'tad_honor_marquee.html';
+$modversion['blocks'][$i]['template']    = 'tad_honor_marquee.tpl';
 $modversion['blocks'][$i]['edit_func']   = 'tad_honor_marquee_edit';
 $modversion['blocks'][$i]['options']     = '10|left|8||';
 

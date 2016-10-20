@@ -1,7 +1,7 @@
 <?php
 /*-----------引入檔案區--------------*/
 include_once "header.php";
-$xoopsOption['template_main'] = set_bootstrap("tad_honor_index.html");
+$xoopsOption['template_main'] = "tad_honor_index.tpl";
 include_once XOOPS_ROOT_PATH . "/header.php";
 /*-----------功能函數區--------------*/
 
@@ -107,7 +107,7 @@ function list_tad_honor()
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc ";
+    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by honor_date desc";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = getPageBar($sql, 20, 10, null, null, $bootstrap);
