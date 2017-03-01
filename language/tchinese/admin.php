@@ -15,3 +15,5 @@ define("_MA_TADHONOR_HONOR_UID", "發布者");
 
 define("_MA_TADHONOR_UP_HONOR_SN", "上傳");
 define("_MA_TADHONOR_SHOW_HONOR_SN_FILES", "上傳");
+define('_MA_TADHONOR_HONOR_PUBLISH_PERMISSIONS', "發布權限");
+define('_MA_TADHONOR_HONOR_PERMISSIONS_SETUP', "權限設定");

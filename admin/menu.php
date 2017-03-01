@@ -15,6 +15,12 @@ $adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU1_DESC;
 $adminmenu[$i]['icon']  = "{$icon_dir}button.png";
 
 $i++;
+$adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU2;
+$adminmenu[$i]['link']  = 'admin/power.php';
+$adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU2_DESC;
+$adminmenu[$i]['icon']  = "{$icon_dir}button.png";
+
+$i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
 $adminmenu[$i]['link']  = 'admin/about.php';
 $adminmenu[$i]['desc']  = _MI_TAD_ADMIN_ABOUT_DESC;

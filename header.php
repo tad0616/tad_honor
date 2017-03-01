@@ -9,8 +9,7 @@ if ($xoopsUser) {
     $isAdmin   = $xoopsUser->isAdmin($module_id);
 }
 
-$interface_menu[_TAD_TO_MOD]          = "index.php";
-$interface_menu[_MD_TADHONOR_SMNAME1] = "index.php";
+$interface_menu[_TAD_TO_MOD] = "index.php";
 
 if ($isAdmin) {
     $interface_menu[_TAD_TO_ADMIN] = "admin/main.php";

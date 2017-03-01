@@ -8,6 +8,8 @@ define('_MI_TADHONOR_DESC', '榮譽榜模組');
 define('_MI_TADHONOR_AUTHOR_WEB', 'Tad 教材網');
 define('_MI_TADHONOR_ADMENU1', "榮譽榜管理");
 define('_MI_TADHONOR_ADMENU1_DESC', "榮譽榜管理");
+define('_MI_TADHONOR_ADMENU2', "權限設定");
+define('_MI_TADHONOR_ADMENU2_DESC', "權限設定");
 
 define('_MI_TADHONOR_LIST_BLOCK_NAME', '最新榮譽榜');
 define('_MI_TADHONOR_LIST_BLOCK_DESC', '最新榮譽榜區塊 (tad_honor_list)');

@@ -8,7 +8,7 @@ include_once XOOPS_ROOT_PATH . "/header.php";
 //以流水號秀出某筆tad_honor資料內容
 function show_one_tad_honor($honor_sn = "")
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin;
+    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
 
     if (empty($honor_sn)) {
         return;
@@ -68,6 +68,7 @@ function show_one_tad_honor($honor_sn = "")
 
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('now_op', 'show_one_tad_honor');
+    $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
 }
 
 //新增tad_honor計數器
@@ -100,7 +101,7 @@ function delete_tad_honor($honor_sn = "")
 //列出所有tad_honor資料
 function list_tad_honor()
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin;
+    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -110,7 +111,7 @@ function list_tad_honor()
     $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by honor_date desc";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
-    $PageBar = getPageBar($sql, 20, 10, null, null, $bootstrap);
+    $PageBar = getPageBar($sql, 20, 10, null, null, 3);
     $bar     = $PageBar['bar'];
     $sql     = $PageBar['sql'];
     $total   = $PageBar['total'];
@@ -161,6 +162,9 @@ function list_tad_honor()
     $sweet_alert           = new sweet_alert();
     $delete_tad_honor_func = $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", "honor_sn");
     $xoopsTpl->assign('delete_tad_honor_func', $delete_tad_honor_func);
+
+    $xoopsTpl->assign('post_power', power_chk("tad_honor_post", 1));
+    $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
 }
 
 /*-----------執行動作判斷區----------*/
@@ -170,6 +174,17 @@ $files_sn = empty($_REQUEST['files_sn']) ? "" : (int) ($_REQUEST['files_sn']);
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
+    //新增資料
+    case "insert_tad_honor":
+        $honor_sn = insert_tad_honor();
+        header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
+        break;
+
+    //更新資料
+    case "update_tad_honor":
+        update_tad_honor($honor_sn);
+        header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
+        break;
 
     case "tad_honor_form":
         tad_honor_form($honor_sn);
@@ -193,7 +208,6 @@ switch ($op) {
     default:
         if (empty($honor_sn)) {
             list_tad_honor();
-            //$main.=tad_honor_form($honor_sn);
         } else {
             show_one_tad_honor($honor_sn);
         }

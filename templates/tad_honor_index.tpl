@@ -1,114 +1,96 @@
-<{$bootstrap}>
-<{$jquery}>
+<div style="background: #ffffff url('images/confetti.png') no-repeat; background-size: contain; ">
 <{$toolbar}>
 
+<{if $now_op=="tad_honor_form"}>
+  <{includeq file="$xoops_rootpath/modules/tad_honor/templates/tad_honor_form.tpl"}>
+<{/if}>
 
 <!--顯示某一筆資料-->
 <{if $now_op=="show_one_tad_honor"}>
-  <{if $isAdmin}>
+  <{if $isAdmin or $post_power}>
     <{$delete_tad_honor_func}>
   <{/if}>
-  <h2 class="text-center"><{$honor_title}></h2>
+  <style type="text/css" media="screen">
+    canvas#canvas {
+      display: block;
+      zindex: 1;
+      pointer-events: none;
+      min-height: 400px;
+      width: 100%;
+      position: absolute;
+    }
 
+    #confetti_content {
+      min-height: 400px;
+      position: relative;
+    }
+  </style>
+  <script src="class/confetti.js" type="text/javascript" charset="utf-8"></script>
 
-  
-  <!--發佈日期-->
-  <div class="row">
-    <label class="col-md-2 text-right">
-      <{$smarty.const._MD_TADHONOR_HONOR_DATE}>
-    </label>
-    <div class="col-md-2">
-      <{$honor_date}>
-    </div>
+  <canvas id="canvas"></canvas>
+  <div id="confetti_content">
+    <h2><{$honor_title}></h2>
 
-    <!--發布單位-->
-    <label class="col-md-2 text-right">
-      <{$smarty.const._MD_TADHONOR_HONOR_UNIT}>
-    </label>
-    <div class="col-md-2">
-      <{$honor_unit}>/<{$honor_uid}>
-    </div>
-
-    <!--點閱次數-->
-    <label class="col-md-2 text-right">
-      <{$smarty.const._MD_TADHONOR_HONOR_COUNTER}>
-    </label>
-    <div class="col-md-2">
-      <{$honor_counter}>
-    </div>
-  </div>
-
-  <!--詳細內容-->
-  <div class="row">
-    <div class="col-md-12">
-      
-      <div class="well">
-        <{$honor_content}>
-      </div>
-    </div>
-  </div>
-
-  <!--相關連結-->
-  <{if $honor_url}>
+    <!--詳細內容-->
     <div class="row">
-      <label class="col-md-2 text-right">
-        <{$smarty.const._MD_TADHONOR_HONOR_URL}>
-      </label>
-      <div class="col-md-10">
-        <{$honor_url}>
+      <div class="col-sm-12">
+        <div style="border-top: 1px dashed #927156; border-bottom: 1px dashed #927156; margin:10px auto 30px auto; padding:15px; ">
+          <{$honor_content}>
+        </div>
       </div>
     </div>
-  <{/if}>
 
-
-  <{if $show_honor_sn_files}>
-    <div class="row">
-      <div class="col-md-12">
-        <{$show_honor_sn_files}>
+    <!--相關連結-->
+    <{if $honor_url}>
+      <div class="alert alert-warning">
+        <{$smarty.const._MD_TADHONOR_HONOR_URL}><{$smarty.const._TAD_FOR}><a href="<{$honor_url}>" target="_blank"><{$honor_url}></a>
       </div>
-    </div>
-  <{/if}>
-
-  <div class="text-right">
-    <{if $isAdmin}>
-      <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
-      <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
-      <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
     <{/if}>
-    <a href="<{$action}>" class="btn btn-success"><{$smarty.const._TAD_HOME}></a>
+
+
+    <{if $show_honor_sn_files}>
+      <{$show_honor_sn_files}>
+    <{/if}>
+
+    <!--發佈日期-->
+    <div class="alert alert-info">
+      <div class="pull-right">
+        <{if $isAdmin or ($post_power and $uid==$honor_uid)}>
+          <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
+          <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
+          <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
+        <{/if}>
+      </div>
+      <{$honor_unit}> <{$honor_uid}> 於 <{$honor_date}> 發布，共有 <{$honor_counter}> 人次閱讀
+    </div>
   </div>
+
 <{/if}>
 
 <!--列出所有資料-->
-
 <{if $now_op=="list_tad_honor"}>
   <{if $all_content}>
-    <{if $isAdmin}>
+    <{if $isAdmin or $post_power}>
       <{$delete_tad_honor_func}>
     <{/if}>
 
     <table class="table table-striped table-hover">
       <thead>
-        <tr>
-          
-          <th>
-            <!--標題-->
-            <{$smarty.const._MD_TADHONOR_HONOR_TITLE}>
-          </th>
-          <th>
+        <tr class="info">
+          <th style="text-align: center;">
             <!--發佈日期-->
             <{$smarty.const._MD_TADHONOR_HONOR_DATE}>
           </th>
           <th>
+            <!--標題-->
+            <{$smarty.const._MD_TADHONOR_HONOR_TITLE}>
+          </th>
+          <th nowrap="nowrap" style="text-align: center;">
             <!--發布單位-->
             <{$smarty.const._MD_TADHONOR_HONOR_UNIT}>
           </th>
-          <th>
-            <!--點閱次數-->
-            <{$smarty.const._MD_TADHONOR_HONOR_COUNTER}>
-          </th>
-          <{if $isAdmin}>
-            <th><{$smarty.const._TAD_FUNCTION}></th>
+          <{if $isAdmin or $post_power}>
+            <th></th>
           <{/if}>
         </tr>
       </thead>
@@ -116,32 +98,26 @@
       <tbody>
         <{foreach from=$all_content item=data}>
           <tr>
-            
+            <td nowrap="nowrap" style="text-align: center;">
+              <!--發佈日期-->
+              <{$data.honor_date}>
+            </td>
             <td>
               <!--標題-->
               <{$data.honor_title_link}>
               <{$data.list_file}>
             </td>
-
-            <td>
-              <!--發佈日期-->
-              <{$data.honor_date}>
-            </td>
-
-            <td>
+            <td style="text-align: center;">
               <!--發布單位-->
               <{$data.honor_unit}>
             </td>
 
-            <td>
-              <!--點閱次數-->
-              <{$data.honor_counter}>
-            </td>
-
-            <{if $isAdmin}>
+            <{if $isAdmin or $post_power}>
               <td>
-                <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
-                <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                <{if $uid==$data.honor_uid}>
+                  <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
+                  <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                <{/if}>
               </td>
             <{/if}>
           </tr>
@@ -150,18 +126,20 @@
     </table>
 
 
-    <{if $isAdmin}>
+    <{if $isAdmin or $post_power}>
       <div class="text-right">
-        <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
+        <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
     <{/if}>
 
     <{$bar}>
   <{else}>
-    <{if $isAdmin}>
+    <{if $isAdmin or $post_power}>
       <div class="jumbotron text-center">
-        <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
+        <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
     <{/if}>
   <{/if}>
 <{/if}>
+
+</div>

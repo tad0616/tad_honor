@@ -8,6 +8,8 @@ define('_MI_TADHONOR_DESC', 'Honor Roll module');
 define('_MI_TADHONOR_AUTHOR_WEB', 'Tad teaching network');
 define('_MI_TADHONOR_ADMENU1', "Honor Roll Management");
 define('_MI_TADHONOR_ADMENU1_DESC', "Honor Roll Management");
+define('_MI_TADHONOR_ADMENU2', "Permissions Setup");
+define('_MI_TADHONOR_ADMENU2_DESC', "Permissions Setup");
 
 define('_MI_TADHONOR_LIST_BLOCK_NAME', 'New Hall of Fame');
 define('_MI_TADHONOR_LIST_BLOCK_DESC', 'Latest honor roll block (tad_honor_list)');
