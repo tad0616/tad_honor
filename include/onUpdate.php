@@ -8,7 +8,7 @@ function xoops_module_update_tad_honor(&$module, $old_version)
     mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_honor/file");
     mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_honor/image");
     mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_honor/image/.thumbs");
-//if(!chk_chk1()) go_update1();
+    //if(!chk_chk1()) go_update1();
 
     return true;
 }
@@ -17,7 +17,7 @@ function xoops_module_update_tad_honor(&$module, $old_version)
 function chk_chk1()
 {
     global $xoopsDB;
-    $sql    = "select count(`欄位`) from " . $xoopsDB->prefix("資料表");
+    $sql    = "SELECT count(`欄位`) FROM " . $xoopsDB->prefix("資料表");
     $result = $xoopsDB->query($sql);
     if (empty($result)) {
         return false;
@@ -30,7 +30,7 @@ function chk_chk1()
 function go_update1()
 {
     global $xoopsDB;
-    $sql = "ALTER TABLE " . $xoopsDB->prefix("資料表") . " ADD `欄位` smallint(5) NOT NULL";
+    $sql = "ALTER TABLE " . $xoopsDB->prefix("資料表") . " ADD `欄位` SMALLINT(5) NOT NULL";
     $xoopsDB->queryF($sql) or redirect_header(XOOPS_URL, 3, $xoopsDB->error());
 
     return true;
@@ -39,15 +39,15 @@ function go_update1()
 //建立目錄
 function mk_dir($dir = "")
 {
-//若無目錄名稱秀出警告訊息
+    //若無目錄名稱秀出警告訊息
     if (empty($dir)) {
         return;
     }
 
-//若目錄不存在的話建立目錄
+    //若目錄不存在的話建立目錄
     if (!is_dir($dir)) {
         umask(000);
-//若建立失敗秀出警告訊息
+        //若建立失敗秀出警告訊息
         mkdir($dir, 0777);
     }
 }
@@ -105,7 +105,6 @@ function delete_directory($dirname)
             } else {
                 delete_directory($dirname . '/' . $file);
             }
-
         }
     }
     closedir($dir_handle);
