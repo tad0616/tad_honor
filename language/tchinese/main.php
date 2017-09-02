@@ -12,6 +12,5 @@ define("_MD_TADHONOR_HONOR_UID", "發布者");
 define('_MD_TADHONOR_UP_HONOR_SN', "上傳");
 define('_MD_TADHONOR_SHOW_HONOR_SN_FILES', "上傳");
 
-define("_MD_TADHONOR_SHOW_HONOR_SN_FILES", "上傳");
 define("_MD_TADHONOR_HONOR_TITLE", "標題");
 define("_MD_TADHONOR_SMNAME1", "榮譽榜");
