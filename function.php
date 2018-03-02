@@ -139,9 +139,7 @@ function insert_tad_honor()
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
     $_POST['honor_url']     = $myts->addSlashes($_POST['honor_url']);
 
-    $sql = "insert into `" . $xoopsDB->prefix("tad_honor") . "`
-  (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`)
-  values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
+    $sql = "insert into `" . $xoopsDB->prefix("tad_honor") . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
     $xoopsDB->query($sql) or web_error($sql);
 
     //取得最後新增資料的流水編號

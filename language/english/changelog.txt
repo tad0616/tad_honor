@@ -1,3 +1,14 @@
+Tad Honor 1.4.2 (2017-11-21 released)
+=================================================
+1. To solve the problem of non-administrator can not modify the content
+2. Support PHP 7.1
+
+
+Tad Honor 1.4.1 (2017-09-28 released)
+=================================================
+1.Fixed the problem that the number of data displayed on the Marquee Block does not work correctly
+
+
 Tad Honor 1.4 (2017-06-16 released)
 =================================================
 1.Completion of accessibility 2.0 A level detection

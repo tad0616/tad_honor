@@ -5,7 +5,7 @@ function tad_honor_marquee($options)
     global $xoopsDB;
 
     //{$options[0]} : 取出幾筆榮譽榜資料？
-    $block['options0'] = $options[0];
+    $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
     $options[1] = intval($options[1]);
     if ($options[1] < 11 or $options[1] > 40) {
@@ -24,9 +24,9 @@ function tad_honor_marquee($options)
     }
     $block['options3'] = $options[3];
 
-    $sql     = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc";
+    $sql     = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc limit 0, {$options[0]}";
     $result  = $xoopsDB->query($sql) or web_error($sql);
-    $content = '';
+    $content = array();
     $i       = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;

@@ -56,7 +56,8 @@ function show_one_tad_honor($honor_sn = "")
     $xoopsTpl->assign('honor_counter', $honor_counter);
     $xoopsTpl->assign('honor_content', $honor_content);
     $xoopsTpl->assign('honor_url', $honor_url);
-    $xoopsTpl->assign('honor_uid', $uid_name);
+    $xoopsTpl->assign('honor_uid', $honor_uid);
+    $xoopsTpl->assign('uid_name', $uid_name);
 
     if (!file_exists(XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php")) {
         redirect_header("index.php", 3, _TAD_NEED_TADTOOLS);
@@ -69,6 +70,8 @@ function show_one_tad_honor($honor_sn = "")
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('now_op', 'show_one_tad_honor');
     $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
+    $xoopsTpl->assign('post_power', power_chk("tad_honor_post", 1));
+
 }
 
 //新增tad_honor計數器
@@ -118,7 +121,7 @@ function list_tad_honor()
 
     $result = $xoopsDB->query($sql) or web_error($sql);
 
-    $all_content = "";
+    $all_content = array();
     $i           = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
@@ -140,7 +143,8 @@ function list_tad_honor()
         $all_content[$i]['honor_counter']    = $honor_counter;
         $all_content[$i]['honor_content']    = $honor_content;
         $all_content[$i]['honor_url']        = $honor_url;
-        $all_content[$i]['honor_uid']        = $uid_name;
+        $all_content[$i]['honor_uid']        = $honor_uid;
+        $all_content[$i]['uid_name']         = $uid_name;
         $TadUpFiles->set_col("honor_sn", $honor_sn);
         $show_files                   = $TadUpFiles->show_files('up_honor_sn', true, 'small', true, false, null, null, false);
         $all_content[$i]['list_file'] = $show_files;

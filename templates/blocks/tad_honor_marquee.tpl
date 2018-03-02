@@ -12,7 +12,7 @@
   }
 
   ul.marquee li {
-    font: <{$block.options1}>px;
+    font-size: <{$block.options1}>px;
     padding: 3px 5px;
   }
 </style>
