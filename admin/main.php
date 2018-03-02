@@ -29,14 +29,14 @@ function show_one_tad_honor($honor_sn = "")
     if (empty($honor_sn)) {
         return;
     } else {
-        $honor_sn = (int) ($honor_sn);
+        $honor_sn = (int)($honor_sn);
     }
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
+    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
     $result = $xoopsDB->query($sql) or web_error($sql);
-    $all    = $xoopsDB->fetchArray($result);
+    $all = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
     foreach ($all as $k => $v) {
@@ -75,7 +75,7 @@ function show_one_tad_honor($honor_sn = "")
     $xoopsTpl->assign('honor_uid', $uid_name);
 
     if (!file_exists(XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php")) {
-        redirect_header("index.php", 3, _MA_NEED_TADTOOLS);
+        redirect_header("index.php", 3, _TAD_NEED_TADTOOLS);
     }
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php";
     $sweet_alert           = new sweet_alert();
@@ -107,7 +107,7 @@ function list_tad_honor()
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` ";
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_honor") . "` ";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = getPageBar($sql, 20, 10, null, null, 3);
@@ -155,7 +155,7 @@ function list_tad_honor()
     $xoopsTpl->assign('now_op', 'list_tad_honor');
 
     if (!file_exists(XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php")) {
-        redirect_header("index.php", 3, _MA_NEED_TADTOOLS);
+        redirect_header("index.php", 3, _TAD_NEED_TADTOOLS);
     }
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php";
     $sweet_alert           = new sweet_alert();
@@ -165,8 +165,8 @@ function list_tad_honor()
 
 /*-----------執行動作判斷區----------*/
 $op       = empty($_REQUEST['op']) ? "" : $_REQUEST['op'];
-$honor_sn = empty($_REQUEST['honor_sn']) ? "" : (int) ($_REQUEST['honor_sn']);
-$files_sn = empty($_REQUEST['files_sn']) ? "" : (int) ($_REQUEST['files_sn']);
+$honor_sn = empty($_REQUEST['honor_sn']) ? "" : (int)($_REQUEST['honor_sn']);
+$files_sn = empty($_REQUEST['files_sn']) ? "" : (int)($_REQUEST['files_sn']);
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -206,7 +206,7 @@ switch ($op) {
         }
         break;
 
-        /*---判斷動作請貼在上方---*/
+    /*---判斷動作請貼在上方---*/
 }
 
 /*-----------秀出結果區--------------*/
