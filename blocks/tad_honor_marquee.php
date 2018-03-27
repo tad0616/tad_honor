@@ -8,9 +8,11 @@ function tad_honor_marquee($options)
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
     $options[1] = intval($options[1]);
-    if ($options[1] < 11 or $options[1] > 40) {
+
+    if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
     }
+
     $block['options1'] = $options[1];
     $block['height']   = $options[1] + 8;
     //{$options[2]} : 背景顏色
@@ -41,8 +43,9 @@ function tad_honor_marquee($options)
 //區塊編輯函式 (tad_honor_marquee_edit)
 function tad_honor_marquee_edit($options)
 {
-    if ($options[1] < 11 or $options[1] > 30) {
-        $options[1] = 18;
+    $options[1] = intval($options[1]);
+    if ($options[1] < 11 or $options[1] > 60) {
+        $options[1] = 24;
     }
 
     if (is_numeric($options[2])) {
