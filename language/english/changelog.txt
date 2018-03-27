@@ -1,3 +1,8 @@
+Tad Honor 1.4.3 (released on 2018-03-27)
+=================================================
+1. Correct the invalidation of the text size setting of the marquee.
+2. Add new block more link
+
 Tad Honor 1.4.2 (2017-11-21 released)
 =================================================
 1. To solve the problem of non-administrator can not modify the content

@@ -1,4 +1,3 @@
-<!-- for bootstrap3-->
 <ul class="list-group">
   <{foreach from=$block.content item=data}>
     <li class="list-group-item">
@@ -8,3 +7,4 @@
     </li>
   <{/foreach}>
 </ul>
+<div class="text-right">[ <a href="<{$xoops_url}>/modules/tad_honor/index.php">more...</a> ]</div>

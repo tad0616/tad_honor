@@ -4,7 +4,7 @@
     var ctx;
     var W;
     var H;
-    var mp = 150; //max particles
+    var mp = 50; //max particles
     var particles = [];
     var angle = 0;
     var tiltAngle = 0;
