@@ -17,3 +17,5 @@ define('_MA_TADHONOR_UP_HONOR_SN', "上傳");
 define('_MA_TADHONOR_SHOW_HONOR_SN_FILES', "上傳");
 define('_MA_TADHONOR_HONOR_PUBLISH_PERMISSIONS', "發布權限");
 define('_MA_TADHONOR_HONOR_PERMISSIONS_SETUP', "權限設定");
+define('_MA_TADHONOR_NO_FRED', "沒有安裝 fred_honorboard，無須使用此功能");
+define('_MA_TADHONOR_IMPORT', "匯入");

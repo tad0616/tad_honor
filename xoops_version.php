@@ -3,7 +3,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADHONOR_NAME;
-$modversion['version']     = '1.43';
+$modversion['version']     = '1.44';
 $modversion['description'] = _MI_TADHONOR_DESC;
 $modversion['author']      = _MI_TADHONOR_AUTHOR;
 $modversion['credits']     = _MI_TADHONOR_CREDITS;
@@ -14,7 +14,7 @@ $modversion['image']       = "images/logo_{$xoopsConfig['language']}.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['release_date']        = '2018-03-27';
+$modversion['release_date']        = '2018-05-10';
 $modversion['module_website_url']  = 'http://tad0616.net';
 $modversion['module_website_name'] = _MI_TADHONOR_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
@@ -63,6 +63,9 @@ $modversion['templates'][$i]['description'] = 'tad_honor_adm_main.tpl';
 $i++;
 $modversion['templates'][$i]['file']        = 'tad_honor_adm_power.tpl';
 $modversion['templates'][$i]['description'] = 'tad_honor_adm_power.tpl';
+$i++;
+$modversion['templates'][$i]['file']        = 'tad_honor_adm_import.tpl';
+$modversion['templates'][$i]['description'] = 'tad_honor_adm_import.tpl';
 
 $i++;
 $modversion['templates'][$i]['file']        = 'tad_honor_index.tpl';

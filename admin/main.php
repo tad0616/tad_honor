@@ -29,14 +29,14 @@ function show_one_tad_honor($honor_sn = "")
     if (empty($honor_sn)) {
         return;
     } else {
-        $honor_sn = (int)($honor_sn);
+        $honor_sn = (int) ($honor_sn);
     }
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
+    $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
     $result = $xoopsDB->query($sql) or web_error($sql);
-    $all = $xoopsDB->fetchArray($result);
+    $all    = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
     foreach ($all as $k => $v) {
@@ -158,15 +158,15 @@ function list_tad_honor()
         redirect_header("index.php", 3, _TAD_NEED_TADTOOLS);
     }
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/sweet_alert.php";
-    $sweet_alert           = new sweet_alert();
-    $delete_tad_honor_func = $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", "honor_sn");
-    $xoopsTpl->assign('delete_tad_honor_func', $delete_tad_honor_func);
+    $sweet_alert = new sweet_alert();
+    $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", "honor_sn");
 }
 
 /*-----------執行動作判斷區----------*/
-$op       = empty($_REQUEST['op']) ? "" : $_REQUEST['op'];
-$honor_sn = empty($_REQUEST['honor_sn']) ? "" : (int)($_REQUEST['honor_sn']);
-$files_sn = empty($_REQUEST['files_sn']) ? "" : (int)($_REQUEST['files_sn']);
+include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
+$op       = system_CleanVars($_REQUEST, 'op', '', 'string');
+$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', '', 'int');
+$files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -174,13 +174,13 @@ switch ($op) {
     case "insert_tad_honor":
         $honor_sn = insert_tad_honor();
         header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
-        break;
+        exit;
 
     //更新資料
     case "update_tad_honor":
         update_tad_honor($honor_sn);
         header("location: {$_SERVER['PHP_SELF']}?honor_sn=$honor_sn");
-        break;
+        exit;
 
     case "tad_honor_form":
         tad_honor_form($honor_sn);
@@ -189,13 +189,12 @@ switch ($op) {
     case "delete_tad_honor":
         delete_tad_honor($honor_sn);
         header("location: {$_SERVER['PHP_SELF']}");
-        break;
+        exit;
 
     //下載檔案
     case "tufdl":
         $TadUpFiles->add_file_counter($files_sn, false);
         exit;
-        break;
 
     default:
         if (empty($honor_sn)) {
@@ -206,7 +205,7 @@ switch ($op) {
         }
         break;
 
-    /*---判斷動作請貼在上方---*/
+        /*---判斷動作請貼在上方---*/
 }
 
 /*-----------秀出結果區--------------*/
