@@ -1,3 +1,8 @@
+Tad Honor 1.4.5 (released on 2018-05-21)
+=================================================
+1. Support database strict mode
+
+
 Tad Honor 1.4.4 (released on 2018-05-10)
 =================================================
 1. Added fred honorboard honor  data import function.

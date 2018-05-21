@@ -1,7 +1,7 @@
 CREATE TABLE `tad_honor` (
   `honor_sn` smallint(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '編號',
   `honor_title` varchar(255) NOT NULL DEFAULT '' COMMENT '標題',
-  `honor_date` date NOT NULL DEFAULT '0000-00-00' COMMENT '發佈日期',
+  `honor_date` date NOT NULL  COMMENT '發佈日期',
   `honor_unit` varchar(255) NOT NULL DEFAULT '' COMMENT '發布單位',
   `honor_counter` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '點閱次數',
   `honor_content` text NOT NULL COMMENT '詳細內容',
@@ -25,5 +25,5 @@ CREATE TABLE `tad_honor_files_center` (
     `hash_filename` varchar(255) NOT NULL default '' COMMENT '加密檔案名稱',
     `sub_dir` varchar(255) NOT NULL default '' COMMENT '檔案子路徑',
     PRIMARY KEY (`files_sn`)
-  ) ENGINE=MyISAM;
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
