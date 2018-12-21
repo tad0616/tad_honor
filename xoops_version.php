@@ -3,7 +3,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADHONOR_NAME;
-$modversion['version']     = '1.45';
+$modversion['version']     = '1.47';
 $modversion['description'] = _MI_TADHONOR_DESC;
 $modversion['author']      = _MI_TADHONOR_AUTHOR;
 $modversion['credits']     = _MI_TADHONOR_CREDITS;
@@ -14,7 +14,7 @@ $modversion['image']       = "images/logo_{$xoopsConfig['language']}.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['release_date']        = '2018-05-21';
+$modversion['release_date']        = '2019-01-01';
 $modversion['module_website_url']  = 'http://tad0616.net';
 $modversion['module_website_name'] = _MI_TADHONOR_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
@@ -66,6 +66,9 @@ $modversion['templates'][$i]['description'] = 'tad_honor_adm_power.tpl';
 $i++;
 $modversion['templates'][$i]['file']        = 'tad_honor_adm_import.tpl';
 $modversion['templates'][$i]['description'] = 'tad_honor_adm_import.tpl';
+$i++;
+$modversion['templates'][$i]['file']        = 'tad_honor_adm_import_tadnews.tpl';
+$modversion['templates'][$i]['description'] = 'tad_honor_adm_import_tadnews.tpl';
 
 $i++;
 $modversion['templates'][$i]['file']        = 'tad_honor_index.tpl';
@@ -91,10 +94,19 @@ $modversion['blocks'][$i]['template']    = 'tad_honor_marquee.tpl';
 $modversion['blocks'][$i]['edit_func']   = 'tad_honor_marquee_edit';
 $modversion['blocks'][$i]['options']     = '6|24|#f2f2ff|1px solid #08084d';
 
-$i++;
+$i                                       = 0;
 $modversion['config'][$i]['name']        = 'honor_unit';
 $modversion['config'][$i]['title']       = '_MI_TADHONOR_HONOR_UNIT';
 $modversion['config'][$i]['description'] = '_MI_TADHONOR_HONOR_UNIT_DESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = _MI_TADHONOR_HONOR_UNIT_DEFAULT;
+$i++;
+
+$modversion['config'][$i]['name']        = 'show_confetti';
+$modversion['config'][$i]['title']       = '_MI_TADHONOR_SHOW_CONFETTI';
+$modversion['config'][$i]['description'] = '_MI_TADHONOR_SHOW_CONFETTI_DESC';
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 1;
+$i++;

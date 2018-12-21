@@ -26,6 +26,13 @@ $adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU3_DESC;
 $adminmenu[$i]['icon']  = "images/admin/synchronized.png";
 
 $i++;
+$adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU4;
+$adminmenu[$i]['link']  = 'admin/import_tadnews.php';
+$adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU4_DESC;
+$adminmenu[$i]['icon']  = "images/admin/synchronized.png";
+
+
+$i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
 $adminmenu[$i]['link']  = 'admin/about.php';
 $adminmenu[$i]['desc']  = _MI_TAD_ADMIN_ABOUT_DESC;

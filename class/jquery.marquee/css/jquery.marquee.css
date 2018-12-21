@@ -1,4 +1,4 @@
-ul.marquee {
+ul#tad_honor_marquee2 {
 	/* required styles */
 	display: block;
 	padding: 0;
@@ -10,7 +10,7 @@ ul.marquee {
 
 }
 
-ul.marquee li {
+ul#tad_honor_marquee2 li {
 	/* required styles */
 	position: absolute;
 	top: -999em;

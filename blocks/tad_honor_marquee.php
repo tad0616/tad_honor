@@ -2,7 +2,7 @@
 //區塊主函式 (tad_honor_marquee)
 function tad_honor_marquee($options)
 {
-    global $xoopsDB;
+    global $xoopsDB, $xoTheme;
 
     //{$options[0]} : 取出幾筆榮譽榜資料？
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
@@ -14,7 +14,7 @@ function tad_honor_marquee($options)
     }
 
     $block['options1'] = $options[1];
-    $block['height']   = $options[1] + 8;
+    $block['height']   = ($options[1] * 3) + 20;
     //{$options[2]} : 背景顏色
     if (is_numeric($options[2])) {
         $options[2] = "#f2f2ff";
@@ -37,6 +37,8 @@ function tad_honor_marquee($options)
     }
     $block['content'] = $content;
 
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
+    $xoTheme->addScript(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
     return $block;
 }
 

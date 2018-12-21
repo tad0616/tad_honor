@@ -223,4 +223,5 @@ switch ($op) {
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign("toolbar", toolbar_bootstrap($interface_menu));
 $xoopsTpl->assign("isAdmin", $isAdmin);
+$xoopsTpl->assign("show_confetti", $xoopsModuleConfig['show_confetti']);
 include_once XOOPS_ROOT_PATH . '/footer.php';

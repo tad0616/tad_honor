@@ -17,5 +17,7 @@ define('_MA_TADHONOR_UP_HONOR_SN', "Upload");
 define('_MA_TADHONOR_SHOW_HONOR_SN_FILES', "Upload");
 define('_MA_TADHONOR_HONOR_PUBLISH_PERMISSIONS', "Publish Permissions");
 define('_MA_TADHONOR_HONOR_PERMISSIONS_SETUP', "Permissions Setup");
-define('_MA_TADHONOR_NO_FRED', "No fred_honorboard is installed, no need to use this function");
+define('_MA_TADHONOR_NO_FRED', "fred_honorboard does not installed, no need to use this function");
+define('_MA_TADHONOR_NO_TADNEWS', "tadnews does not installed, no need to use this function");
 define('_MA_TADHONOR_IMPORT', "import");
+define('_MA_TADHONOR_SELECT_HONOR_CATE', "Please select the honor list");

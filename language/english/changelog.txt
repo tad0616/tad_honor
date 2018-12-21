@@ -1,3 +1,12 @@
+Tad Honor 1.4.7 (2019-01-01 released)
+=================================================
+1.Support BootStrap4
+2.Fix the problem of conflict with TadNews marquee
+
+Tad Honor 1.4.6 (released on 2018-08-25)
+==========================================================
+1. Support the "honor list" classification import function in tadnews
+
 Tad Honor 1.4.5 (released on 2018-05-21)
 =================================================
 1. Support database strict mode
