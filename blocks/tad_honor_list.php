@@ -7,7 +7,7 @@ function tad_honor_list($options)
     //{$options[0]} : 顯示幾筆榮譽榜資料？
     $block['options0'] = $options[0];
     $sql               = "select  * from `" . $xoopsDB->prefix("tad_honor") . "`  order by `honor_date` desc limit $options[0] ";
-    $result            = $xoopsDB->query($sql) or web_error($sql);
+    $result            = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
     $content           = array();
     $i                 = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
