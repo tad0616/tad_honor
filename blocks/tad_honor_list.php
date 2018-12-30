@@ -2,7 +2,8 @@
 //區塊主函式 (tad_honor_list)
 function tad_honor_list($options)
 {
-    global $xoopsDB;
+    global $xoopsDB, $xoTheme;
+    $xoTheme->addStylesheet('modules/tadtools/css/vertical_menu.css');
 
     //{$options[0]} : 顯示幾筆榮譽榜資料？
     $block['options0'] = $options[0];
