@@ -13,7 +13,7 @@ function delete_tad_honor($honor_sn = "")
         return;
     }
     $sql = "delete from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
@@ -35,7 +35,7 @@ function show_one_tad_honor($honor_sn = "")
     $myts = MyTextSanitizer::getInstance();
 
     $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}' ";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $all    = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
@@ -94,7 +94,7 @@ function add_tad_honor_counter($honor_sn = '')
         return;
     }
     $sql = "update `" . $xoopsDB->prefix("tad_honor") . "` set `honor_counter` = `honor_counter` + 1 where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 }
 
 //列出所有tad_honor資料
@@ -115,7 +115,7 @@ function list_tad_honor()
     $sql     = $PageBar['sql'];
     $total   = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     $all_content = array();
     $i           = 0;

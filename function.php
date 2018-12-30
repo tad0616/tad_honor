@@ -109,7 +109,7 @@ function get_tad_honor($honor_sn = "")
         return;
     }
     $sql    = "select * from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $data   = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -140,7 +140,7 @@ function insert_tad_honor()
     $_POST['honor_url']     = $myts->addSlashes($_POST['honor_url']);
 
     $sql = "insert into `" . $xoopsDB->prefix("tad_honor") . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
@@ -186,7 +186,7 @@ function update_tad_honor($honor_sn = "")
    `honor_url` = '{$_POST['honor_url']}' ,
    `honor_uid` = '{$uid}'
   where `honor_sn` = '$honor_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_honor");
