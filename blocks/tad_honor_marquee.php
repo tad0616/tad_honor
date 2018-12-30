@@ -14,7 +14,8 @@ function tad_honor_marquee($options)
     }
 
     $block['options1'] = $options[1];
-    $block['height']   = ($options[1] * 3) + 20;
+    // $block['height']   = 400;
+    $block['height'] = $options[1] * 1.6;
     //{$options[2]} : 背景顏色
     if (is_numeric($options[2])) {
         $options[2] = "#f2f2ff";
@@ -36,7 +37,7 @@ function tad_honor_marquee($options)
         $i++;
     }
     $block['content'] = $content;
-
+    get_jquery();
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
     $xoTheme->addScript(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
     return $block;
@@ -45,6 +46,13 @@ function tad_honor_marquee($options)
 //區塊編輯函式 (tad_honor_marquee_edit)
 function tad_honor_marquee_edit($options)
 {
+    if (!file_exists(XOOPS_ROOT_PATH . "/modules/tadtools/mColorPicker.php")) {
+        redirect_header("index.php", 3, _MA_NEED_TADTOOLS);
+    }
+    include_once XOOPS_ROOT_PATH . "/modules/tadtools/mColorPicker.php";
+    $mColorPicker = new mColorPicker('.color');
+    $mColorPicker->render();
+
     $options[1] = intval($options[1]);
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
@@ -59,45 +67,32 @@ function tad_honor_marquee_edit($options)
     }
 
     $form = "
-  <table>
-    <tr>
-      <th style='width:120px;'>
-        <!--取出幾筆榮譽榜資料？-->
-        " . _MB_TADHONOR_MARQUEE_OPT0 . "
-      </th>
-      <td>
-        <input type='text' name='options[0]' value='{$options[0]}'>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--文字大小-->
-        " . _MB_TADHONOR_MARQUEE_OPT1 . "
-      </th>
-      <td>
-        <input type='text' name='options[1]' value='{$options[1]}'>px
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--背景顏色-->
-        " . _MB_TADHONOR_MARQUEE_OPT2 . "
-      </th>
-      <td>
-        <input type='text' name='options[2]' value='{$options[2]}'>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--跑馬燈外框樣式設定-->
-        " . _MB_TADHONOR_MARQUEE_OPT3 . "
-      </th>
-      <td>
-        <input type='text' name='options[3]' value='{$options[3]}'>
-      </td>
-    </tr>
-  </table>
-  ";
+    <ol class='my-form'>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT0 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[0]' value='{$options[0]}' size=6>
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT1 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[1]' value='{$options[1]}' size=6>px
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT2 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input color' data-hex='true' name='options[2]' value='{$options[2]}' size=6>
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT3 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[3]' value='{$options[3]}' size=100>
+            </div>
+        </li>
+    </ol>";
 
     return $form;
 }
