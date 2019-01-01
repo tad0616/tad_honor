@@ -92,6 +92,9 @@ function delete_tad_honor($honor_sn = "")
     if (empty($honor_sn)) {
         return;
     }
+    if (!power_chk("tad_honor_post", 1) and !$isAdmin) {
+        redirect_header("index.php", 3, _TAD_PERMISSION_DENIED);
+    }
     $sql = "delete from `" . $xoopsDB->prefix("tad_honor") . "` where `honor_sn` = '{$honor_sn}'";
     $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
