@@ -37,7 +37,8 @@ function tad_honor_marquee($options)
         $i++;
     }
     $block['content'] = $content;
-    get_jquery();
+
+    $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
     $xoTheme->addScript(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
     return $block;
