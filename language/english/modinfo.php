@@ -24,7 +24,7 @@ define('_MI_TADHONOR_HONOR_UNIT_DESC', 'Publishing unit setting');
 define('_MI_TADHONOR_HONOR_UNIT_DEFAULT', 'Office of Academic Affairs; President\'s Office; Office of Student Affairs');
 
 define('_MI_TADHONOR_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_TADHONOR_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_TADHONOR_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_TADHONOR_BACK_2_ADMIN', 'Back to Administration of ');
 
 //help
