@@ -27,7 +27,7 @@ define('_MI_TADHONOR_SHOW_CONFETTI', '是否顯示動態彩帶');
 define('_MI_TADHONOR_SHOW_CONFETTI_DESC', '是否顯示榮譽榜內容的動態彩帶');
 
 define('_MI_TADHONOR_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_TADHONOR_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_TADHONOR_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_TADHONOR_BACK_2_ADMIN', '回到後臺 ');
 
 //help
