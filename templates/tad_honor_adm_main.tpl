@@ -1,18 +1,13 @@
-<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/modules/tadtools/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/modules/tadtools/css/xoops_adm3.css">
-
-
 <!--顯示表單-->
+<link href="<{$xoops_url}>/modules/tadtools/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/My97DatePicker/WdatePicker.js"></script>
 
-
-
 <{if $now_op=="tad_honor_form"}>
-  <div class="container">
+  <div class="container-fluid">
     <!--套用formValidator驗證機制-->
     <{$formValidator_code}>
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
-      
+
 
       <!--標題-->
       <div class="row">
@@ -91,7 +86,7 @@
       </div>
 
       <div class="text-center">
-        
+
       <!--編號-->
       <input type='hidden' name="honor_sn" value="<{$honor_sn}>">
 
@@ -113,7 +108,7 @@
   <h2 class="text-center"><{$honor_title}></h2>
 
 
-  
+
   <!--發佈日期-->
   <div class="row">
     <label class="col-md-3 text-right">
@@ -150,7 +145,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_CONTENT}>
     </label>
     <div class="col-md-9">
-      
+
       <div class="well">
         <{$honor_content}>
       </div>
@@ -209,7 +204,7 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          
+
           <th>
             <!--標題-->
             <{$smarty.const._MA_TADHONOR_HONOR_TITLE}>
@@ -235,7 +230,7 @@
       <tbody>
         <{foreach from=$all_content item=data}>
           <tr>
-            
+
             <td>
               <!--標題-->
               <{$data.honor_title_link}>
