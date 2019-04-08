@@ -1,10 +1,4 @@
 <?php
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 include_once '../../tadtools/language/' . $xoopsConfig['language'] . '/admin_common.php';
 define('_TAD_NEED_TADTOOLS', " 需要 tadtools 模組，可至<a href='http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50' target='_blank'>Tad教材網</a>下載。");
 
@@ -21,3 +15,9 @@ define('_MA_TADHONOR_HONOR_UID', "發布者");
 
 define('_MA_TADHONOR_UP_HONOR_SN', "上傳");
 define('_MA_TADHONOR_SHOW_HONOR_SN_FILES', "上傳");
+define('_MA_TADHONOR_HONOR_PUBLISH_PERMISSIONS', "發布權限");
+define('_MA_TADHONOR_HONOR_PERMISSIONS_SETUP', "權限設定");
+define('_MA_TADHONOR_NO_FRED', "沒有安裝 fred_honorboard，無須使用此功能");
+define('_MA_TADHONOR_NO_TADNEWS', "沒有安裝 tadnews，無須使用此功能");
+define('_MA_TADHONOR_IMPORT', "匯入");
+define('_MA_TADHONOR_SELECT_HONOR_CATE', "請選擇榮譽榜分類");

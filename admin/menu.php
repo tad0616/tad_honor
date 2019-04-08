@@ -1,13 +1,6 @@
 <?php
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 $adminmenu = array();
 $i         = 1;
-$icon_dir  = substr(XOOPS_VERSION, 6, 3) == '2.6' ? "" : "images/admin/";
 
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_HOME;
 $adminmenu[$i]['link']  = 'admin/index.php';
@@ -18,7 +11,26 @@ $i++;
 $adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU1;
 $adminmenu[$i]['link']  = 'admin/main.php';
 $adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU1_DESC;
-$adminmenu[$i]['icon']  = "{$icon_dir}button.png";
+$adminmenu[$i]['icon']  = "images/admin/badge.png";
+
+$i++;
+$adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU2;
+$adminmenu[$i]['link']  = 'admin/power.php';
+$adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU2_DESC;
+$adminmenu[$i]['icon']  = "images/admin/keys.png";
+
+$i++;
+$adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU3;
+$adminmenu[$i]['link']  = 'admin/import.php';
+$adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU3_DESC;
+$adminmenu[$i]['icon']  = "images/admin/synchronized.png";
+
+$i++;
+$adminmenu[$i]['title'] = _MI_TADHONOR_ADMENU4;
+$adminmenu[$i]['link']  = 'admin/import_tadnews.php';
+$adminmenu[$i]['desc']  = _MI_TADHONOR_ADMENU4_DESC;
+$adminmenu[$i]['icon']  = "images/admin/synchronized.png";
+
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;

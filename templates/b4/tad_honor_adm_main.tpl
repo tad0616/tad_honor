@@ -3,100 +3,7 @@
 <script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/My97DatePicker/WdatePicker.js"></script>
 
 <{if $now_op=="tad_honor_form"}>
-  <div class="container-fluid">
-    <!--套用formValidator驗證機制-->
-    <{$formValidator_code}>
-    <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
-
-
-      <!--標題-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_HONOR_TITLE}>
-          </label>
-          <div class="col-md-10">
-            <input type="text" name="honor_title" id="honor_title" class="form-control " value="<{$honor_title}>" placeholder="<{$smarty.const._MA_TADHONOR_HONOR_TITLE}>">
-          </div>
-        </div>
-      </div>
-
-      <!--發佈日期-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_HONOR_DATE}>
-          </label>
-          <div class="col-md-4">
-            <input type="text" name="honor_date" id="honor_date" class="form-control " value="<{$honor_date}>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd' , startDate:'%y-%M-%d'})" placeholder="<{$smarty.const._MA_TADHONOR_HONOR_DATE}>">
-          </div>
-        </div>
-      </div>
-
-      <!--發布單位-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_HONOR_UNIT}>
-          </label>
-          <div class="col-md-4">
-            <select name="honor_unit" class="form-control " size=1>
-              <{foreach from=$unit_array item=unit}>
-                <option value="<{$unit.name}>" <{if $honor_unit == $unit.name}>selected="selected"<{/if}>><{$unit.name}></option>
-              <{/foreach}>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!--詳細內容-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_HONOR_CONTENT}>
-          </label>
-          <div class="col-md-10">
-            <{$honor_content_editor}>
-          </div>
-        </div>
-      </div>
-
-      <!--相關連結-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_HONOR_URL}>
-          </label>
-          <div class="col-md-10">
-            <input type="text" name="honor_url" id="honor_url" class="form-control " value="<{$honor_url}>" placeholder="<{$smarty.const._MA_TADHONOR_HONOR_URL}>">
-          </div>
-        </div>
-      </div>
-
-      <!--上傳-->
-      <div class="row">
-        <div class="form-group">
-          <label class="col-md-2 control-label">
-            <{$smarty.const._MA_TADHONOR_UP_HONOR_SN}>
-          </label>
-          <div class="col-md-10">
-            <{$up_honor_sn_form}>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center">
-
-      <!--編號-->
-      <input type='hidden' name="honor_sn" value="<{$honor_sn}>">
-
-        <{$token_form}>
-
-        <input type="hidden" name="op" value="<{$next_op}>">
-        <button type="submit" class="btn btn-primary"><{$smarty.const._TAD_SAVE}></button>
-      </div>
-    </form>
-  </div>
+  <{includeq file="$xoops_rootpath/modules/tad_honor/templates/tad_honor_form.tpl"}>
 <{/if}>
 
 
@@ -111,42 +18,42 @@
 
   <!--發佈日期-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_DATE}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$honor_date}>
     </div>
   </div>
 
   <!--發布單位-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_UNIT}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$honor_unit}>
     </div>
   </div>
 
   <!--點閱次數-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_COUNTER}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$honor_counter}>
     </div>
   </div>
 
   <!--詳細內容-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_CONTENT}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
 
-      <div class="well">
+      <div class="card card-body bg-light m-1">
         <{$honor_content}>
       </div>
     </div>
@@ -154,20 +61,20 @@
 
   <!--相關連結-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_URL}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$honor_url}>
     </div>
   </div>
 
   <!--發布者-->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_HONOR_UID}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$honor_uid}>
     </div>
   </div>
@@ -175,10 +82,10 @@
 
   <!---->
   <div class="row">
-    <label class="col-md-3 text-right">
+    <label class="col-sm-3 text-right">
       <{$smarty.const._MA_TADHONOR_SHOW_HONOR_SN_FILES}>
     </label>
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <{$show_honor_sn_files}>
     </div>
   </div>
@@ -254,8 +161,8 @@
 
             <{if $isAdmin}>
               <td>
-                <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
-                <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
+                <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
               </td>
             <{/if}>
           </tr>

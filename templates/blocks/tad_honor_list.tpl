@@ -1,8 +1,2 @@
-<!-- for bootstrap3-->
-<ul class="list-group">
-  <{foreach from=$block.content item=data}>
-    <li class="list-group-item">
-      <a href="<{$xoops_url}>/modules/tad_honor/index.php?honor_sn=<{$data.honor_sn}>"><{$data.honor_title}></a>
-    </li>
-  <{/foreach}>
-</ul>
+<{assign var=this_file value=$smarty.template|basename|replace:'db:':''}>
+<{includeq file="$xoops_rootpath/modules/tad_honor/templates/blocks/b4.tpl"}>

@@ -1,113 +1,99 @@
 <?php
-
-//  ------------------------------------------------------------------------ //
-// 本模組由 tad 製作
-// 製作日期：2015-01-22
-// $Id:$
-// ------------------------------------------------------------------------- //
-
 //區塊主函式 (tad_honor_marquee)
-function tad_honor_marquee($options) {
-    global $xoopsDB;
+function tad_honor_marquee($options)
+{
+    global $xoopsDB, $xoTheme;
 
     //{$options[0]} : 取出幾筆榮譽榜資料？
-    $block['options0'] = $options[0];
-    //{$options[1]} : 跑馬燈方向
+    $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
+    //{$options[1]} : 文字大小
+    $options[1] = intval($options[1]);
+
+    if ($options[1] < 11 or $options[1] > 60) {
+        $options[1] = 24;
+    }
+
     $block['options1'] = $options[1];
-    //{$options[2]} : 跑馬燈速度
+    // $block['height']   = 400;
+    $block['height'] = $options[1] * 1.6;
+    //{$options[2]} : 背景顏色
+    if (is_numeric($options[2])) {
+        $options[2] = "#f2f2ff";
+    }
     $block['options2'] = $options[2];
-    //{$options[3]} : 跑馬燈CSS外觀設定
+    //{$options[3]} : 跑馬燈外框樣式設定
+    if (strpos($options[3], ';') !== false) {
+        $options[3] = "1px solid #08084d";
+    }
     $block['options3'] = $options[3];
-    //{$options[4]} : 跑馬燈條目CSS外觀設定
-    $block['options4'] = $options[4];
-    $sql               = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc";
-    $result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, mysql_error());
-    $content = '';
-    $i       = 0;
+
+    $sql     = "select * from `" . $xoopsDB->prefix("tad_honor") . "` order by `honor_date` desc limit 0, {$options[0]}";
+    $result  = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $content = array();
+
+    $i = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;
         $i++;
     }
-    $block['bootstrap_version'] = $_SESSION['bootstrap'];
-    $block['content']           = $content;
+    $block['content'] = $content;
 
+    $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
+    $xoTheme->addScript(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
     return $block;
 }
 
 //區塊編輯函式 (tad_honor_marquee_edit)
-function tad_honor_marquee_edit($options) {
+function tad_honor_marquee_edit($options)
+{
+    if (!file_exists(XOOPS_ROOT_PATH . "/modules/tadtools/mColorPicker.php")) {
+        redirect_header("index.php", 3, _MA_NEED_TADTOOLS);
+    }
+    include_once XOOPS_ROOT_PATH . "/modules/tadtools/mColorPicker.php";
+    $mColorPicker = new mColorPicker('.color');
+    $mColorPicker->render();
 
-    //"跑馬燈方向"預設值
-    $checked_1_0 = ($options[1] == 'left') ? 'checked' : '';
-    $checked_1_1 = ($options[1] == 'right') ? 'checked' : '';
-    $checked_1_2 = ($options[1] == 'up') ? 'checked' : '';
-    $checked_1_3 = ($options[1] == 'down') ? 'checked' : '';
+    $options[1] = intval($options[1]);
+    if ($options[1] < 11 or $options[1] > 60) {
+        $options[1] = 24;
+    }
 
-    //"跑馬燈速度"預設值
-    $selected_2_0 = ($options[2] == '2') ? 'selected' : '';
-    $selected_2_1 = ($options[2] == '4') ? 'selected' : '';
-    $selected_2_2 = ($options[2] == '6') ? 'selected' : '';
-    $selected_2_3 = ($options[2] == '8') ? 'selected' : '';
-    $selected_2_4 = ($options[2] == '10') ? 'selected' : '';
+    if (is_numeric($options[2])) {
+        $options[2] = "#f2f2ff";
+    }
+
+    if (strpos($options[3], ';') !== false) {
+        $options[3] = "1px solid #08084d";
+    }
 
     $form = "
-  <table>
-    <tr>
-      <th>
-        <!--取出幾筆榮譽榜資料？-->
-        " . _MB_TADHONOR_MARQUEE_OPT0 . "
-      </th>
-      <td>
-        <input type='text' name='options[0]' value='{$options[0]}'>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--跑馬燈方向-->
-        " . _MB_TADHONOR_MARQUEE_OPT1 . "
-      </th>
-      <td>
-          <input type='radio' name='options[1]' value='left' $checked_1_0> left
-          <input type='radio' name='options[1]' value='right' $checked_1_1> right
-          <input type='radio' name='options[1]' value='up' $checked_1_2> up
-          <input type='radio' name='options[1]' value='down' $checked_1_3> down
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--跑馬燈速度-->
-        " . _MB_TADHONOR_MARQUEE_OPT2 . "
-      </th>
-      <td>
-        <select name='options[2]'>
-          <option value='2' $selected_2_0>2</option>
-          <option value='4' $selected_2_1>4</option>
-          <option value='6' $selected_2_2>6</option>
-          <option value='8' $selected_2_3>8</option>
-          <option value='10' $selected_2_4>10</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--跑馬燈CSS外觀設定-->
-        " . _MB_TADHONOR_MARQUEE_OPT3 . "
-      </th>
-      <td>
-        <textarea name='options[3]'>{$options[3]}</textarea>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <!--跑馬燈條目CSS外觀設定-->
-        " . _MB_TADHONOR_MARQUEE_OPT4 . "
-      </th>
-      <td>
-        <textarea name='options[4]'>{$options[4]}</textarea>
-      </td>
-    </tr>
-  </table>
-  ";
+    <ol class='my-form'>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT0 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[0]' value='{$options[0]}' size=6>
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT1 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[1]' value='{$options[1]}' size=6>px
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT2 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input color' data-hex='true' name='options[2]' value='{$options[2]}' size=6>
+            </div>
+        </li>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT3 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[3]' value='{$options[3]}' size=100>
+            </div>
+        </li>
+    </ol>";
 
     return $form;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * MyLinks module
+ * Tad Honor module
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -9,13 +9,12 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright ::  The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license   ::    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package   ::    mylinks
- * @subpackage:: admin
- * @since     :       2.5.0
- * @author    ::     Magic.Shao <magic.shao@gmail.com> - Susheng Yang <ezskyyoung@gmail.com>
- * @version   ::  $Id $
+ * @copyright           XOOPS Project (https://xoops.org)
+ * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package             Tad Honor
+ * @since               2.5.7
+ * @author              Tad
+ * @version             $Id $
  **/
 
 echo "<div align=\"center\"><a href=\"https://xoops.org\" target=\"_blank\"><img src=\"../images/admin/xoopsmicrobutton.gif\" alt=\"XOOPS\" title=\"XOOPS\"></a></div>";

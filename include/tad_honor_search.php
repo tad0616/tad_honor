@@ -1,6 +1,7 @@
 <?php
 //榮譽榜搜尋程式
-function tad_honor_search($queryarray, $andor, $limit, $offset, $userid) {
+function tad_honor_search($queryarray, $andor, $limit, $offset, $userid)
+{
     global $xoopsDB;
     if (get_magic_quotes_gpc()) {
         foreach ($queryarray as $k => $v) {
