@@ -23,7 +23,7 @@ function tad_honor_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql .= "ORDER BY  `honor_date` DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
-    $ret    = array();
+    $ret    = [];
     $i      = 0;
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $ret[$i]['image'] = "images/coins.png";

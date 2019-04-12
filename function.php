@@ -20,7 +20,7 @@ function tad_honor_form($honor_sn = "")
     if (!empty($honor_sn)) {
         $DBV = get_tad_honor($honor_sn);
     } else {
-        $DBV = array();
+        $DBV = [];
     }
 
     //預設值設定

@@ -43,7 +43,7 @@ function list_fred_honorboard()
     $sql    = "SELECT * FROM `" . $xoopsDB->prefix("fred_honorboard") . "`";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
-    $all_content = array();
+    $all_content = [];
     while ($all = $xoopsDB->fetchArray($result)) {
         $all_content[] = $all;
     }
@@ -52,13 +52,13 @@ function list_fred_honorboard()
 }
 
 //匯入
-function import_now($honor_arr = array())
+function import_now($honor_arr = [])
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser;
     $uid  = $xoopsUser->uid();
     $myts = MyTextSanitizer::getInstance();
 
-    $dep    = array();
+    $dep    = [];
     $sql    = "SELECT department_sn,department_name FROM `" . $xoopsDB->prefix("fred_honorboard_department") . "`";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     while (list($department_sn, $department_name) = $xoopsDB->fetchRow($result)) {
@@ -93,7 +93,7 @@ function import_now($honor_arr = array())
 /*-----------執行動作判斷區----------*/
 include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 $op       = system_CleanVars($_REQUEST, 'op', '', 'string');
-$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', array(), 'array');
+$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', [], 'array');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/

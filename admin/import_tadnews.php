@@ -27,7 +27,7 @@ function list_tadnews_cate()
     $sql    = "SELECT * FROM `" . $xoopsDB->prefix("tad_news_cate") . "`";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
-    $all_cate = array();
+    $all_cate = [];
     while ($all = $xoopsDB->fetchArray($result)) {
         $all_cate[] = $all;
     }
@@ -43,7 +43,7 @@ function list_tadnews($ncsn)
     $sql    = "SELECT * FROM `" . $xoopsDB->prefix("tad_news") . "` where ncsn='{$ncsn}' and `enable`='1'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
-    $all_content = array();
+    $all_content = [];
     while ($all = $xoopsDB->fetchArray($result)) {
         $all_content[] = $all;
     }
@@ -53,7 +53,7 @@ function list_tadnews($ncsn)
 }
 
 //匯入
-function import_now($nsn_arr = array(), $ncsn)
+function import_now($nsn_arr = [], $ncsn)
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
 
@@ -86,7 +86,7 @@ function import_now($nsn_arr = array(), $ncsn)
 /*-----------執行動作判斷區----------*/
 include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 $op   = system_CleanVars($_REQUEST, 'op', '', 'string');
-$nsn  = system_CleanVars($_REQUEST, 'nsn', array(), 'array');
+$nsn  = system_CleanVars($_REQUEST, 'nsn', [], 'array');
 $ncsn = system_CleanVars($_REQUEST, 'ncsn', '', 'int');
 
 switch ($op) {
