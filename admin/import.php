@@ -76,7 +76,7 @@ function import_now($honor_arr = [])
             $honor_content    = empty($all['honor_content']) ? $honor_title : $myts->addSlashes($all['honor_content']);
             $write_department = $dep[$all['write_department']];
             $write_date       = $myts->addSlashes($all['write_date']);
-            $click            = intval($all['click']);
+            $click            = (int)$all['click'];
 
             $sql = "replace into `" . $xoopsDB->prefix("tad_honor") . "`
             (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`)
