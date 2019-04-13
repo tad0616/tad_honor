@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Tad_honor;
+<?php
+
+namespace XoopsModules\Tad_honor;
 
 /*
  Utility Class Definition
@@ -23,19 +25,17 @@
  * @since        File available since version 1.54
  */
 
-
 /**
  * Class Utility
  */
 class Utility
 {
-
     //--------------- Custom module methods -----------------------------
     //新增檔案欄位
     public static function chk_fc_tag()
     {
         global $xoopsDB;
-        $sql    = "SELECT count(`tag`) FROM " . $xoopsDB->prefix("tad_honor_files_center");
+        $sql = 'SELECT count(`tag`) FROM ' . $xoopsDB->prefix('tad_honor_files_center');
         $result = $xoopsDB->query($sql);
         if (empty($result)) {
             return true;
@@ -47,16 +47,16 @@ class Utility
     public static function go_fc_tag()
     {
         global $xoopsDB;
-        $sql = "ALTER TABLE " . $xoopsDB->prefix("tad_honor_files_center") . "
+        $sql = 'ALTER TABLE ' . $xoopsDB->prefix('tad_honor_files_center') . "
     ADD `upload_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上傳時間',
     ADD `uid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '上傳者',
     ADD `tag` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '註記'
     ";
-        $xoopsDB->queryF($sql) or redirect_header(XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin", 30, $xoopsDB->error());
+        $xoopsDB->queryF($sql) or redirect_header(XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin', 30, $xoopsDB->error());
     }
 
     //建立目錄
-    public static function mk_dir($dir = "")
+    public static function mk_dir($dir = '')
     {
         //若無目錄名稱秀出警告訊息
         if (empty($dir)) {
@@ -80,13 +80,15 @@ class Utility
         if (!rename($oldfile, $newfile)) {
             if (copy($oldfile, $newfile)) {
                 unlink($oldfile);
+
                 return true;
             }
+
             return false;
         }
+
         return true;
     }
-
 
     //刪除目錄
     public static function delete_directory($dirname)
@@ -100,28 +102,28 @@ class Utility
         }
 
         while ($file = readdir($dir_handle)) {
-            if ($file != "." && $file != "..") {
-                if (!is_dir($dirname . "/" . $file)) {
-                    unlink($dirname . "/" . $file);
+            if ('.' != $file && '..' != $file) {
+                if (!is_dir($dirname . '/' . $file)) {
+                    unlink($dirname . '/' . $file);
                 } else {
                     static::delete_directory($dirname . '/' . $file);
                 }
-
             }
         }
         closedir($dir_handle);
         rmdir($dirname);
+
         return true;
     }
 
     //拷貝目錄
-    public static function full_copy($source = "", $target = "")
+    public static function full_copy($source = '', $target = '')
     {
         if (is_dir($source)) {
             @mkdir($target);
             $d = dir($source);
             while (false !== ($entry = $d->read())) {
-                if ($entry == '.' || $entry == '..') {
+                if ('.' == $entry || '..' == $entry) {
                     continue;
                 }
 
@@ -137,5 +139,4 @@ class Utility
             copy($source, $target);
         }
     }
-
 }
