@@ -1,8 +1,8 @@
 <?php
 /*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = 'tad_honor_adm_main.tpl';
-include_once 'header.php';
-include_once '../function.php';
+$GLOBALS['xoopsOption']['template_main'] = 'tad_honor_adm_main.tpl';
+require_once __DIR__ . '/header.php';
+require_once dirname(__DIR__) . '/function.php';
 /*-----------功能函數區--------------*/
 
 //刪除tad_honor某筆資料資料
@@ -15,7 +15,7 @@ function delete_tad_honor($honor_sn = '')
     $sql = 'delete from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
     $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->del_files();
@@ -51,7 +51,7 @@ function show_one_tad_honor($honor_sn = '')
         $uid_name = XoopsUser::getUnameFromId($honor_uid, 0);
     }
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $show_honor_sn_files = $TadUpFiles->show_files('up_honor_sn', true, 'thumb', true, false, null, null, false);
@@ -76,7 +76,7 @@ function show_one_tad_honor($honor_sn = '')
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
     $sweet_alert = new sweet_alert();
     $delete_tad_honor_func = $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     $xoopsTpl->assign('delete_tad_honor_func', $delete_tad_honor_func);
@@ -103,7 +103,7 @@ function list_tad_honor()
 
     $myts = MyTextSanitizer::getInstance();
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
 
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . '` ';
@@ -118,7 +118,7 @@ function list_tad_honor()
 
     $all_content = [];
     $i = 0;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
         foreach ($all as $k => $v) {
             $$k = $v;
@@ -156,13 +156,13 @@ function list_tad_honor()
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
     $sweet_alert = new sweet_alert();
     $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
 }
 
 /*-----------執行動作判斷區----------*/
-include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
+require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 $op = system_CleanVars($_REQUEST, 'op', '', 'string');
 $honor_sn = system_CleanVars($_REQUEST, 'honor_sn', '', 'int');
 $files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
@@ -207,4 +207,4 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('isAdmin', true);
-include_once 'footer.php';
+require_once __DIR__ . '/footer.php';

@@ -3,7 +3,7 @@
 if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
     redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
 }
-include_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
+require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
 
 /********************* 自訂函數 *********************/
 
@@ -70,7 +70,7 @@ function tad_honor_form($honor_sn = '')
     if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once TADTOOLS_PATH . '/formValidator.php';
+    require_once TADTOOLS_PATH . '/formValidator.php';
     $formValidator = new formValidator('#myForm', true);
     $formValidator_code = $formValidator->render();
 
@@ -78,19 +78,19 @@ function tad_honor_form($honor_sn = '')
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/ck.php')) {
         redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/ck.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/ck.php';
     $ck = new CKEditor('tad_honor', 'honor_content', $honor_content);
     $ck->setHeight(250);
     $editor = $ck->render();
     $xoopsTpl->assign('honor_content_editor', $editor);
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $up_honor_sn_form = $TadUpFiles->upform(true, 'up_honor_sn', '');
     $xoopsTpl->assign('up_honor_sn_form', $up_honor_sn_form);
 
     //加入Token安全機制
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $token = new XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
@@ -128,7 +128,7 @@ function insert_tad_honor()
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -144,7 +144,7 @@ function insert_tad_honor()
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);
@@ -166,7 +166,7 @@ function update_tad_honor($honor_sn = '')
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -186,7 +186,7 @@ function update_tad_honor($honor_sn = '')
   where `honor_sn` = '$honor_sn'";
     $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);

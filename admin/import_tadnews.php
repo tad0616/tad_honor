@@ -1,8 +1,8 @@
 <?php
 /*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = 'tad_honor_adm_import_tadnews.tpl';
-include_once 'header.php';
-include_once '../function.php';
+$GLOBALS['xoopsOption']['template_main'] = 'tad_honor_adm_import_tadnews.tpl';
+require_once __DIR__ . '/header.php';
+require_once dirname(__DIR__) . '/function.php';
 /*-----------功能函數區--------------*/
 
 //列出所有 list_tadnews 資料
@@ -12,8 +12,8 @@ function list_tadnews_cate()
 
     //取得某模組編號
 
-    $modhandler = xoops_getHandler('module');
-    $ThexoopsModule = $modhandler->getByDirname('tadnews');
+    $moduleHandler = xoops_getHandler('module');
+    $ThexoopsModule = $moduleHandler->getByDirname('tadnews');
 
     if ($ThexoopsModule) {
         $mod_id = $ThexoopsModule->getVar('mid');
@@ -29,7 +29,7 @@ function list_tadnews_cate()
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     $all_cate = [];
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $all_cate[] = $all;
     }
 
@@ -45,7 +45,7 @@ function list_tadnews($ncsn)
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $all_content[] = $all;
     }
 
@@ -65,7 +65,7 @@ function import_now($nsn_arr, $ncsn)
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         if (in_array($all['nsn'], $nsn_arr, true)) {
             $honor_title = $myts->addSlashes($all['news_title']);
             $honor_content = empty($all['news_title']) ? $honor_title : $myts->addSlashes($all['news_content']);
@@ -83,7 +83,7 @@ function import_now($nsn_arr, $ncsn)
 }
 
 /*-----------執行動作判斷區----------*/
-include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
+require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 $op = system_CleanVars($_REQUEST, 'op', '', 'string');
 $nsn = system_CleanVars($_REQUEST, 'nsn', [], 'array');
 $ncsn = system_CleanVars($_REQUEST, 'ncsn', '', 'int');
@@ -108,4 +108,4 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('isAdmin', true);
-include_once 'footer.php';
+require_once __DIR__ . '/footer.php';
