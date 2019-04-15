@@ -5,12 +5,14 @@ if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
 }
 require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
 
-/********************* 自訂函數 *********************/
+/********************* 自訂函數 ********************
+ * @param string $honor_sn
+ */
 
 //tad_honor編輯表單
 function tad_honor_form($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin, $xoopsUser;
 
     if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);

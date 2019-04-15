@@ -13,3 +13,10 @@ define('_MD_TADHONOR_UP_HONOR_SN', 'Upload');
 define('_MD_TADHONOR_SHOW_HONOR_SN_FILES', 'Upload');
 define('_MD_TADHONOR_HONOR_TITLE', 'Title');
 define('_MD_TADHONOR_SMNAME1', 'Honor Roll');
+
+
+define('_MD_TADHONOR_HONOR_RECEIPIENT', 'Title');
+define('_MD_TADHONOR_HONOR_DATE', 'Title');
+define('_MD_TADHONOR_HONOR_TOTAL_VIEWS', 'Title');
+
+define('_MD_TADHONOR_HONOR_VIEWS_INFO', 'Presented by %s, %s on %s. Total views: %s ');

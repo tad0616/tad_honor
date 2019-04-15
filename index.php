@@ -58,6 +58,9 @@ function show_one_tad_honor($honor_sn = '')
     $xoopsTpl->assign('honor_uid', $honor_uid);
     $xoopsTpl->assign('uid_name', $uid_name);
 
+    $lang_viewsinfo = _MD_TADHONOR_HONOR_VIEWS_INFO;
+    $xoopsTpl->assign('lang_viewsinfo', sprintf($lang_viewsinfo, $honor_unit, $uid_name, $honor_date, $honor_counter));
+
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
