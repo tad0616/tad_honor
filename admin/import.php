@@ -28,7 +28,7 @@ function list_fred_honorboard()
     //轉移權限(原權限)
     $sql = 'SELECT gperm_groupid,gperm_itemid,gperm_name FROM `' . $xoopsDB->prefix('group_permission') . "` WHERE `gperm_modid` ='{$mod_id}' ";
     $result = $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result))) {
+    while (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result)) {
         $power[$gperm_itemid][$gperm_name][$gperm_groupid] = $gperm_groupid;
     }
 
@@ -37,7 +37,7 @@ function list_fred_honorboard()
     $sql = 'SELECT gperm_groupid,gperm_itemid,gperm_name FROM `' . $xoopsDB->prefix('group_permission') . "` WHERE `gperm_modid` ='{$mid}' ";
 
     $result = $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result))) {
+    while (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result)) {
         $now_power[$gperm_itemid][$gperm_name][$gperm_groupid] = $gperm_groupid;
     }
 
@@ -62,7 +62,7 @@ function import_now($honor_arr = [])
     $dep = [];
     $sql = 'SELECT department_sn,department_name FROM `' . $xoopsDB->prefix('fred_honorboard_department') . '`';
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($department_sn, $department_name) = $xoopsDB->fetchRow($result))) {
+    while (list($department_sn, $department_name) = $xoopsDB->fetchRow($result)) {
         $dep[$department_sn] = $department_name;
     }
 
@@ -70,7 +70,7 @@ function import_now($honor_arr = [])
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
-        if (in_array($all['honor_sn'], $honor_arr, true)) {
+        if (in_array($all['honor_sn'], $honor_arr)) {
             $honor_person = $myts->addSlashes($all['honor_person']);
             $honor_title = $myts->addSlashes($all['honor_title']);
             $honor_content = empty($all['honor_content']) ? $honor_title : $myts->addSlashes($all['honor_content']);

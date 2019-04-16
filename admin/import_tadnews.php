@@ -66,7 +66,7 @@ function import_now($nsn_arr, $ncsn)
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
-        if (in_array($all['nsn'], $nsn_arr, true)) {
+        if (in_array($all['nsn'], $nsn_arr)) {
             $honor_title = $myts->addSlashes($all['news_title']);
             $honor_content = empty($all['news_title']) ? $honor_title : $myts->addSlashes($all['news_content']);
             $honor_unit = $honor_unit_arr[0];
