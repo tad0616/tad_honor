@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @param $module
+ * @return bool
+ */
 function xoops_module_uninstall_tad_honor(&$module)
 {
     global $xoopsDB;

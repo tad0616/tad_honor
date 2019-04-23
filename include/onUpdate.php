@@ -2,6 +2,11 @@
 
 use XoopsModules\Tad_honor\Utility;
 
+/**
+ * @param $module
+ * @param $old_version
+ * @return bool
+ */
 function xoops_module_update_tad_honor(&$module, $old_version)
 {
     global $xoopsDB;

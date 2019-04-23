@@ -37,6 +37,9 @@ function list_tadnews_cate()
 }
 
 //列出所有 list_tadnews 資料
+/**
+ * @param $ncsn
+ */
 function list_tadnews($ncsn)
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl;
@@ -54,6 +57,10 @@ function list_tadnews($ncsn)
 }
 
 //匯入
+/**
+ * @param $nsn_arr
+ * @param $ncsn
+ */
 function import_now($nsn_arr, $ncsn)
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;

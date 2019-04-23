@@ -1,5 +1,13 @@
 <?php
 //榮譽榜搜尋程式
+/**
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
+ * @return array
+ */
 function tad_honor_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;

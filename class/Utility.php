@@ -32,6 +32,9 @@ class Utility
 {
     //--------------- Custom module methods -----------------------------
     //新增檔案欄位
+    /**
+     * @return bool
+     */
     public static function chk_fc_tag()
     {
         global $xoopsDB;
@@ -56,6 +59,10 @@ class Utility
     }
 
     //建立目錄
+
+    /**
+     * @param string $dir
+     */
     public static function mk_dir($dir = '')
     {
         //若無目錄名稱秀出警告訊息
@@ -75,6 +82,11 @@ class Utility
 
     //拷貝目錄
 
+    /**
+     * @param $oldfile
+     * @param $newfile
+     * @return bool
+     */
     public static function rename_win($oldfile, $newfile)
     {
         if (!rename($oldfile, $newfile)) {
@@ -91,6 +103,11 @@ class Utility
     }
 
     //刪除目錄
+
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public static function delete_directory($dirname)
     {
         if (is_dir($dirname)) {
@@ -117,6 +134,11 @@ class Utility
     }
 
     //拷貝目錄
+
+    /**
+     * @param string $source
+     * @param string $target
+     */
     public static function full_copy($source = '', $target = '')
     {
         if (is_dir($source)) {

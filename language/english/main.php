@@ -1,8 +1,10 @@
 <?php
-define('_TAD_NEED_TADTOOLS', "This module needs TadTools module. You can download TadTools from <a href='http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50' target='_blank'>Tad's web</a>.");
+if (!defined('_TAD_NEED_TADTOOLS')) {
+    define('_TAD_NEED_TADTOOLS', "This module needs TadTools module. You can download TadTools from <a href='http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50' target='_blank'>Tad's web</a>.");
+}
 
 //tad_honor-list
-define('_MD_TADHONOR_HONOR_DATE', 'Release date');
+define('_MD_TADHONOR_HONOR_RELEASE_DATE', 'Release date');
 define('_MD_TADHONOR_HONOR_UNIT', 'Issued');
 define('_MD_TADHONOR_HONOR_COUNTER', 'Viewed');
 define('_MD_TADHONOR_HONOR_CONTENT', 'Details');

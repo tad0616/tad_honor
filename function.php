@@ -61,11 +61,11 @@ function tad_honor_form($honor_sn = '')
     $xoopsTpl->assign('honor_url', $honor_url);
 
     //設定 honor_uid 欄位的預設值
-    $user_uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $user_uid = $xoopsUser ? $xoopsUser->uid() : '';
     $honor_uid = !isset($DBV['honor_uid']) ? $user_uid : $DBV['honor_uid'];
     $xoopsTpl->assign('honor_uid', $honor_uid);
 
-    $op = (empty($honor_sn)) ? 'insert_tad_honor' : 'update_tad_honor';
+    $op = empty($honor_sn) ? 'insert_tad_honor' : 'update_tad_honor';
     //$op="replace_tad_honor";
 
     //套用formValidator驗證機制
@@ -93,7 +93,7 @@ function tad_honor_form($honor_sn = '')
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $token = new XoopsFormHiddenToken();
+    $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
@@ -103,6 +103,10 @@ function tad_honor_form($honor_sn = '')
 }
 
 //以流水號取得某筆tad_honor資料
+/**
+ * @param string $honor_sn
+ * @return array|false|void
+ */
 function get_tad_honor($honor_sn = '')
 {
     global $xoopsDB;
@@ -117,6 +121,9 @@ function get_tad_honor($honor_sn = '')
 }
 
 //新增資料到tad_honor中
+/**
+ * @return int
+ */
 function insert_tad_honor()
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
@@ -126,7 +133,7 @@ function insert_tad_honor()
     }
 
     //取得使用者編號
-    $uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $uid = $xoopsUser ? $xoopsUser->uid() : '';
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -155,6 +162,10 @@ function insert_tad_honor()
 }
 
 //更新tad_honor某一筆資料
+/**
+ * @param string $honor_sn
+ * @return string
+ */
 function update_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
@@ -164,7 +175,7 @@ function update_tad_honor($honor_sn = '')
     }
 
     //取得使用者編號
-    $uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $uid = $xoopsUser ? $xoopsUser->uid() : '';
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {

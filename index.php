@@ -6,6 +6,9 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 /*-----------功能函數區--------------*/
 
 //以流水號秀出某筆tad_honor資料內容
+/**
+ * @param string $honor_sn
+ */
 function show_one_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
@@ -13,7 +16,7 @@ function show_one_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $honor_sn = (int) ($honor_sn);
+    $honor_sn = (int)$honor_sn;
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -30,9 +33,9 @@ function show_one_tad_honor($honor_sn = '')
     add_tad_honor_counter($honor_sn);
 
     //將 uid 編號轉換成使用者姓名（或帳號）
-    $uid_name = XoopsUser::getUnameFromId($honor_uid, 1);
+    $uid_name = \XoopsUser::getUnameFromId($honor_uid, 1);
     if (empty($uid_name)) {
-        $uid_name = XoopsUser::getUnameFromId($honor_uid, 0);
+        $uid_name = \XoopsUser::getUnameFromId($honor_uid, 0);
     }
 
     require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
@@ -71,11 +74,14 @@ function show_one_tad_honor($honor_sn = '')
 
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('now_op', 'show_one_tad_honor');
-    $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
+    $xoopsTpl->assign('uid', $xoopsUser ? $xoopsUser->uid() : 0);
     $xoopsTpl->assign('post_power', power_chk('tad_honor_post', 1));
 }
 
 //新增tad_honor計數器
+/**
+ * @param string $honor_sn
+ */
 function add_tad_honor_counter($honor_sn = '')
 {
     global $xoopsDB;
@@ -87,6 +93,9 @@ function add_tad_honor_counter($honor_sn = '')
 }
 
 //刪除tad_honor某筆資料資料
+/**
+ * @param string $honor_sn
+ */
 function delete_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $isAdmin;
@@ -172,7 +181,7 @@ function list_tad_honor()
     $xoopsTpl->assign('delete_tad_honor_func', $delete_tad_honor_func);
 
     $xoopsTpl->assign('post_power', power_chk('tad_honor_post', 1));
-    $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
+    $xoopsTpl->assign('uid', $xoopsUser ? $xoopsUser->uid() : 0);
 }
 
 /*-----------執行動作判斷區----------*/

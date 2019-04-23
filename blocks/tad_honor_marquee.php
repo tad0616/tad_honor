@@ -1,5 +1,9 @@
 <?php
 //區塊主函式 (tad_honor_marquee)
+/**
+ * @param $options
+ * @return mixed
+ */
 function tad_honor_marquee($options)
 {
     global $xoopsDB, $xoTheme;
@@ -46,6 +50,10 @@ function tad_honor_marquee($options)
 }
 
 //區塊編輯函式 (tad_honor_marquee_edit)
+/**
+ * @param $options
+ * @return string
+ */
 function tad_honor_marquee_edit($options)
 {
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/mColorPicker.php')) {

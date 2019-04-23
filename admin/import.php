@@ -53,6 +53,9 @@ function list_fred_honorboard()
 }
 
 //匯入
+/**
+ * @param array $honor_arr
+ */
 function import_now($honor_arr = [])
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser;
