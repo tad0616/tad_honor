@@ -57,42 +57,39 @@ $modversion['search']['file'] = 'include/tad_honor_search.php';
 $modversion['search']['func'] = 'tad_honor_search';
 
 //---樣板設定---//
-$i = 0;
-$modversion['templates'][$i]['file'] = 'tad_honor_adm_main.tpl';
-$modversion['templates'][$i]['description'] = 'tad_honor_adm_main.tpl';
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_honor_adm_power.tpl';
-$modversion['templates'][$i]['description'] = 'tad_honor_adm_power.tpl';
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_honor_adm_import.tpl';
-$modversion['templates'][$i]['description'] = 'tad_honor_adm_import.tpl';
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_honor_adm_import_tadnews.tpl';
-$modversion['templates'][$i]['description'] = 'tad_honor_adm_import_tadnews.tpl';
 
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_honor_index.tpl';
-$modversion['templates'][$i]['description'] = 'tad_honor_index.tpl';
+$modversion['templates'] = [
+    ['file' => 'tad_honor_adm_main.tpl', 'description' => 'tad_honor_adm_main.tpl'],
+    ['file' => 'tad_honor_adm_power.tpl', 'description' => 'tad_honor_adm_power.tpl'],
+    ['file' => 'tad_honor_adm_import.tpl', 'description' => 'tad_honor_adm_import.tpl'],
+    ['file' => 'tad_honor_adm_import_tadnews.tpl', 'description' => 'tad_honor_adm_import_tadnews.tpl'],
+    ['file' => 'tad_honor_index.tpl', 'description' => 'tad_honor_index.tpl'],
+];
+
 
 //---區塊設定---//
-$i = 0;
-$i++;
-$modversion['blocks'][$i]['file'] = 'tad_honor_list.php';
-$modversion['blocks'][$i]['name'] = _MI_TADHONOR_LIST_BLOCK_NAME;
-$modversion['blocks'][$i]['description'] = _MI_TADHONOR_LIST_BLOCK_DESC;
-$modversion['blocks'][$i]['show_func'] = 'tad_honor_list';
-$modversion['blocks'][$i]['template'] = 'tad_honor_list.tpl';
-$modversion['blocks'][$i]['edit_func'] = 'tad_honor_list_edit';
-$modversion['blocks'][$i]['options'] = '10';
 
-$i++;
-$modversion['blocks'][$i]['file'] = 'tad_honor_marquee.php';
-$modversion['blocks'][$i]['name'] = _MI_TADHONOR_MARQUEE_BLOCK_NAME;
-$modversion['blocks'][$i]['description'] = _MI_TADHONOR_MARQUEE_BLOCK_DESC;
-$modversion['blocks'][$i]['show_func'] = 'tad_honor_marquee';
-$modversion['blocks'][$i]['template'] = 'tad_honor_marquee.tpl';
-$modversion['blocks'][$i]['edit_func'] = 'tad_honor_marquee_edit';
-$modversion['blocks'][$i]['options'] = '6|24|#f2f2ff|1px solid #08084d';
+$modversion['blocks'][] = [
+    'file'        => 'tad_honor_list.php',
+    'name'        => _MI_TADHONOR_LIST_BLOCK_NAME,
+    'description' => _MI_TADHONOR_LIST_BLOCK_DESC,
+    'show_func'   => 'tad_honor_list',
+    'template'    => 'tad_honor_list.tpl',
+    'edit_func'   => 'tad_honor_list_edit',
+    'options'     => '10',
+];
+
+$modversion['blocks'][] = [
+    'file'        => 'tad_honor_marquee.php',
+    'name'        => _MI_TADHONOR_MARQUEE_BLOCK_NAME,
+    'description' => _MI_TADHONOR_MARQUEE_BLOCK_DESC,
+    'show_func'   => 'tad_honor_marquee',
+    'template'    => 'tad_honor_marquee.tpl',
+    'edit_func'   => 'tad_honor_marquee_edit',
+    'options'     => '6|24|#f2f2ff|1px solid #08084d',
+];
+
+
 
 $i = 0;
 $modversion['config'][$i]['name'] = 'honor_unit';

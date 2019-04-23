@@ -110,6 +110,9 @@ function list_tad_honor()
 {
     global $xoopsDB, $xoopsTpl, $isAdmin;
 
+    /** @var \XoopsModules\Tad_honor\Helper $helper */
+    $helper = \XoopsModules\Tad_honor\Helper::getInstance();
+
     $myts = MyTextSanitizer::getInstance();
 
     require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
@@ -158,7 +161,7 @@ function list_tad_honor()
 
     $xoopsTpl->assign('bar', $bar);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('isAdmin', $isAdmin);
+    $xoopsTpl->assign('isAdmin', $helper->isUserAdmin());
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('now_op', 'list_tad_honor');
 
