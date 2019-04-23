@@ -147,7 +147,7 @@ function list_tad_honor()
         $all_content[$i]['honor_counter'] = $honor_counter;
         $all_content[$i]['honor_content'] = $honor_content;
         $all_content[$i]['honor_url'] = $honor_url;
-        $all_content[$i]['honor_uid'] = $uid_name;
+        $all_content[$i]['honor_uid'] = $honor_uid;
         $TadUpFiles->set_col('honor_sn', $honor_sn);
         $show_files = $TadUpFiles->show_files('up_honor_sn', true, 'small', true, false, null, null, false);
         $all_content[$i]['list_file'] = $show_files;
@@ -172,9 +172,9 @@ function list_tad_honor()
 
 /*-----------執行動作判斷區----------*/
 require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', '', 'int');
-$files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
+$op = \Xmf\Request::getString('op', '');
+$honor_sn = \Xmf\Request::getInt('honor_sn', '');
+$files_sn = \Xmf\Request::getInt('files_sn', '');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
