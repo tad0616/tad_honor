@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 include_once 'header.php';
 $xoopsOption['template_main'] = 'tad_honor_index.tpl';
@@ -17,8 +18,8 @@ function show_one_tad_honor($honor_sn = '')
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $all = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
@@ -69,7 +70,7 @@ function show_one_tad_honor($honor_sn = '')
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('now_op', 'show_one_tad_honor');
     $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
-    $xoopsTpl->assign('post_power', power_chk('tad_honor_post', 1));
+    $xoopsTpl->assign('post_power', Utility::power_chk('tad_honor_post', 1));
 }
 
 //新增tad_honor計數器
@@ -80,7 +81,7 @@ function add_tad_honor_counter($honor_sn = '')
         return;
     }
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set `honor_counter` = `honor_counter` + 1 where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 }
 
 //刪除tad_honor某筆資料資料
@@ -90,11 +91,11 @@ function delete_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
     $sql = 'delete from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
@@ -112,15 +113,15 @@ function list_tad_honor()
     include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . '` ORDER BY honor_date DESC';
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . '` ORDER BY honor_date DESC';
 
-    //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
-    $PageBar = getPageBar($sql, 20, 10, null, null, 3);
+    //Utility::getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
+    $PageBar = Utility::getPageBar($sql, 20, 10, null, null, 3);
     $bar = $PageBar['bar'];
     $sql = $PageBar['sql'];
     $total = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     $i = 0;
@@ -168,7 +169,7 @@ function list_tad_honor()
     $delete_tad_honor_func = $sweet_alert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     $xoopsTpl->assign('delete_tad_honor_func', $delete_tad_honor_func);
 
-    $xoopsTpl->assign('post_power', power_chk('tad_honor_post', 1));
+    $xoopsTpl->assign('post_power', Utility::power_chk('tad_honor_post', 1));
     $xoopsTpl->assign('uid', ($xoopsUser) ? $xoopsUser->uid() : 0);
 }
 
@@ -220,7 +221,7 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('toolbar', toolbar_bootstrap($interface_menu));
+$xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu));
 $xoopsTpl->assign('isAdmin', $isAdmin);
 $xoopsTpl->assign('show_confetti', $xoopsModuleConfig['show_confetti']);
 include_once XOOPS_ROOT_PATH . '/footer.php';

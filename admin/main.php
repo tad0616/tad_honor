@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_main.tpl';
 include_once 'header.php';
@@ -13,7 +14,7 @@ function delete_tad_honor($honor_sn = '')
         return;
     }
     $sql = 'delete from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
@@ -33,8 +34,8 @@ function show_one_tad_honor($honor_sn = '')
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $all = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
@@ -93,7 +94,7 @@ function add_tad_honor_counter($honor_sn = '')
         return;
     }
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set `honor_counter` = `honor_counter` + 1 where `honor_sn` = '{$honor_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 }
 
 //列出所有tad_honor資料
@@ -106,15 +107,15 @@ function list_tad_honor()
     include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . '` ';
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . '` ';
 
-    //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
-    $PageBar = getPageBar($sql, 20, 10, null, null, 3);
+    //Utility::getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
+    $PageBar = Utility::getPageBar($sql, 20, 10, null, null, 3);
     $bar = $PageBar['bar'];
     $sql = $PageBar['sql'];
     $total = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     $i = 0;
@@ -197,7 +198,7 @@ switch ($op) {
     default:
         if (empty($honor_sn)) {
             list_tad_honor();
-        //$main.=tad_honor_form($honor_sn);
+            //$main.=tad_honor_form($honor_sn);
         } else {
             show_one_tad_honor($honor_sn);
         }

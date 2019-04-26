@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_import.tpl';
 include_once 'header.php';
@@ -27,7 +28,7 @@ function list_fred_honorboard()
 
     //轉移權限(原權限)
     $sql = 'SELECT gperm_groupid,gperm_itemid,gperm_name FROM `' . $xoopsDB->prefix('group_permission') . "` WHERE `gperm_modid` ='{$mod_id}'";
-    $result = $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result)) {
         $power[$gperm_itemid][$gperm_name][$gperm_groupid] = $gperm_groupid;
     }
@@ -36,13 +37,13 @@ function list_fred_honorboard()
     $mid = $xoopsModule->getVar('mid');
     $sql = 'SELECT gperm_groupid,gperm_itemid,gperm_name FROM `' . $xoopsDB->prefix('group_permission') . "` WHERE `gperm_modid` ='{$mid}' ";
 
-    $result = $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($gperm_groupid, $gperm_itemid, $gperm_name) = $xoopsDB->fetchRow($result)) {
         $now_power[$gperm_itemid][$gperm_name][$gperm_groupid] = $gperm_groupid;
     }
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('fred_honorboard') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('fred_honorboard') . '`';
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     while ($all = $xoopsDB->fetchArray($result)) {
@@ -61,13 +62,13 @@ function import_now($honor_arr = [])
 
     $dep = [];
     $sql = 'SELECT department_sn,department_name FROM `' . $xoopsDB->prefix('fred_honorboard_department') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($department_sn, $department_name) = $xoopsDB->fetchRow($result)) {
         $dep[$department_sn] = $department_name;
     }
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('fred_honorboard') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('fred_honorboard') . '`';
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while ($all = $xoopsDB->fetchArray($result)) {
         if (in_array($all['honor_sn'], $honor_arr)) {
@@ -81,13 +82,13 @@ function import_now($honor_arr = [])
             $sql = 'replace into `' . $xoopsDB->prefix('tad_honor') . "`
             (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`)
             values('{$honor_title}' , '{$write_date}' ,  '{$write_department}' , '{$click}' , '{$honor_content}' , '' , '{$uid}' )";
-            $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+            $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
         }
     }
 
     $conf_value = implode(';', $dep);
     $sql = 'update `' . $xoopsDB->prefix('config') . "` set `conf_value`='$conf_value' where `conf_name`='honor_unit'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 }
 
 /*-----------執行動作判斷區----------*/

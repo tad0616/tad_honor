@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_import_tadnews.tpl';
 include_once 'header.php';
@@ -26,7 +27,7 @@ function list_tadnews_cate()
     }
 
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news_cate') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_cate = [];
     while ($all = $xoopsDB->fetchArray($result)) {
@@ -41,8 +42,8 @@ function list_tadnews($ncsn)
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl;
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     while ($all = $xoopsDB->fetchArray($result)) {
@@ -62,8 +63,8 @@ function import_now($nsn_arr, $ncsn)
 
     $honor_unit_arr = explode(';', $xoopsModuleConfig['honor_unit']);
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while ($all = $xoopsDB->fetchArray($result)) {
         if (in_array($all['nsn'], $nsn_arr)) {
@@ -77,7 +78,7 @@ function import_now($nsn_arr, $ncsn)
             $sql = 'replace into `' . $xoopsDB->prefix('tad_honor') . "`
             (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`)
             values('{$honor_title}' , '{$honor_date}' ,  '{$honor_unit}' , '{$honor_counter}' , '{$honor_content}' , '' , '{$honor_uid}' )";
-            $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+            $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
         }
     }
 }

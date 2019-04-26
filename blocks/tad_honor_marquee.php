@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\Utility;
 //區塊主函式 (tad_honor_marquee)
 function tad_honor_marquee($options)
 {
@@ -7,7 +8,7 @@ function tad_honor_marquee($options)
     //{$options[0]} : 取出幾筆榮譽榜資料？
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
-    $options[1] = (int)$options[1];
+    $options[1] = (int) $options[1];
 
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
@@ -27,8 +28,8 @@ function tad_honor_marquee($options)
     }
     $block['options3'] = $options[3];
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $content = [];
 
     $i = 0;
@@ -55,7 +56,7 @@ function tad_honor_marquee_edit($options)
     $mColorPicker = new mColorPicker('.color');
     $mColorPicker->render();
 
-    $options[1] = (int)$options[1];
+    $options[1] = (int) $options[1];
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
     }

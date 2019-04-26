@@ -1,10 +1,6 @@
 <?php
-//引入TadTools的函式庫
-if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
-    redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
-}
-include_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
-
+use XoopsModules\Tadtools\Utility;
+xoops_loadLanguage('main', 'tadtools');
 /********************* 自訂函數 *********************/
 
 //tad_honor編輯表單
@@ -12,7 +8,7 @@ function tad_honor_form($honor_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -67,10 +63,10 @@ function tad_honor_form($honor_sn = '')
     //$op="replace_tad_honor";
 
     //套用formValidator驗證機制
-    if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
+    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/formValidator.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once TADTOOLS_PATH . '/formValidator.php';
+    include_once XOOPS_ROOT_PATH . '/modules/tadtools/formValidator.php';
     $formValidator = new formValidator('#myForm', true);
     $formValidator_code = $formValidator->render();
 
@@ -107,8 +103,8 @@ function get_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -119,7 +115,7 @@ function insert_tad_honor()
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -139,7 +135,7 @@ function insert_tad_honor()
     $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_honor') . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
@@ -157,7 +153,7 @@ function update_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -184,7 +180,7 @@ function update_tad_honor($honor_sn = '')
    `honor_url` = '{$_POST['honor_url']}' ,
    `honor_uid` = '{$uid}'
   where `honor_sn` = '$honor_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
