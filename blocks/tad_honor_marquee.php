@@ -49,12 +49,9 @@ function tad_honor_marquee($options)
 //區塊編輯函式 (tad_honor_marquee_edit)
 function tad_honor_marquee_edit($options)
 {
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/mColorPicker.php')) {
-        redirect_header('index.php', 3, _MA_NEED_TADTOOLS);
-    }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/mColorPicker.php';
-    $mColorPicker = new mColorPicker('.color');
-    $mColorPicker->render();
+
+    $MColorPicker = new MColorPicker('.color');
+    $MColorPicker->render();
 
     $options[1] = (int) $options[1];
     if ($options[1] < 11 or $options[1] > 60) {

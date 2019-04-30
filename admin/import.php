@@ -58,7 +58,7 @@ function import_now($honor_arr = [])
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser;
     $uid = $xoopsUser->uid();
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $dep = [];
     $sql = 'SELECT department_sn,department_name FROM `' . $xoopsDB->prefix('fred_honorboard_department') . '`';

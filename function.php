@@ -1,4 +1,7 @@
 <?php
+use XoopsModules\Tadtools\CkEditor;
+use XoopsModules\Tadtools\FormValidator;
+use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 xoops_loadLanguage('main', 'tadtools');
 /********************* 自訂函數 *********************/
@@ -62,24 +65,15 @@ function tad_honor_form($honor_sn = '')
     $op = (empty($honor_sn)) ? 'insert_tad_honor' : 'update_tad_honor';
     //$op="replace_tad_honor";
 
-    //套用formValidator驗證機制
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/formValidator.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/formValidator.php';
-    $formValidator = new formValidator('#myForm', true);
-    $formValidator_code = $formValidator->render();
+    $FormValidator = new FormValidator('#myForm', true);
+    $FormValidator->render();
 
     //詳細內容
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/ck.php')) {
-        redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
-    }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/ck.php';
-    $ck = new CKEditor('tad_honor', 'honor_content', $honor_content);
-    $ck->setHeight(250);
-    $editor = $ck->render();
+    $CkEditor = new CkEditor('tad_honor', 'honor_content', $honor_content);
+    $CkEditor->setHeight(250);
+    $editor = $CkEditor->render();
     $xoopsTpl->assign('honor_content_editor', $editor);
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $up_honor_sn_form = $TadUpFiles->upform(true, 'up_honor_sn', '');
@@ -91,7 +85,6 @@ function tad_honor_form($honor_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('formValidator_code', $formValidator_code);
     $xoopsTpl->assign('now_op', 'tad_honor_form');
     $xoopsTpl->assign('next_op', $op);
 }
@@ -128,7 +121,7 @@ function insert_tad_honor()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
@@ -140,7 +133,6 @@ function insert_tad_honor()
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);
@@ -166,23 +158,22 @@ function update_tad_honor($honor_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
     $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
 
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set
-   `honor_title` = '{$_POST['honor_title']}' ,
-   `honor_date` = '{$_POST['honor_date']}' ,
-   `honor_unit` = '{$_POST['honor_unit']}' ,
-   `honor_content` = '{$_POST['honor_content']}' ,
-   `honor_url` = '{$_POST['honor_url']}' ,
-   `honor_uid` = '{$uid}'
-  where `honor_sn` = '$honor_sn'";
+    `honor_title` = '{$_POST['honor_title']}' ,
+    `honor_date` = '{$_POST['honor_date']}' ,
+    `honor_unit` = '{$_POST['honor_unit']}' ,
+    `honor_content` = '{$_POST['honor_content']}' ,
+    `honor_url` = '{$_POST['honor_url']}' ,
+    `honor_uid` = '{$uid}'
+    where `honor_sn` = '$honor_sn'";
     $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);

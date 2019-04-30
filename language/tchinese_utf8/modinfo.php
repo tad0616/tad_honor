@@ -1,6 +1,5 @@
 <?php
-include_once XOOPS_ROOT_PATH . "/modules/tadtools/language/{$xoopsConfig['language']}/modinfo_common.php";
-
+xoops_loadLanguage('modinfo_common', 'tadtools');
 define('_MI_TADHONOR_NAME', '榮譽榜');
 define('_MI_TADHONOR_AUTHOR', '榮譽榜');
 define('_MI_TADHONOR_CREDITS', '');

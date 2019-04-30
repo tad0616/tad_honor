@@ -9,9 +9,7 @@
 
 <!--顯示某一筆資料-->
 <{if $now_op=="show_one_tad_honor"}>
-  <{if $isAdmin}>
-    <{$delete_tad_honor_func}>
-  <{/if}>
+
   <h2 class="text-center"><{$honor_title}></h2>
 
 
@@ -104,9 +102,6 @@
 
 <{if $now_op=="list_tad_honor"}>
   <{if $all_content}>
-    <{if $isAdmin}>
-      <{$delete_tad_honor_func}>
-    <{/if}>
 
     <table class="table table-striped table-hover">
       <thead>

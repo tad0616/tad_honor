@@ -10,10 +10,6 @@
 
 <!--顯示某一筆資料-->
 <{if $now_op=="show_one_tad_honor"}>
-  <{if $isAdmin or $post_power}>
-    <{$delete_tad_honor_func}>
-  <{/if}>
-
   <{if $show_confetti==1}>
     <style type="text/css" media="screen">
       canvas#canvas {
@@ -72,10 +68,6 @@
 <!--列出所有資料-->
 <{if $now_op=="list_tad_honor"}>
   <{if $all_content}>
-    <{if $isAdmin or $post_power}>
-      <{$delete_tad_honor_func}>
-    <{/if}>
-
     <{if $show_confetti==1}>
       <style type="text/css" media="screen">
         canvas#canvas {

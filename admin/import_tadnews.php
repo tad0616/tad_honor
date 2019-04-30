@@ -59,7 +59,7 @@ function import_now($nsn_arr, $ncsn)
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $honor_unit_arr = explode(';', $xoopsModuleConfig['honor_unit']);
 
