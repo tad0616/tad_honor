@@ -13,7 +13,7 @@ $module_id = $xoopsModule->getVar('mid');
 
 $perm_desc = '';
 
-$formi = new XoopsGroupPermForm('', $module_id, 'tad_honor_post', $perm_desc);
+$formi = new \XoopsGroupPermForm('', $module_id, 'tad_honor_post', $perm_desc);
 $formi->addItem('1', _MA_TADHONOR_HONOR_PUBLISH_PERMISSIONS);
 
 $permission_content = $formi->render();
