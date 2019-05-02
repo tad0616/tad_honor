@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\MColorPicker;
 use XoopsModules\Tadtools\Utility;
 //區塊主函式 (tad_honor_marquee)
 function tad_honor_marquee($options)
