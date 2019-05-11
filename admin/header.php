@@ -1,7 +1,5 @@
 <?php
 /**
- * Tad Honor module
- *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
@@ -11,22 +9,16 @@
  *
  * @copyright           XOOPS Project (https://xoops.org)
  * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package             Tad Honor
- * @since               2.5.7
- * @author              Tad
+ * @package
+ * @since        2.5.0
+ * @author
  * @version             $Id $
  **/
-
-use \XoopsModules\Tad_honor;
-
 include dirname(__DIR__) . '/preloads/autoloader.php';
-
-require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-
-/** @var \XoopsModules\Tad_honor\Helper $helper */
-$helper = \XoopsModules\Tad_honor\Helper::getInstance();
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 xoops_loadLanguage('main', $xoopsModule->getVar('dirname'));
+
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new \XoopsTpl();

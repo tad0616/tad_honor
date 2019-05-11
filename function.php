@@ -1,11 +1,10 @@
 <?php
-//引入TadTools的函式庫
-if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
-    redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
-}
-require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
-
-/********************* 自訂函數 ********************
+use XoopsModules\Tadtools\CkEditor;
+use XoopsModules\Tadtools\FormValidator;
+use XoopsModules\Tadtools\TadUpFiles;
+use XoopsModules\Tadtools\Utility;
+xoops_loadLanguage('main', 'tadtools');
+/********************* 自訂函數 *********************/
  * @param string $honor_sn
  */
 
@@ -14,7 +13,7 @@ function tad_honor_form($honor_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin, $xoopsUser;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -68,24 +67,15 @@ function tad_honor_form($honor_sn = '')
     $op = empty($honor_sn) ? 'insert_tad_honor' : 'update_tad_honor';
     //$op="replace_tad_honor";
 
-    //套用formValidator驗證機制
-    if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once TADTOOLS_PATH . '/formValidator.php';
-    $formValidator = new formValidator('#myForm', true);
-    $formValidator_code = $formValidator->render();
+    $FormValidator = new FormValidator('#myForm', true);
+    $FormValidator->render();
 
     //詳細內容
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/ck.php')) {
-        redirect_header('http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/ck.php';
-    $ck = new CKEditor('tad_honor', 'honor_content', $honor_content);
-    $ck->setHeight(250);
-    $editor = $ck->render();
+    $CkEditor = new CkEditor('tad_honor', 'honor_content', $honor_content);
+    $CkEditor->setHeight(250);
+    $editor = $CkEditor->render();
     $xoopsTpl->assign('honor_content_editor', $editor);
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $up_honor_sn_form = $TadUpFiles->upform(true, 'up_honor_sn', '');
@@ -97,7 +87,6 @@ function tad_honor_form($honor_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('formValidator_code', $formValidator_code);
     $xoopsTpl->assign('now_op', 'tad_honor_form');
     $xoopsTpl->assign('next_op', $op);
 }
@@ -113,8 +102,8 @@ function get_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -128,7 +117,7 @@ function insert_tad_honor()
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -141,19 +130,18 @@ function insert_tad_honor()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
     $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_honor') . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $honor_sn = $xoopsDB->getInsertId();
 
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);
@@ -170,7 +158,7 @@ function update_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
 
-    if (!power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -183,7 +171,7 @@ function update_tad_honor($honor_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
     $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
     $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
@@ -197,9 +185,8 @@ function update_tad_honor($honor_sn = '')
    `honor_url` = '{$_POST['honor_url']}' ,
    `honor_uid` = '{$uid}'
   where `honor_sn` = '$honor_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
     $TadUpFiles->upload_file('up_honor_sn', '', '', '', '', true, false);

@@ -1,4 +1,11 @@
 <?php
+use XoopsModules\Tadtools\MColorPicker;
+use XoopsModules\Tadtools\Utility;
+
+if (!class_exists('XoopsModules\Tadtools\Utility')) {
+    require XOOPS_ROOT_PATH . '/modules/tadtools/preloads/autoloader.php';
+}
+
 //區塊主函式 (tad_honor_marquee)
 /**
  * @param $options
@@ -31,8 +38,8 @@ function tad_honor_marquee($options)
     }
     $block['options3'] = $options[3];
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $content = [];
 
     $i = 0;
@@ -56,12 +63,9 @@ function tad_honor_marquee($options)
  */
 function tad_honor_marquee_edit($options)
 {
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/mColorPicker.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/mColorPicker.php';
-    $mColorPicker = new mColorPicker('.color');
-    $mColorPicker->render();
+
+    $MColorPicker = new MColorPicker('.color');
+    $MColorPicker->render();
 
     $options[1] = (int)$options[1];
     if ($options[1] < 11 or $options[1] > 60) {
