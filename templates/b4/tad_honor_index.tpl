@@ -60,7 +60,8 @@
             <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-sm btn-primary"><{$smarty.const._TAD_ADD}></a>
           <{/if}>
         </div>
-        <{$honor_unit}> <{$uid_name}> 於 <{$honor_date}> 發布，共有 <{$honor_counter}> 人次閱讀
+<{*        <{$honor_unit}> <{$uid_name}> 於 <{$honor_date}> 發布，共有 <{$honor_counter}> 人次閱讀*}>
+          <{$lang_viewsinfo}>
       </div>
     </div>
 <{/if}>

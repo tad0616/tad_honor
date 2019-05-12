@@ -2,8 +2,8 @@
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_import.tpl';
-include_once 'header.php';
-include_once '../function.php';
+require_once __DIR__ . '/header.php';
+require_once dirname(__DIR__) . '/function.php';
 /*-----------功能函數區--------------*/
 
 //列出所有 list_fred_honorboard 資料
@@ -13,8 +13,8 @@ function list_fred_honorboard()
 
     //取得某模組編號
 
-    $modhandler = xoops_getHandler('module');
-    $ThexoopsModule = $modhandler->getByDirname('fred_honorboard');
+    $moduleHandler = xoops_getHandler('module');
+    $ThexoopsModule = $moduleHandler->getByDirname('fred_honorboard');
 
     if ($ThexoopsModule) {
         $mod_id = $ThexoopsModule->getVar('mid');
@@ -46,7 +46,7 @@ function list_fred_honorboard()
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $all_content[] = $all;
     }
 
@@ -54,6 +54,9 @@ function list_fred_honorboard()
 }
 
 //匯入
+/**
+ * @param array $honor_arr
+ */
 function import_now($honor_arr = [])
 {
     global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser;
@@ -70,7 +73,7 @@ function import_now($honor_arr = [])
     $sql = "SELECT * FROM `" . $xoopsDB->prefix('fred_honorboard') . '`';
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         if (in_array($all['honor_sn'], $honor_arr)) {
             $honor_person = $myts->addSlashes($all['honor_person']);
             $honor_title = $myts->addSlashes($all['honor_title']);
@@ -92,7 +95,7 @@ function import_now($honor_arr = [])
 }
 
 /*-----------執行動作判斷區----------*/
-include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
+require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 $op = system_CleanVars($_REQUEST, 'op', '', 'string');
 $honor_sn = system_CleanVars($_REQUEST, 'honor_sn', [], 'array');
 
@@ -113,4 +116,4 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('isAdmin', true);
-include_once 'footer.php';
+require_once __DIR__ . '/footer.php';

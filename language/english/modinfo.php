@@ -22,7 +22,7 @@ define('_MI_TADHONOR_MARQUEE_BLOCK_NAME', 'Honor Roll Marquee');
 define('_MI_TADHONOR_MARQUEE_BLOCK_DESC', 'Honor Roll Marquee block (tad_honor_marquee)');
 define('_MI_TADHONOR_HONOR_UNIT', 'Publishing unit setting');
 define('_MI_TADHONOR_HONOR_UNIT_DESC', 'Publishing unit setting');
-define('_MI_TADHONOR_HONOR_UNIT_DEFAULT', 'Office of Academic Affairs; President\'s Office; Office of Student Affairs');
+define('_MI_TADHONOR_HONOR_UNIT_DEFAULT', "Office of Academic Affairs; President\'s Office2; Office of Student Affairs");
 define('_MI_TADHONOR_SHOW_CONFETTI', 'Do you see dynamic ribbons');
 define('_MI_TADHONOR_SHOW_CONFETTI_DESC', 'Do you want to display the dynamic ribbon of the honor list');
 

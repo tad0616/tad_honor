@@ -7,6 +7,10 @@ if (!class_exists('XoopsModules\Tadtools\Utility')) {
 }
 
 //區塊主函式 (tad_honor_marquee)
+/**
+ * @param $options
+ * @return mixed
+ */
 function tad_honor_marquee($options)
 {
     global $xoopsDB, $xoTheme;
@@ -14,7 +18,7 @@ function tad_honor_marquee($options)
     //{$options[0]} : 取出幾筆榮譽榜資料？
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
-    $options[1] = (int) $options[1];
+    $options[1] = (int)$options[1];
 
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
@@ -39,7 +43,7 @@ function tad_honor_marquee($options)
     $content = [];
 
     $i = 0;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $content[$i] = $all;
         $i++;
     }
@@ -53,13 +57,17 @@ function tad_honor_marquee($options)
 }
 
 //區塊編輯函式 (tad_honor_marquee_edit)
+/**
+ * @param $options
+ * @return string
+ */
 function tad_honor_marquee_edit($options)
 {
 
     $MColorPicker = new MColorPicker('.color');
     $MColorPicker->render();
 
-    $options[1] = (int) $options[1];
+    $options[1] = (int)$options[1];
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
     }

@@ -1,6 +1,10 @@
 <?php
 use XoopsModules\Tadtools\Utility;
 //區塊主函式 (tad_honor_list)
+/**
+ * @param $options
+ * @return mixed
+ */
 function tad_honor_list($options)
 {
     global $xoopsDB, $xoTheme;
@@ -12,7 +16,7 @@ function tad_honor_list($options)
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $content = [];
     $i = 0;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $content[$i] = $all;
         $i++;
     }
@@ -22,6 +26,10 @@ function tad_honor_list($options)
 }
 
 //區塊編輯函式 (tad_honor_list_edit)
+/**
+ * @param $options
+ * @return string
+ */
 function tad_honor_list_edit($options)
 {
     $form = "

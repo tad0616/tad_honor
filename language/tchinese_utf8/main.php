@@ -14,3 +14,5 @@ define('_MD_TADHONOR_SHOW_HONOR_SN_FILES', '上傳');
 
 define('_MD_TADHONOR_HONOR_TITLE', '標題');
 define('_MD_TADHONOR_SMNAME1', '榮譽榜');
+
+define('_MD_TADHONOR_HONOR_VIEWS_INFO', '%s %s 於 %s 發布，共有 %s 人次閱讀');

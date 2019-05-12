@@ -1,5 +1,13 @@
 <?php
 //榮譽榜搜尋程式
+/**
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
+ * @return array
+ */
 function tad_honor_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
@@ -25,7 +33,7 @@ function tad_honor_search($queryarray, $andor, $limit, $offset, $userid)
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret = [];
     $i = 0;
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[$i]['image'] = 'images/coins.png';
         $ret[$i]['link'] = 'index.php?honor_sn=' . $myrow['honor_sn'];
         $ret[$i]['title'] = $myrow['honor_title'];

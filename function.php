@@ -5,11 +5,13 @@ use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 xoops_loadLanguage('main', 'tadtools');
 /********************* 自訂函數 *********************/
+ * @param string $honor_sn
+ */
 
 //tad_honor編輯表單
 function tad_honor_form($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin, $xoopsUser;
 
     if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
@@ -58,11 +60,11 @@ function tad_honor_form($honor_sn = '')
     $xoopsTpl->assign('honor_url', $honor_url);
 
     //設定 honor_uid 欄位的預設值
-    $user_uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $user_uid = $xoopsUser ? $xoopsUser->uid() : '';
     $honor_uid = !isset($DBV['honor_uid']) ? $user_uid : $DBV['honor_uid'];
     $xoopsTpl->assign('honor_uid', $honor_uid);
 
-    $op = (empty($honor_sn)) ? 'insert_tad_honor' : 'update_tad_honor';
+    $op = empty($honor_sn) ? 'insert_tad_honor' : 'update_tad_honor';
     //$op="replace_tad_honor";
 
     $FormValidator = new FormValidator('#myForm', true);
@@ -80,7 +82,7 @@ function tad_honor_form($honor_sn = '')
     $xoopsTpl->assign('up_honor_sn_form', $up_honor_sn_form);
 
     //加入Token安全機制
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
@@ -90,6 +92,10 @@ function tad_honor_form($honor_sn = '')
 }
 
 //以流水號取得某筆tad_honor資料
+/**
+ * @param string $honor_sn
+ * @return array|false|void
+ */
 function get_tad_honor($honor_sn = '')
 {
     global $xoopsDB;
@@ -104,6 +110,9 @@ function get_tad_honor($honor_sn = '')
 }
 
 //新增資料到tad_honor中
+/**
+ * @return int
+ */
 function insert_tad_honor()
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
@@ -113,11 +122,11 @@ function insert_tad_honor()
     }
 
     //取得使用者編號
-    $uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $uid = $xoopsUser ? $xoopsUser->uid() : '';
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -141,6 +150,10 @@ function insert_tad_honor()
 }
 
 //更新tad_honor某一筆資料
+/**
+ * @param string $honor_sn
+ * @return string
+ */
 function update_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
@@ -150,11 +163,11 @@ function update_tad_honor($honor_sn = '')
     }
 
     //取得使用者編號
-    $uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $uid = $xoopsUser ? $xoopsUser->uid() : '';
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -165,13 +178,13 @@ function update_tad_honor($honor_sn = '')
     $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
 
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set
-    `honor_title` = '{$_POST['honor_title']}' ,
-    `honor_date` = '{$_POST['honor_date']}' ,
-    `honor_unit` = '{$_POST['honor_unit']}' ,
-    `honor_content` = '{$_POST['honor_content']}' ,
-    `honor_url` = '{$_POST['honor_url']}' ,
-    `honor_uid` = '{$uid}'
-    where `honor_sn` = '$honor_sn'";
+   `honor_title` = '{$_POST['honor_title']}' ,
+   `honor_date` = '{$_POST['honor_date']}' ,
+   `honor_unit` = '{$_POST['honor_unit']}' ,
+   `honor_content` = '{$_POST['honor_content']}' ,
+   `honor_url` = '{$_POST['honor_url']}' ,
+   `honor_uid` = '{$uid}'
+  where `honor_sn` = '$honor_sn'";
     $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $TadUpFiles = new TadUpFiles('tad_honor');

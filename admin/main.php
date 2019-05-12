@@ -4,11 +4,14 @@ use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_main.tpl';
-include_once 'header.php';
-include_once '../function.php';
+require_once __DIR__ . '/header.php';
+require_once dirname(__DIR__) . '/function.php';
 /*-----------功能函數區--------------*/
 
 //刪除tad_honor某筆資料資料
+/**
+ * @param string $honor_sn
+ */
 function delete_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $isAdmin;
@@ -24,6 +27,9 @@ function delete_tad_honor($honor_sn = '')
 }
 
 //以流水號秀出某筆tad_honor資料內容
+/**
+ * @param string $honor_sn
+ */
 function show_one_tad_honor($honor_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $isAdmin;
@@ -31,7 +37,7 @@ function show_one_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $honor_sn = (int) ($honor_sn);
+    $honor_sn = (int)$honor_sn;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -48,9 +54,9 @@ function show_one_tad_honor($honor_sn = '')
     add_tad_honor_counter($honor_sn);
 
     //將 uid 編號轉換成使用者姓名（或帳號）
-    $uid_name = XoopsUser::getUnameFromId($honor_uid, 1);
+    $uid_name = \XoopsUser::getUnameFromId($honor_uid, 1);
     if (empty($uid_name)) {
-        $uid_name = XoopsUser::getUnameFromId($honor_uid, 0);
+        $uid_name = \XoopsUser::getUnameFromId($honor_uid, 0);
     }
 
     $TadUpFiles = new TadUpFiles('tad_honor');
@@ -82,6 +88,9 @@ function show_one_tad_honor($honor_sn = '')
 }
 
 //新增tad_honor計數器
+/**
+ * @param string $honor_sn
+ */
 function add_tad_honor_counter($honor_sn = '')
 {
     global $xoopsDB;
@@ -97,7 +106,7 @@ function list_tad_honor()
 {
     global $xoopsDB, $xoopsTpl, $isAdmin;
 
-    $myts = \MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 
     $TadUpFiles = new TadUpFiles('tad_honor');
 
@@ -113,7 +122,7 @@ function list_tad_honor()
 
     $all_content = [];
     $i = 0;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $honor_sn , $honor_title , $honor_date , $honor_unit , $honor_counter , $honor_content , $honor_url , $honor_uid
         foreach ($all as $k => $v) {
             $$k = $v;
@@ -133,7 +142,7 @@ function list_tad_honor()
         $all_content[$i]['honor_counter'] = $honor_counter;
         $all_content[$i]['honor_content'] = $honor_content;
         $all_content[$i]['honor_url'] = $honor_url;
-        $all_content[$i]['honor_uid'] = $uid_name;
+        $all_content[$i]['honor_uid'] = $honor_uid;
         $TadUpFiles->set_col('honor_sn', $honor_sn);
         $show_files = $TadUpFiles->show_files('up_honor_sn', true, 'small', true, false, null, null, false);
         $all_content[$i]['list_file'] = $show_files;
@@ -153,10 +162,10 @@ function list_tad_honor()
 }
 
 /*-----------執行動作判斷區----------*/
-include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', '', 'int');
-$files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
+require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
+$op = \Xmf\Request::getString('op', '');
+$honor_sn = \Xmf\Request::getInt('honor_sn', '');
+$files_sn = \Xmf\Request::getInt('files_sn', '');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -188,7 +197,7 @@ switch ($op) {
     default:
         if (empty($honor_sn)) {
             list_tad_honor();
-            //$main.=tad_honor_form($honor_sn);
+        //$main.=tad_honor_form($honor_sn);
         } else {
             show_one_tad_honor($honor_sn);
         }
@@ -198,4 +207,4 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('isAdmin', true);
-include_once 'footer.php';
+require_once __DIR__ . '/footer.php';
