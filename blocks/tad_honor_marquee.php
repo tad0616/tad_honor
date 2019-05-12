@@ -38,7 +38,7 @@ function tad_honor_marquee($options)
     }
     $block['options3'] = $options[3];
 
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $content = [];
 

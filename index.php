@@ -23,7 +23,7 @@ function show_one_tad_honor($honor_sn = '')
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}' ";
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $all = $xoopsDB->fetchArray($result);
 
@@ -117,7 +117,7 @@ function list_tad_honor()
 
     $TadUpFiles = new TadUpFiles('tad_honor');
 
-    $sql = "SELECT * FROM " . $xoopsDB->prefix('tad_honor') . ' ORDER BY honor_date DESC';
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('tad_honor') . ' ORDER BY honor_date DESC';
 
     //Utility::getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = Utility::getPageBar($sql, 20, 10, null, null, 3);
