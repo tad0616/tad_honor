@@ -19,7 +19,7 @@ function show_one_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $honor_sn = (int)$honor_sn;
+    $honor_sn = (int) $honor_sn;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -62,6 +62,7 @@ function show_one_tad_honor($honor_sn = '')
     $xoopsTpl->assign('honor_url', $honor_url);
     $xoopsTpl->assign('honor_uid', $honor_uid);
     $xoopsTpl->assign('uid_name', $uid_name);
+    $xoopsTpl->assign('lang_viewsinfo', sprintf(_MD_TADHONOR_HONOR_VIEWS_INFO, $honor_unit, $uid_name, $honor_date, $honor_counter));
 
     if ($isAdmin or Utility::power_chk('tad_honor_post', 1)) {
         $SweetAlert = new SweetAlert();

@@ -4,10 +4,7 @@ use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 xoops_loadLanguage('main', 'tadtools');
-/********************* 自訂函數 ********************
- * @param string $honor_sn
- */
-/*
+/**
  * @param string $honor_sn
  */
 
