@@ -42,7 +42,7 @@ function list_fred_honorboard()
         $now_power[$gperm_itemid][$gperm_name][$gperm_groupid] = $gperm_groupid;
     }
 
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('fred_honorboard') . '`';
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('fred_honorboard') . '`';
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
@@ -70,7 +70,7 @@ function import_now($honor_arr = [])
         $dep[$department_sn] = $department_name;
     }
 
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('fred_honorboard') . '`';
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('fred_honorboard') . '`';
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {

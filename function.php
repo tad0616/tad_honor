@@ -102,7 +102,7 @@ function get_tad_honor($honor_sn = '')
     if (empty($honor_sn)) {
         return;
     }
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
