@@ -7,7 +7,7 @@
   }
 
   ul#tad_honor_marquee2 li {
-    font-size: <{$block.options1}>px;
+    font-size: <{$block.options1}>em;
     padding: 3px 5px;
   }
 </style>

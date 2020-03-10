@@ -18,13 +18,13 @@ function tad_honor_marquee($options)
     //{$options[0]} : 取出幾筆榮譽榜資料？
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
-    $options[1] = (int)$options[1];
+    $options[1] = (int) $options[1];
 
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
     }
 
-    $block['options1'] = $options[1];
+    $block['options1'] = round($options[1] / 16, 2);
     // $block['height']   = 400;
     $block['height'] = $options[1] * 1.6;
     //{$options[2]} : 背景顏色
@@ -67,7 +67,7 @@ function tad_honor_marquee_edit($options)
     $MColorPicker = new MColorPicker('.color');
     $MColorPicker->render();
 
-    $options[1] = (int)$options[1];
+    $options[1] = (int) $options[1];
     if ($options[1] < 11 or $options[1] > 60) {
         $options[1] = 24;
     }
