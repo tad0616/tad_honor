@@ -3,7 +3,7 @@ $modversion = [];
 
 //---模組基本資訊---//
 $modversion['name'] = _MI_TADHONOR_NAME;
-$modversion['version'] = '1.48';
+$modversion['version'] = '1.49';
 $modversion['description'] = _MI_TADHONOR_DESC;
 $modversion['author'] = _MI_TADHONOR_AUTHOR;
 $modversion['credits'] = _MI_TADHONOR_CREDITS;
@@ -14,7 +14,7 @@ $modversion['image'] = "images/logo_{$xoopsConfig['language']}.png";
 $modversion['dirname'] = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['release_date'] = '2019/05/10';
+$modversion['release_date'] = '2020/03/14';
 $modversion['module_website_url'] = 'https://tad0616.net';
 $modversion['module_website_name'] = _MI_TADHONOR_AUTHOR_WEB;
 $modversion['module_status'] = 'release';
@@ -66,30 +66,27 @@ $modversion['templates'] = [
     ['file' => 'tad_honor_index.tpl', 'description' => 'tad_honor_index.tpl'],
 ];
 
-
 //---區塊設定---//
 
 $modversion['blocks'][] = [
-    'file'        => 'tad_honor_list.php',
-    'name'        => _MI_TADHONOR_LIST_BLOCK_NAME,
+    'file' => 'tad_honor_list.php',
+    'name' => _MI_TADHONOR_LIST_BLOCK_NAME,
     'description' => _MI_TADHONOR_LIST_BLOCK_DESC,
-    'show_func'   => 'tad_honor_list',
-    'template'    => 'tad_honor_list.tpl',
-    'edit_func'   => 'tad_honor_list_edit',
-    'options'     => '10',
+    'show_func' => 'tad_honor_list',
+    'template' => 'tad_honor_list.tpl',
+    'edit_func' => 'tad_honor_list_edit',
+    'options' => '10',
 ];
 
 $modversion['blocks'][] = [
-    'file'        => 'tad_honor_marquee.php',
-    'name'        => _MI_TADHONOR_MARQUEE_BLOCK_NAME,
+    'file' => 'tad_honor_marquee.php',
+    'name' => _MI_TADHONOR_MARQUEE_BLOCK_NAME,
     'description' => _MI_TADHONOR_MARQUEE_BLOCK_DESC,
-    'show_func'   => 'tad_honor_marquee',
-    'template'    => 'tad_honor_marquee.tpl',
-    'edit_func'   => 'tad_honor_marquee_edit',
-    'options'     => '6|24|#f2f2ff|1px solid #08084d',
+    'show_func' => 'tad_honor_marquee',
+    'template' => 'tad_honor_marquee.tpl',
+    'edit_func' => 'tad_honor_marquee_edit',
+    'options' => '6|24|#f2f2ff|1px solid #08084d',
 ];
-
-
 
 $i = 0;
 $modversion['config'][$i]['name'] = 'honor_unit';
