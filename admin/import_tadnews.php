@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $GLOBALS['xoopsOption']['template_main'] = 'tad_honor_adm_import_tadnews.tpl';
@@ -9,7 +10,7 @@ require_once dirname(__DIR__) . '/function.php';
 //列出所有 list_tadnews 資料
 function list_tadnews_cate()
 {
-    global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl;
+    global $xoopsDB, $xoopsModule, $xoopsTpl;
 
     //取得某模組編號
 
@@ -43,7 +44,7 @@ function list_tadnews_cate()
  */
 function list_tadnews($ncsn)
 {
-    global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl;
+    global $xoopsDB, $xoopsModule, $xoopsTpl;
 
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
@@ -64,7 +65,7 @@ function list_tadnews($ncsn)
  */
 function import_now($nsn_arr, $ncsn)
 {
-    global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsModule, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -79,8 +80,8 @@ function import_now($nsn_arr, $ncsn)
             $honor_content = empty($all['news_title']) ? $honor_title : $myts->addSlashes($all['news_content']);
             $honor_unit = $honor_unit_arr[0];
             $honor_date = $myts->addSlashes($all['start_day']);
-            $honor_counter = (int)$all['counter'];
-            $honor_uid = (int)$all['uid'];
+            $honor_counter = (int) $all['counter'];
+            $honor_uid = (int) $all['uid'];
 
             $sql = 'replace into `' . $xoopsDB->prefix('tad_honor') . "`
             (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`)
@@ -91,10 +92,9 @@ function import_now($nsn_arr, $ncsn)
 }
 
 /*-----------執行動作判斷區----------*/
-require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$nsn = system_CleanVars($_REQUEST, 'nsn', [], 'array');
-$ncsn = system_CleanVars($_REQUEST, 'ncsn', '', 'int');
+$op = Request::getString('op');
+$nsn = Request::getArray('nsn');
+$ncsn = Request::getInt('ncsn');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -115,5 +115,4 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('isAdmin', true);
 require_once __DIR__ . '/footer.php';

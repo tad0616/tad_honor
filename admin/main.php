@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
@@ -14,7 +15,7 @@ require_once dirname(__DIR__) . '/function.php';
  */
 function delete_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $isAdmin;
+    global $xoopsDB;
     if (empty($honor_sn)) {
         return;
     }
@@ -32,12 +33,12 @@ function delete_tad_honor($honor_sn = '')
  */
 function show_one_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin;
+    global $xoopsDB, $xoopsTpl;
 
     if (empty($honor_sn)) {
         return;
     }
-    $honor_sn = (int)$honor_sn;
+    $honor_sn = (int) $honor_sn;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -104,7 +105,7 @@ function add_tad_honor_counter($honor_sn = '')
 //列出所有tad_honor資料
 function list_tad_honor()
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin;
+    global $xoopsDB, $xoopsTpl;
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -153,7 +154,6 @@ function list_tad_honor()
 
     $xoopsTpl->assign('bar', $bar);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('isAdmin', $isAdmin);
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('now_op', 'list_tad_honor');
 
@@ -162,10 +162,9 @@ function list_tad_honor()
 }
 
 /*-----------執行動作判斷區----------*/
-require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = \Xmf\Request::getString('op', '');
-$honor_sn = \Xmf\Request::getInt('honor_sn', '');
-$files_sn = \Xmf\Request::getInt('files_sn', '');
+$op = Request::getString('op');
+$honor_sn = Request::getInt('honor_sn');
+$files_sn = Request::getInt('files_sn');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -197,7 +196,7 @@ switch ($op) {
     default:
         if (empty($honor_sn)) {
             list_tad_honor();
-        //$main.=tad_honor_form($honor_sn);
+            //$main.=tad_honor_form($honor_sn);
         } else {
             show_one_tad_honor($honor_sn);
         }
@@ -206,5 +205,4 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('isAdmin', true);
 require_once __DIR__ . '/footer.php';

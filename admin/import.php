@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_import.tpl';
@@ -9,7 +10,7 @@ require_once dirname(__DIR__) . '/function.php';
 //列出所有 list_fred_honorboard 資料
 function list_fred_honorboard()
 {
-    global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl;
+    global $xoopsDB, $xoopsModule, $xoopsTpl;
 
     //取得某模組編號
 
@@ -59,7 +60,7 @@ function list_fred_honorboard()
  */
 function import_now($honor_arr = [])
 {
-    global $xoopsDB, $xoopsModule, $isAdmin, $xoopsTpl, $xoopsUser;
+    global $xoopsDB, $xoopsModule, $xoopsTpl, $xoopsUser;
     $uid = $xoopsUser->uid();
     $myts = \MyTextSanitizer::getInstance();
 
@@ -95,9 +96,8 @@ function import_now($honor_arr = [])
 }
 
 /*-----------執行動作判斷區----------*/
-require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', [], 'array');
+$op = Request::getString('op');
+$honor_sn = Request::getArray('honor_sn');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -115,5 +115,4 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('isAdmin', true);
 require_once __DIR__ . '/footer.php';

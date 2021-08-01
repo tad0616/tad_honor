@@ -11,9 +11,9 @@ xoops_loadLanguage('main', 'tadtools');
 //tad_honor編輯表單
 function tad_honor_form($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $xoopsUser;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -115,9 +115,9 @@ function get_tad_honor($honor_sn = '')
  */
 function insert_tad_honor()
 {
-    global $xoopsDB, $xoopsUser, $isAdmin;
+    global $xoopsDB, $xoopsUser;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -156,9 +156,9 @@ function insert_tad_honor()
  */
 function update_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $xoopsUser, $isAdmin;
+    global $xoopsDB, $xoopsUser;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 

@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
@@ -14,7 +15,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
  */
 function show_one_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsTpl, $xoopsUser;
 
     if (empty($honor_sn)) {
         return;
@@ -64,7 +65,7 @@ function show_one_tad_honor($honor_sn = '')
     $xoopsTpl->assign('uid_name', $uid_name);
     $xoopsTpl->assign('lang_viewsinfo', sprintf(_MD_TADHONOR_HONOR_VIEWS_INFO, $honor_unit, $uid_name, $honor_date, $honor_counter));
 
-    if ($isAdmin or Utility::power_chk('tad_honor_post', 1)) {
+    if ($_SESSION['tad_honor_adm'] or Utility::power_chk('tad_honor_post', 1)) {
         $SweetAlert = new SweetAlert();
         $SweetAlert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     }
@@ -94,11 +95,11 @@ function add_tad_honor_counter($honor_sn = '')
  */
 function delete_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $isAdmin;
+    global $xoopsDB;
     if (empty($honor_sn)) {
         return;
     }
-    if (!Utility::power_chk('tad_honor_post', 1) and !$isAdmin) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
     $sql = 'delete from `' . $xoopsDB->prefix('tad_honor') . "` where `honor_sn` = '{$honor_sn}'";
@@ -112,7 +113,7 @@ function delete_tad_honor($honor_sn = '')
 //列出所有tad_honor資料
 function list_tad_honor()
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsTpl, $xoopsUser;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -162,11 +163,10 @@ function list_tad_honor()
 
     $xoopsTpl->assign('bar', $bar);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('isAdmin', $isAdmin);
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('now_op', 'list_tad_honor');
 
-    if ($isAdmin or Utility::power_chk('tad_honor_post', 1)) {
+    if ($_SESSION['tad_honor_adm'] or Utility::power_chk('tad_honor_post', 1)) {
         $SweetAlert = new SweetAlert();
         $SweetAlert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     }
@@ -176,10 +176,9 @@ function list_tad_honor()
 }
 
 /*-----------執行動作判斷區----------*/
-require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$honor_sn = system_CleanVars($_REQUEST, 'honor_sn', '', 'int');
-$files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
+$op = Request::getString('op');
+$honor_sn = Request::getInt('honor_sn');
+$files_sn = Request::getInt('files_sn');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -223,6 +222,5 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu));
-$xoopsTpl->assign('isAdmin', $isAdmin);
 $xoopsTpl->assign('show_confetti', $xoopsModuleConfig['show_confetti']);
 require_once XOOPS_ROOT_PATH . '/footer.php';
