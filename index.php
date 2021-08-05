@@ -197,6 +197,7 @@ switch ($op) {
     case 'tad_honor_form':
         tad_honor_form($honor_sn);
         break;
+
     case 'delete_tad_honor':
         delete_tad_honor($honor_sn);
         header("location: {$_SERVER['PHP_SELF']}");
@@ -204,10 +205,8 @@ switch ($op) {
 
     //下載檔案
     case 'tufdl':
-
         $TadUpFiles = new TadUpFiles('tad_honor');
-        $TadUpFiles->set_col('honor_sn', $honor_sn);
-        $TadUpFiles->add_file_counter($files_sn, false);
+        $TadUpFiles->add_file_counter($files_sn, false, true);
         exit;
 
     default:

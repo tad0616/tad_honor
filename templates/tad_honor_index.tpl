@@ -55,9 +55,9 @@
       <div class="alert alert-info">
         <div class="pull-right">
           <{if $smarty.session.tad_honor_adm or ($post_power and $uid==$honor_uid)}>
-            <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
-            <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
-            <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-sm btn-xs btn-primary"><{$smarty.const._TAD_ADD}></a>
+            <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
+            <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
+            <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-sm btn-primary"><{$smarty.const._TAD_ADD}></a>
           <{/if}>
         </div>
 <{*        <{$honor_unit}> <{$uid_name}> 於 <{$honor_date}> 發布，共有 <{$honor_counter}> 人次閱讀*}>
@@ -132,8 +132,8 @@
                 <{if $smarty.session.tad_honor_adm or $post_power}>
                   <td nowrap>
                     <{if $uid==$data.honor_uid}>
-                      <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
-                      <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                      <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
+                      <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
                     <{/if}>
                   </td>
                 <{/if}>
