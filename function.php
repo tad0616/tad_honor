@@ -3,6 +3,7 @@ use XoopsModules\Tadtools\CkEditor;
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
+use XoopsModules\Tadtools\Wcag;
 xoops_loadLanguage('main', 'tadtools');
 /**
  * @param string $honor_sn
@@ -131,12 +132,14 @@ function insert_tad_honor()
     }
 
     $myts = \MyTextSanitizer::getInstance();
-    $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
-    $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
-    $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
-    $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
+    $honor_title = $myts->addSlashes($_POST['honor_title']);
+    $honor_date = $myts->addSlashes($_POST['honor_date']);
+    $honor_unit = $myts->addSlashes($_POST['honor_unit']);
+    $honor_content = $myts->addSlashes($_POST['honor_content']);
+    $honor_content = Wcag::amend($honor_content);
+    $honor_url = $myts->addSlashes($_POST['honor_url']);
 
-    $sql = 'insert into `' . $xoopsDB->prefix('tad_honor') . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$_POST['honor_title']}' , '{$_POST['honor_date']}' , '{$_POST['honor_unit']}' , 0 , '{$_POST['honor_content']}' , '{$_POST['honor_url']}' , '{$uid}')";
+    $sql = 'insert into `' . $xoopsDB->prefix('tad_honor') . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$honor_title}' , '{$honor_date}' , '{$honor_unit}' , 0 , '{$honor_content}' , '{$honor_url}' , '{$uid}')";
     $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
@@ -172,19 +175,21 @@ function update_tad_honor($honor_sn = '')
     }
 
     $myts = \MyTextSanitizer::getInstance();
-    $_POST['honor_title'] = $myts->addSlashes($_POST['honor_title']);
-    $_POST['honor_date'] = $myts->addSlashes($_POST['honor_date']);
-    $_POST['honor_content'] = $myts->addSlashes($_POST['honor_content']);
-    $_POST['honor_url'] = $myts->addSlashes($_POST['honor_url']);
+    $honor_title = $myts->addSlashes($_POST['honor_title']);
+    $honor_date = $myts->addSlashes($_POST['honor_date']);
+    $honor_unit = $myts->addSlashes($_POST['honor_unit']);
+    $honor_content = $myts->addSlashes($_POST['honor_content']);
+    $honor_content = Wcag::amend($honor_content);
+    $honor_url = $myts->addSlashes($_POST['honor_url']);
 
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set
-   `honor_title` = '{$_POST['honor_title']}' ,
-   `honor_date` = '{$_POST['honor_date']}' ,
-   `honor_unit` = '{$_POST['honor_unit']}' ,
-   `honor_content` = '{$_POST['honor_content']}' ,
-   `honor_url` = '{$_POST['honor_url']}' ,
-   `honor_uid` = '{$uid}'
-  where `honor_sn` = '$honor_sn'";
+    `honor_title` = '{$honor_title}' ,
+    `honor_date` = '{$honor_date}' ,
+    `honor_unit` = '{$honor_unit}' ,
+    `honor_content` = '{$honor_content}' ,
+    `honor_url` = '{$honor_url}' ,
+    `honor_uid` = '{$uid}'
+    where `honor_sn` = '$honor_sn'";
     $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $TadUpFiles = new TadUpFiles('tad_honor');

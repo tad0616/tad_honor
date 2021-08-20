@@ -1,6 +1,7 @@
 <?php
 use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
+use XoopsModules\Tadtools\Wcag;
 /*-----------引入檔案區--------------*/
 $xoopsOption['template_main'] = 'tad_honor_adm_import.tpl';
 require_once __DIR__ . '/header.php';
@@ -79,6 +80,7 @@ function import_now($honor_arr = [])
             $honor_person = $myts->addSlashes($all['honor_person']);
             $honor_title = $myts->addSlashes($all['honor_title']);
             $honor_content = empty($all['honor_content']) ? $honor_title : $myts->addSlashes($all['honor_content']);
+            $honor_content = Wcag::amend($honor_content);
             $write_department = $dep[$all['write_department']];
             $write_date = $myts->addSlashes($all['write_date']);
             $click = (int) $all['click'];
