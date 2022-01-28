@@ -15,7 +15,7 @@
 
   <!--發佈日期-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_DATE}>
     </label>
     <div class="col-sm-9">
@@ -25,7 +25,7 @@
 
   <!--發布單位-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_UNIT}>
     </label>
     <div class="col-sm-9">
@@ -35,7 +35,7 @@
 
   <!--點閱次數-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_COUNTER}>
     </label>
     <div class="col-sm-9">
@@ -45,7 +45,7 @@
 
   <!--詳細內容-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_CONTENT}>
     </label>
     <div class="col-sm-9">
@@ -58,7 +58,7 @@
 
   <!--相關連結-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_URL}>
     </label>
     <div class="col-sm-9">
@@ -68,7 +68,7 @@
 
   <!--發布者-->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_HONOR_UID}>
     </label>
     <div class="col-sm-9">
@@ -79,7 +79,7 @@
 
   <!---->
   <div class="row">
-    <label class="col-sm-3 text-right">
+    <label class="col-sm-3 text-right text-end">
       <{$smarty.const._MA_TADHONOR_SHOW_HONOR_SN_FILES}>
     </label>
     <div class="col-sm-9">
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <div class="text-right">
+  <div class="text-right text-end">
     <{if $smarty.session.tad_honor_adm}>
       <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
       <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
@@ -165,7 +165,7 @@
 
 
     <{if $smarty.session.tad_honor_adm}>
-      <div class="text-right">
+      <div class="text-right text-end">
         <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
     <{/if}>

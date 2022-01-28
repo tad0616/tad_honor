@@ -53,7 +53,7 @@
 
       <!--發佈日期-->
       <div class="alert alert-info">
-        <div class="pull-right">
+        <div class="pull-right float-right pull-end">
           <{if $smarty.session.tad_honor_adm or ($post_power and $uid==$honor_uid)}>
             <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
             <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
@@ -144,7 +144,7 @@
       </div>
 
     <{if $smarty.session.tad_honor_adm or $post_power}>
-      <div class="text-right">
+      <div class="text-right text-end">
         <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
     <{/if}>

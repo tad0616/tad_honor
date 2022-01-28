@@ -2,7 +2,7 @@
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
 
       <!--標題-->
-      <div class="form-group row">
+      <div class="form-group row mb-3">
         <label class="col-sm-2 col-form-label text-sm-right control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_TITLE}>
         </label>
@@ -12,7 +12,7 @@
       </div>
 
       <!--發佈日期-->
-      <div class="form-group row">
+      <div class="form-group row mb-3">
         <label class="col-sm-2 col-form-label text-sm-right control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_DATE}>
         </label>
@@ -34,7 +34,7 @@
       </div>
 
       <!--詳細內容-->
-      <div class="form-group row">
+      <div class="form-group row mb-3">
         <label class="col-sm-2 col-form-label text-sm-right control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_CONTENT}>
         </label>
@@ -44,7 +44,7 @@
       </div>
 
       <!--相關連結-->
-      <div class="form-group row">
+      <div class="form-group row mb-3">
         <label class="col-sm-2 col-form-label text-sm-right control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_URL}>
         </label>
@@ -54,7 +54,7 @@
       </div>
 
       <!--上傳-->
-      <div class="form-group row">
+      <div class="form-group row mb-3">
         <label class="col-sm-2 col-form-label text-sm-right control-label">
           <{$smarty.const._MD_TADHONOR_UP_HONOR_SN}>
         </label>

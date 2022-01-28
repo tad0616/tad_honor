@@ -8,6 +8,6 @@
         </li>
     <{/foreach}>
 </ul>
-<div class="text-right">
+<div class="text-right text-end">
     <a href="<{$xoops_url}>/modules/tad_honor/index.php"><span class="badge badge-info">more...</span></a>
 </div>
