@@ -62,7 +62,7 @@ function show_one_tad_honor($honor_sn = '')
 
     $TadUpFiles = new TadUpFiles('tad_honor');
     $TadUpFiles->set_col('honor_sn', $honor_sn);
-    $show_honor_sn_files = $TadUpFiles->show_files('up_honor_sn', true, 'thumb', true, false, null, null, false);
+    $show_honor_sn_files = $TadUpFiles->show_files('up_honor_sn', true, 'thumb', true);
     $xoopsTpl->assign('show_honor_sn_files', $show_honor_sn_files);
 
     //過濾讀出的變數值
@@ -190,7 +190,7 @@ switch ($op) {
 
     //下載檔案
     case 'tufdl':
-        $TadUpFiles->add_file_counter($files_sn, false);
+        $TadUpFiles->add_file_counter($files_sn);
         exit;
 
     default:
