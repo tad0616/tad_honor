@@ -129,12 +129,10 @@
                   <{$data.honor_unit}>
                 </td>
 
-                <{if $smarty.session.tad_honor_adm or $post_power}>
+                <{if $smarty.session.tad_honor_adm or ($post_power and $uid==$data.honor_uid)}>
                   <td nowrap>
-                    <{if $uid==$data.honor_uid}>
                       <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
                       <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
-                    <{/if}>
                   </td>
                 <{/if}>
               </tr>

@@ -111,7 +111,7 @@ function list_tad_honor()
 
     $TadUpFiles = new TadUpFiles('tad_honor');
 
-    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('tad_honor') . ' ';
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('tad_honor') . ' ORDER BY honor_date DESC';
 
     //Utility::getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = Utility::getPageBar($sql, 20, 10, null, null, 3);

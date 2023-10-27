@@ -1,3 +1,9 @@
+Tad Honor 2.0 (released 2023-10-27)
+====================================
+1. Adjust the backend sorting to newest to oldest.
+2. Adjust the frontend list toolbar display permission.
+3. Fix more button color problem.
+
 Tad Honor 1.9 (released on 2022-10-27)
 ====================================
 1. Cancel the mandatory download of the attached files, the download mode is based on the Tadtools preferences.
