@@ -173,7 +173,7 @@
     <{$bar}>
   <{else}>
     <{if $smarty.session.tad_honor_adm}>
-      <div class="jumbotron text-center">
+      <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
         <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
     <{/if}>
