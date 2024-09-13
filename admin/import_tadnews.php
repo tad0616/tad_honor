@@ -65,9 +65,7 @@ function list_tadnews($ncsn)
  */
 function import_now($nsn_arr, $ncsn)
 {
-    global $xoopsDB, $xoopsModule, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
-
-    $myts = \MyTextSanitizer::getInstance();
+    global $xoopsDB, $xoopsModuleConfig;
 
     $honor_unit_arr = explode(';', $xoopsModuleConfig['honor_unit']);
 
@@ -76,10 +74,10 @@ function import_now($nsn_arr, $ncsn)
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
         if (in_array($all['nsn'], $nsn_arr)) {
-            $honor_title = $myts->addSlashes($all['news_title']);
-            $honor_content = empty($all['news_title']) ? $honor_title : $myts->addSlashes($all['news_content']);
+            $honor_title = $xoopsDB->escape($all['news_title']);
+            $honor_content = empty($all['news_title']) ? $honor_title : $xoopsDB->escape($all['news_content']);
             $honor_unit = $honor_unit_arr[0];
-            $honor_date = $myts->addSlashes($all['start_day']);
+            $honor_date = $xoopsDB->escape($all['start_day']);
             $honor_counter = (int) $all['counter'];
             $honor_uid = (int) $all['uid'];
 

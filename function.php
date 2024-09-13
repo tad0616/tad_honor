@@ -131,13 +131,12 @@ function insert_tad_honor()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = \MyTextSanitizer::getInstance();
-    $honor_title = $myts->addSlashes($_POST['honor_title']);
-    $honor_date = $myts->addSlashes($_POST['honor_date']);
-    $honor_unit = $myts->addSlashes($_POST['honor_unit']);
-    $honor_content = $myts->addSlashes($_POST['honor_content']);
+    $honor_title = $xoopsDB->escape($_POST['honor_title']);
+    $honor_date = $xoopsDB->escape($_POST['honor_date']);
+    $honor_unit = $xoopsDB->escape($_POST['honor_unit']);
+    $honor_content = $xoopsDB->escape($_POST['honor_content']);
     $honor_content = Wcag::amend($honor_content);
-    $honor_url = $myts->addSlashes($_POST['honor_url']);
+    $honor_url = $xoopsDB->escape($_POST['honor_url']);
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_honor') . "` (`honor_title` , `honor_date` , `honor_unit` , `honor_counter` , `honor_content` , `honor_url` , `honor_uid`) values('{$honor_title}' , '{$honor_date}' , '{$honor_unit}' , 0 , '{$honor_content}' , '{$honor_url}' , '{$uid}')";
     $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
@@ -174,13 +173,12 @@ function update_tad_honor($honor_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = \MyTextSanitizer::getInstance();
-    $honor_title = $myts->addSlashes($_POST['honor_title']);
-    $honor_date = $myts->addSlashes($_POST['honor_date']);
-    $honor_unit = $myts->addSlashes($_POST['honor_unit']);
-    $honor_content = $myts->addSlashes($_POST['honor_content']);
+    $honor_title = $xoopsDB->escape($_POST['honor_title']);
+    $honor_date = $xoopsDB->escape($_POST['honor_date']);
+    $honor_unit = $xoopsDB->escape($_POST['honor_unit']);
+    $honor_content = $xoopsDB->escape($_POST['honor_content']);
     $honor_content = Wcag::amend($honor_content);
-    $honor_url = $myts->addSlashes($_POST['honor_url']);
+    $honor_url = $xoopsDB->escape($_POST['honor_url']);
 
     $sql = 'update `' . $xoopsDB->prefix('tad_honor') . "` set
     `honor_title` = '{$honor_title}' ,

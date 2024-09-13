@@ -61,10 +61,8 @@ function list_fred_honorboard()
  */
 function import_now($honor_arr = [])
 {
-    global $xoopsDB, $xoopsModule, $xoopsTpl, $xoopsUser;
+    global $xoopsDB, $xoopsUser;
     $uid = $xoopsUser->uid();
-    $myts = \MyTextSanitizer::getInstance();
-
     $dep = [];
     $sql = 'SELECT department_sn,department_name FROM `' . $xoopsDB->prefix('fred_honorboard_department') . '`';
     $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
@@ -77,12 +75,12 @@ function import_now($honor_arr = [])
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
         if (in_array($all['honor_sn'], $honor_arr)) {
-            $honor_person = $myts->addSlashes($all['honor_person']);
-            $honor_title = $myts->addSlashes($all['honor_title']);
-            $honor_content = empty($all['honor_content']) ? $honor_title : $myts->addSlashes($all['honor_content']);
+            $honor_person = $xoopsDB->escape($all['honor_person']);
+            $honor_title = $xoopsDB->escape($all['honor_title']);
+            $honor_content = empty($all['honor_content']) ? $honor_title : $xoopsDB->escape($all['honor_content']);
             $honor_content = Wcag::amend($honor_content);
             $write_department = $dep[$all['write_department']];
-            $write_date = $myts->addSlashes($all['write_date']);
+            $write_date = $xoopsDB->escape($all['write_date']);
             $click = (int) $all['click'];
 
             $sql = 'replace into `' . $xoopsDB->prefix('tad_honor') . "`

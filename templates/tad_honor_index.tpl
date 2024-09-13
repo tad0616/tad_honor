@@ -5,7 +5,7 @@
 <{$toolbar}>
 
 <{if $now_op=="tad_honor_form"}>
-  <{includeq file="$xoops_rootpath/modules/tad_honor/templates/tad_honor_form.tpl"}>
+  <{include file="$xoops_rootpath/modules/tad_honor/templates/tad_honor_form.tpl"}>
 <{/if}>
 
 <!--顯示某一筆資料-->

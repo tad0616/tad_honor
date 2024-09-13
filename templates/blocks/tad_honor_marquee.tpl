@@ -20,6 +20,6 @@
 
 <ul id="tad_honor_marquee2">
   <{foreach from=$block.content item=data}>
-    <li><img src="<{$xoops_url}>/modules/tad_honor/images/<{cycle values='trophy,cup,medal,certificate,competition,medal2'}>.svg" alt="<{$data.honor_title}>" style="width: <{$block.options1}>px; height: <{$block.options1}>px; margin: 0px 4px 0px 0px;"> <a href="<{$xoops_url}>/modules/tad_honor/index.php?honor_sn=<{$data.honor_sn}>"><{$data.honor_title}></a></li>
+    <li><img src="<{$xoops_url}>/modules/tad_honor/images/<{cycle values='trophy,cup,medal,certificate,competition,medal2'}>.svg" alt="<{$data.honor_title}>" style="width: <{$block.options1}>em; height: <{$block.options1}>em; margin: 0px 4px 0px 0px;"> <a href="<{$xoops_url}>/modules/tad_honor/index.php?honor_sn=<{$data.honor_sn}>"><{$data.honor_title}></a></li>
   <{/foreach}>
 </ul>
