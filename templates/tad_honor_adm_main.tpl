@@ -88,7 +88,7 @@
   </div>
 
   <div class="text-right text-end">
-    <{if $smarty.session.tad_honor_adm}>
+    <{if $smarty.session.tad_honor_adm|default:false}>
       <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
       <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
       <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
@@ -100,7 +100,7 @@
 <!--列出所有資料-->
 
 <{if $now_op=="list_tad_honor"}>
-  <{if $all_content}>
+  <{if $all_content|default:false}>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -121,7 +121,7 @@
             <!--點閱次數-->
             <{$smarty.const._MA_TADHONOR_HONOR_COUNTER}>
           </th>
-          <{if $smarty.session.tad_honor_adm}>
+          <{if $smarty.session.tad_honor_adm|default:false}>
             <th><{$smarty.const._TAD_FUNCTION}></th>
           <{/if}>
         </tr>
@@ -152,7 +152,7 @@
               <{$data.honor_counter}>
             </td>
 
-            <{if $smarty.session.tad_honor_adm}>
+            <{if $smarty.session.tad_honor_adm|default:false}>
               <td>
                 <a href="javascript:delete_tad_honor_func(<{$data.honor_sn}>);" class="btn btn-sm btn-danger"><{$smarty.const._TAD_DEL}></a>
                 <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$data.honor_sn}>" class="btn btn-sm btn-warning"><{$smarty.const._TAD_EDIT}></a>
@@ -164,7 +164,7 @@
     </table>
 
 
-    <{if $smarty.session.tad_honor_adm}>
+    <{if $smarty.session.tad_honor_adm|default:false}>
       <div class="text-right text-end">
         <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>
@@ -172,7 +172,7 @@
 
     <{$bar}>
   <{else}>
-    <{if $smarty.session.tad_honor_adm}>
+    <{if $smarty.session.tad_honor_adm|default:false}>
       <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
         <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       </div>

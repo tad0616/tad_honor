@@ -40,14 +40,14 @@
       </div>
 
       <!--相關連結-->
-      <{if $honor_url}>
+      <{if $honor_url|default:false}>
         <div class="alert alert-warning">
           <{$smarty.const._MD_TADHONOR_HONOR_URL}><{$smarty.const._TAD_FOR}><a href="<{$honor_url}>" target="_blank"><{$honor_url}></a>
         </div>
       <{/if}>
 
 
-      <{if $show_honor_sn_files}>
+      <{if $show_honor_sn_files|default:false}>
         <{$show_honor_sn_files}>
       <{/if}>
 
@@ -68,7 +68,7 @@
 
 <!--列出所有資料-->
 <{if $now_op=="list_tad_honor"}>
-  <{if $all_content}>
+  <{if $all_content|default:false}>
     <{if $show_confetti==1}>
       <style type="text/css" media="screen">
         canvas#canvas {

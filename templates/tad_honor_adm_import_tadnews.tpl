@@ -1,6 +1,6 @@
 <!--顯示表單-->
 <link href="<{$xoops_url}>/modules/tadtools/css/font-awesome/css/font-awesome.css" rel="stylesheet">
-<{if $all_cate}>
+<{if $all_cate|default:false}>
 <form action="import_tadnews.php" method="post">
     <div class="input-group">
         <div class="input-group-prepend input-group-addon">
@@ -39,7 +39,7 @@
             <th>
                 counter
             </th>
-            <{if $smarty.session.tad_honor_adm}>
+            <{if $smarty.session.tad_honor_adm|default:false}>
             <th><{$smarty.const._TAD_FUNCTION}></th>
             <{/if}>
         </tr>
@@ -72,7 +72,7 @@
                 <!--點閱次數-->
                 <{$data.counter}>
             </td>
-            <{if $smarty.session.tad_honor_adm}>
+            <{if $smarty.session.tad_honor_adm|default:false}>
                 <td>
                 <input type="checkbox" name="nsn[]" value="<{$data.nsn}>" checked>
                 </td>

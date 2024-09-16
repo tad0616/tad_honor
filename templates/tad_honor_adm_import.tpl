@@ -22,7 +22,7 @@
         <th>
           click
         </th>
-        <{if $smarty.session.tad_honor_adm}>
+        <{if $smarty.session.tad_honor_adm|default:false}>
           <th><{$smarty.const._TAD_FUNCTION}></th>
         <{/if}>
       </tr>
@@ -62,7 +62,7 @@
             <!--點閱次數-->
             <{$data.click}>
           </td>
-          <{if $smarty.session.tad_honor_adm}>
+          <{if $smarty.session.tad_honor_adm|default:false}>
             <td>
               <input type="checkbox" name="honor_sn[]" value="<{$data.honor_sn}>" checked>
             </td>
