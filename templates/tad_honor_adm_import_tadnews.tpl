@@ -83,7 +83,7 @@
     </table>
     <div class="text-center">
         <input type="hidden" name="op" value="import_now">
-        <input type="hidden" name="ncsn" value="<{$ncsn}>">
+        <input type="hidden" name="ncsn" value="<{$ncsn|default:''}>">
         <button type="submit" class="btn btn-lg btn-primary"><{$smarty.const._MA_TADHONOR_IMPORT}></button>
     </div>
     </form>

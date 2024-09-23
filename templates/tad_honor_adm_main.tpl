@@ -9,7 +9,7 @@
 
 <!--顯示某一筆資料-->
 <{if $now_op=="show_one_tad_honor"}>
-  <h2 class="text-center"><{$honor_title}></h2>
+  <h2 class="text-center"><{$honor_title|default:''}></h2>
 
 
 
@@ -19,7 +19,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_DATE}>
     </label>
     <div class="col-sm-9">
-      <{$honor_date}>
+      <{$honor_date|default:''}>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_UNIT}>
     </label>
     <div class="col-sm-9">
-      <{$honor_unit}>
+      <{$honor_unit|default:''}>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_COUNTER}>
     </label>
     <div class="col-sm-9">
-      <{$honor_counter}>
+      <{$honor_counter|default:''}>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
     <div class="col-sm-9">
 
       <div class="well card card-body bg-light m-1">
-        <{$honor_content}>
+        <{$honor_content|default:''}>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_URL}>
     </label>
     <div class="col-sm-9">
-      <{$honor_url}>
+      <{$honor_url|default:''}>
     </div>
   </div>
 
@@ -72,7 +72,7 @@
       <{$smarty.const._MA_TADHONOR_HONOR_UID}>
     </label>
     <div class="col-sm-9">
-      <{$honor_uid}>
+      <{$honor_uid|default:''}>
     </div>
   </div>
 
@@ -83,17 +83,17 @@
       <{$smarty.const._MA_TADHONOR_SHOW_HONOR_SN_FILES}>
     </label>
     <div class="col-sm-9">
-      <{$show_honor_sn_files}>
+      <{$show_honor_sn_files|default:''}>
     </div>
   </div>
 
   <div class="text-right text-end">
     <{if $smarty.session.tad_honor_adm|default:false}>
-      <a href="javascript:delete_tad_honor_func(<{$honor_sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
-      <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$honor_sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
+      <a href="javascript:delete_tad_honor_func(<{$honor_sn|default:''}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
+      <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form&honor_sn=<{$honor_sn|default:''}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
       <a href="<{$xoops_url}>/modules/tad_honor/admin/main.php?op=tad_honor_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
     <{/if}>
-    <a href="<{$action}>" class="btn btn-success"><{$smarty.const._TAD_HOME}></a>
+    <a href="<{$action|default:''}>" class="btn btn-success"><{$smarty.const._TAD_HOME}></a>
   </div>
 <{/if}>
 
@@ -170,7 +170,7 @@
       </div>
     <{/if}>
 
-    <{$bar}>
+    <{$bar|default:''}>
   <{else}>
     <{if $smarty.session.tad_honor_adm|default:false}>
       <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
