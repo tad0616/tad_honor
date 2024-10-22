@@ -1,0 +1,18 @@
+canvas#canvas {
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+    min-height: 400px;
+    width: 100%;
+    position: absolute;
+}
+
+#confetti_content {
+    min-height: 400px;
+    position: relative;
+}
+
+.confetti_part {
+    background: #ffffff url('../images/confetti.png') no-repeat;
+    background-size: contain;
+}

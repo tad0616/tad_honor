@@ -3,6 +3,8 @@ Tad Honor 3.0 (尚未釋出)
 1.支援XOOPS 2.5.11
 2.支援PHP8.3
 3.用$xoopsDB->escape()取代$myts->addSlashes()
+4.改用 BootStrap Table 來實現表格自適應
+5.資料庫語法參數化
 
 Tad Honor 2.0 (2023-10-27 釋出)
 ====================================

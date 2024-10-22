@@ -38,8 +38,9 @@ function tad_honor_marquee($options)
     }
     $block['options3'] = $options[3];
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . "` order by `honor_date` desc limit 0, {$options[0]}";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_honor') . '` ORDER BY `honor_date` DESC LIMIT 0, ?';
+    $result = Utility::query($sql, 'i', [$options[0]]) or Utility::web_error($sql, __FILE__, __LINE__);
+
     $content = [];
 
     $i = 0;
@@ -50,8 +51,8 @@ function tad_honor_marquee($options)
     $block['content'] = $content;
 
     $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
-    $xoTheme->addScript(XOOPS_URL . '/modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
+    $xoTheme->addStylesheet('modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
+    $xoTheme->addScript('modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
 
     return $block;
 }
@@ -64,8 +65,8 @@ function tad_honor_marquee($options)
 function tad_honor_marquee_edit($options)
 {
 
-    $MColorPicker = new MColorPicker('.color');
-    $MColorPicker->render();
+    $MColorPicker = new MColorPicker('.color-picker');
+    $MColorPicker->render('bootstrap');
 
     $options[1] = (int) $options[1];
     if ($options[1] < 11 or $options[1] > 60) {
@@ -81,6 +82,12 @@ function tad_honor_marquee_edit($options)
     }
 
     $form = "
+    <style>
+    .color-picker {
+        width: 80%;
+        display: inline-block;
+    }
+    </style>
     <ol class='my-form'>
         <li class='my-row'>
             <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT0 . "</lable>
@@ -97,7 +104,9 @@ function tad_honor_marquee_edit($options)
         <li class='my-row'>
             <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT2 . "</lable>
             <div class='my-content'>
-                <input type='text' class='my-input color' data-hex='true' name='options[2]' value='{$options[2]}' size=6>
+                <div class='input-group'>
+                    <input type='text' class='my-input color-picker' data-hex='true' name='options[2]' value='{$options[2]}' size=6>
+                </div>
             </div>
         </li>
         <li class='my-row'>

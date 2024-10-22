@@ -1,5 +1,3 @@
-<!--顯示表單-->
-<link href="<{$xoops_url}>/modules/tadtools/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <form action="import.php" method="post">
   <table class="table table-striped table-hover">
     <thead>
@@ -73,6 +71,6 @@
   </table>
   <div class="text-center">
     <input type="hidden" name="op" value="import_now">
-    <button type="submit" class="btn btn-lg btn-primary"><{$smarty.const._MA_TADHONOR_IMPORT}></button>
+    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-cloud-download" aria-hidden="true"></i> <{$smarty.const._MA_TADHONOR_IMPORT}></button>
   </div>
 </form>

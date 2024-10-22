@@ -2,9 +2,36 @@
 use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
-$GLOBALS['xoopsOption']['template_main'] = 'tad_honor_adm_import_tadnews.tpl';
+$xoopsOption['template_main'] = 'tad_honor_admin.tpl';
 require_once __DIR__ . '/header.php';
-require_once dirname(__DIR__) . '/function.php';
+/*-----------執行動作判斷區----------*/
+$op = Request::getString('op');
+$nsn = Request::getArray('nsn');
+$ncsn = Request::getInt('ncsn');
+$json_file = XOOPS_ROOT_PATH . '/uploads/tad_honor_data.json';
+
+switch ($op) {
+
+    case 'import_now':
+        import_now($nsn, $ncsn);
+        header('location: ../index.php');
+        exit;
+
+    case 'list_tadnews':
+        list_tadnews($ncsn);
+        $op = 'list_tadnews';
+        break;
+    default:
+        list_tadnews_cate();
+        $op = 'tad_honor_import_tadnews';
+        break;
+
+}
+
+/*-----------秀出結果區--------------*/
+$xoopsTpl->assign('now_op', $op);
+require_once __DIR__ . '/footer.php';
+
 /*-----------功能函數區--------------*/
 
 //列出所有 list_tadnews 資料
@@ -28,7 +55,7 @@ function list_tadnews_cate()
     }
 
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news_cate') . '`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_cate = [];
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
@@ -44,10 +71,10 @@ function list_tadnews_cate()
  */
 function list_tadnews($ncsn)
 {
-    global $xoopsDB, $xoopsModule, $xoopsTpl;
+    global $xoopsDB, $xoopsTpl;
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . '` WHERE `ncsn`=? AND `enable`=1';
+    $result = Utility::query($sql, 'i', [$ncsn]) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
@@ -65,52 +92,27 @@ function list_tadnews($ncsn)
  */
 function import_now($nsn_arr, $ncsn)
 {
-    global $xoopsDB, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsModuleConfig, $json_file;
 
     $honor_unit_arr = explode(';', $xoopsModuleConfig['honor_unit']);
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . "` where ncsn='{$ncsn}' and `enable`='1'";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_news') . '` WHERE `ncsn`=? AND `enable`=1';
+    $result = Utility::query($sql, 'i', [$ncsn]) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
         if (in_array($all['nsn'], $nsn_arr)) {
-            $honor_title = $xoopsDB->escape($all['news_title']);
-            $honor_content = empty($all['news_title']) ? $honor_title : $xoopsDB->escape($all['news_content']);
+            $honor_title = $all['news_title'];
+            $honor_content = empty($all['news_title']) ? $honor_title : $all['news_content'];
             $honor_unit = $honor_unit_arr[0];
-            $honor_date = $xoopsDB->escape($all['start_day']);
+            $honor_date = $all['start_day'];
             $honor_counter = (int) $all['counter'];
             $honor_uid = (int) $all['uid'];
-
-            $sql = 'replace into `' . $xoopsDB->prefix('tad_honor') . "`
+            $sql = 'REPLACE INTO `' . $xoopsDB->prefix('tad_honor') . '`
             (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`)
-            values('{$honor_title}' , '{$honor_date}' ,  '{$honor_unit}' , '{$honor_counter}' , '{$honor_content}' , '' , '{$honor_uid}' )";
-            $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+            VALUES (?, ?, ?, ?, ?, ?, ?)';
+            Utility::query($sql, 'sssissi', [$honor_title, $honor_date, $honor_unit, $honor_counter, $honor_content, '', $honor_uid]) or Utility::web_error($sql, __FILE__, __LINE__);
+
         }
     }
+    unlink($json_file);
 }
-
-/*-----------執行動作判斷區----------*/
-$op = Request::getString('op');
-$nsn = Request::getArray('nsn');
-$ncsn = Request::getInt('ncsn');
-
-switch ($op) {
-    /*---判斷動作請貼在下方---*/
-
-    case 'import_now':
-        import_now($nsn, $ncsn);
-        header('location: ../index.php');
-        exit;
-
-    case 'list_tadnews':
-        list_tadnews($ncsn);
-        break;
-    default:
-        list_tadnews_cate();
-
-        break;
-        /*---判斷動作請貼在上方---*/
-}
-
-/*-----------秀出結果區--------------*/
-require_once __DIR__ . '/footer.php';
