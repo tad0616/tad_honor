@@ -18,15 +18,16 @@ function tad_honor_marquee($options)
     //{$options[0]} : 取出幾筆榮譽榜資料？
     $block['options0'] = $options[0] = empty($options[0]) ? 10 : $options[0];
     //{$options[1]} : 文字大小
-    $options[1] = (int) $options[1];
 
-    if ($options[1] < 11 or $options[1] > 60) {
-        $options[1] = 24;
+    if ($options[1] >= 12) {
+        $block['options1'] = round($options[1] / 16, 2);
+    } elseif ($options[1] > 3) {
+        $block['options1'] = 1.5;
+    } else {
+        $block['options1'] = $options[1];
     }
 
-    $block['options1'] = round($options[1] / 16, 2);
-    // $block['height']   = 400;
-    $block['height'] = $options[1] * 1.6;
+    $block['height'] = round($block['options1'] * 1.5, 2);
     //{$options[2]} : 背景顏色
     if (is_numeric($options[2])) {
         $options[2] = '#f2f2ff';
@@ -53,7 +54,7 @@ function tad_honor_marquee($options)
     $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
     $xoTheme->addStylesheet('modules/tad_honor/class/jquery.marquee/css/jquery.marquee.css');
     $xoTheme->addScript('modules/tad_honor/class/jquery.marquee/lib/jquery.marquee.js');
-
+    // Utility::dd($block);
     return $block;
 }
 
@@ -68,9 +69,10 @@ function tad_honor_marquee_edit($options)
     $MColorPicker = new MColorPicker('.color-picker');
     $MColorPicker->render('bootstrap');
 
-    $options[1] = (int) $options[1];
-    if ($options[1] < 11 or $options[1] > 60) {
-        $options[1] = 24;
+    if ($options[1] >= 12) {
+        $options[1] = round($options[1] / 16, 2);
+    } elseif ($options[1] > 3) {
+        $options[1] = 1.5;
     }
 
     if (is_numeric($options[2])) {
@@ -98,7 +100,7 @@ function tad_honor_marquee_edit($options)
         <li class='my-row'>
             <lable class='my-label'>" . _MB_TADHONOR_MARQUEE_OPT1 . "</lable>
             <div class='my-content'>
-                <input type='text' class='my-input' name='options[1]' value='{$options[1]}' size=6>px
+                <input type='text' class='my-input' name='options[1]' value='{$options[1]}' size=6>rem
             </div>
         </li>
         <li class='my-row'>

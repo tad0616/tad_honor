@@ -82,7 +82,7 @@ $modversion['blocks'] = [
         'show_func' => 'tad_honor_marquee',
         'template' => 'tad_honor_marquee.tpl',
         'edit_func' => 'tad_honor_marquee_edit',
-        'options' => '6|24|#f2f2ff|1px solid #08084d',
+        'options' => '6|1.5|#f2f2ff|1px solid #08084d',
     ],
 ];
 
