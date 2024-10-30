@@ -3,7 +3,7 @@
 
       <!--標題-->
       <div class="form-group row mb-3">
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_TITLE}>
         </label>
         <div class="col-sm-10">
@@ -13,7 +13,7 @@
 
       <!--發佈日期-->
       <div class="form-group row mb-3">
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_DATE}>
         </label>
         <div class="col-sm-4">
@@ -21,11 +21,11 @@
         </div>
 
         <!--發布單位-->
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_UNIT}>
         </label>
         <div class="col-sm-4">
-          <select name="honor_unit" class="form-control " size=1>
+          <select name="honor_unit" class="form-select " size=1>
             <{foreach from=$unit_array item=unit}>
               <option value="<{$unit.name}>" <{if $honor_unit == $unit.name}>selected="selected"<{/if}>><{$unit.name}></option>
             <{/foreach}>
@@ -35,7 +35,7 @@
 
       <!--詳細內容-->
       <div class="form-group row mb-3">
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_CONTENT}>
         </label>
         <div class="col-sm-10">
@@ -45,7 +45,7 @@
 
       <!--相關連結-->
       <div class="form-group row mb-3">
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_HONOR_URL}>
         </label>
         <div class="col-sm-10">
@@ -55,7 +55,7 @@
 
       <!--上傳-->
       <div class="form-group row mb-3">
-        <label class="col-sm-2 col-form-label text-sm-right control-label">
+        <label class="col-sm-2 col-form-label text-sm-right text-sm-end control-label">
           <{$smarty.const._MD_TADHONOR_UP_HONOR_SN}>
         </label>
         <div class="col-sm-10">
