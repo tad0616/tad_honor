@@ -35,7 +35,6 @@ Tad Honor 1.5 (released on 2021-08-01)
 2. Combined with BootStrap3 and 4 templates
 3. Support XOOPS 2.5.11
 
-
 Tad Honor 1.4.9 (2020-03-14 released)
 =================================================
 1. Correction for accessibility 2.0 AA standard
@@ -44,7 +43,6 @@ Tad Honor 1.4.8 (2019-05-10 released)
 ==========================================================
 1. Support XOOPS 2.5.10
 2. No longer supports PHP 5.3
-
 
 Tad Honor 1.4.7 (2019-01-01 released)
 =================================================
@@ -61,12 +59,10 @@ Tad Honor 1.4.5 (released on 2018-05-21)
 =================================================
 1. Support database strict mode
 
-
 Tad Honor 1.4.4 (released on 2018-05-10)
 =================================================
 1. Added fred honorboard honor  data import function.
 2. Remove the tchinese Big5 language
-
 
 Tad Honor 1.4.3 (released on 2018-03-27)
 =================================================
@@ -78,21 +74,17 @@ Tad Honor 1.4.2 (2017-11-21 released)
 1. To solve the problem of non-administrator can not modify the content
 2. Support PHP 7.1
 
-
 Tad Honor 1.4.1 (2017-09-28 released)
 =================================================
 1.Fixed the problem that the number of data displayed on the Marquee Block does not work correctly
-
 
 Tad Honor 1.4 (2017-06-16 released)
 =================================================
 1.Completion of accessibility 2.0 A level detection
 
-
 Tad Honor 1.31 (2017-01-24 released)
 =================================================
 1.Fixed CKEditor unable to upload pictures of the problem
-
 
 Tad Honor 1.3 (2017-01-08 released)
 =================================================
@@ -100,12 +92,10 @@ Tad Honor 1.3 (2017-01-08 released)
 2.Layout optimization
 3.Join other user publishing mechanisms
 
-
 Tad Honor 1.2 (2016-07-07 released)
 =================================================
 1.Fixed sort
 2.Support XOOPS 2.5.8
-
 
 Tad Honor 1.1 (2016-05-27 released)
 =================================================
@@ -114,7 +104,6 @@ Tad Honor 1.1 (2016-05-27 released)
 3.Fixed the file can't be download problem
 4.Corrected block set is not working properly
 5.New icons
-
 
 Tad Honor 1.0 (2015-01-22 released)
 =================================================
