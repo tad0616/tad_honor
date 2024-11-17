@@ -60,6 +60,7 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('now_op', $op);
+$xoopsTpl->assign('tad_honor_adm', $tad_honor_adm);
 $xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu, false, $interface_icon));
 $xoopsTpl->assign('show_confetti', $xoopsModuleConfig['show_confetti']);
 $xoTheme->addStylesheet('modules/' . $xoopsModule->getVar('dirname') . '/css/module.css');
@@ -73,7 +74,7 @@ require_once XOOPS_ROOT_PATH . '/footer.php';
  */
 function show_one_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser;
+    global $xoopsDB, $xoopsTpl, $xoopsUser, $tad_honor_adm;
 
     if (empty($honor_sn)) {
         return;
@@ -125,7 +126,7 @@ function show_one_tad_honor($honor_sn = '')
     $xoopsTpl->assign('uid_name', $uid_name);
     $xoopsTpl->assign('lang_views_info', sprintf(_MD_TADHONOR_HONOR_VIEWS_INFO, $honor_unit, $uid_name, $honor_date, $honor_counter));
 
-    if ($_SESSION['tad_honor_adm'] or Utility::power_chk('tad_honor_post', 1)) {
+    if ($tad_honor_adm or Utility::power_chk('tad_honor_post', 1)) {
         $SweetAlert = new SweetAlert();
         $SweetAlert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     }
@@ -155,11 +156,11 @@ function add_tad_honor_counter($honor_sn = '')
  */
 function delete_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $json_file;
+    global $xoopsDB, $json_file, $tad_honor_adm;
     if (empty($honor_sn)) {
         return;
     }
-    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$tad_honor_adm) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
     $sql = 'DELETE FROM `' . $xoopsDB->prefix('tad_honor') . '` WHERE `honor_sn` = ?';
@@ -174,12 +175,12 @@ function delete_tad_honor($honor_sn = '')
 //列出所有tad_honor資料
 function list_tad_honor()
 {
-    global $xoopsTpl, $xoopsUser, $json_file;
+    global $xoopsTpl, $xoopsUser, $json_file, $tad_honor_adm;
     if (!file_exists($json_file)) {
         mk_tad_honor_json();
     }
 
-    if ($_SESSION['tad_honor_adm'] or Utility::power_chk('tad_honor_post', 1)) {
+    if ($tad_honor_adm or Utility::power_chk('tad_honor_post', 1)) {
         $SweetAlert = new SweetAlert();
         $SweetAlert->render('delete_tad_honor_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_honor&honor_sn=", 'honor_sn');
     }
@@ -191,7 +192,7 @@ function list_tad_honor()
 
 function mk_tad_honor_json()
 {
-    global $xoopsDB, $xoopsUser, $json_file;
+    global $xoopsDB, $xoopsUser, $json_file, $tad_honor_adm;
 
     $uid = $xoopsUser ? $xoopsUser->uid() : '';
     $myts = \MyTextSanitizer::getInstance();
@@ -213,7 +214,7 @@ function mk_tad_honor_json()
         $honor['honor_content'] = $myts->displayTarea($honor['honor_content'], 1, 1, 0, 1, 0);
         $honor['honor_url'] = $myts->htmlSpecialChars($honor['honor_url']);
         $honor['honor_title_link'] = "<a href='{$_SERVER['PHP_SELF']}?honor_sn={$honor['honor_sn']}'>{$honor['honor_title']}</a>{$list_file}";
-        if (($_SESSION['tad_honor_adm'] || Utility::power_chk('tad_honor_post', 1) || $uid == $honor['honor_uid'])) {
+        if (($tad_honor_adm || Utility::power_chk('tad_honor_post', 1) || $uid == $honor['honor_uid'])) {
             $honor['honor_function'] = '<a href="javascript:delete_tad_honor_func(' . $honor['honor_sn'] . ');" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="' . _TAD_DEL . '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             <a href="' . XOOPS_URL . '/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=' . $honor['honor_sn'] . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="' . _TAD_EDIT . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
         }
@@ -232,9 +233,9 @@ function mk_tad_honor_json()
  */
 function update_tad_honor($honor_sn = '')
 {
-    global $xoopsDB, $xoopsUser, $json_file;
+    global $xoopsDB, $xoopsUser, $json_file, $tad_honor_adm;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$tad_honor_adm) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -277,9 +278,9 @@ function update_tad_honor($honor_sn = '')
  */
 function insert_tad_honor()
 {
-    global $xoopsDB, $xoopsUser, $json_file;
+    global $xoopsDB, $xoopsUser, $json_file, $tad_honor_adm;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$tad_honor_adm) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -315,9 +316,9 @@ function insert_tad_honor()
 //tad_honor編輯表單
 function tad_honor_form($honor_sn = '')
 {
-    global $xoopsTpl, $xoopsModuleConfig, $xoopsUser;
+    global $xoopsTpl, $xoopsModuleConfig, $xoopsUser, $tad_honor_adm;
 
-    if (!Utility::power_chk('tad_honor_post', 1) and !$_SESSION['tad_honor_adm']) {
+    if (!Utility::power_chk('tad_honor_post', 1) and !$tad_honor_adm) {
         redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
     }
 

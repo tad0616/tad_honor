@@ -17,7 +17,7 @@
                         <th data-field="honor_unit" data-sortable="true" class="text-center text-nowrap">
                             <{$smarty.const._MD_TADHONOR_HONOR_UNIT}>
                         </th>
-                        <{if $smarty.session.tad_honor_adm or $post_power}>
+                        <{if $tad_honor_adm or $post_power}>
                             <th data-field="honor_function" class="text-center text-nowrap"><{$smarty.const._TAD_FUNCTION}></th>
                         <{/if}>
                     </tr>
@@ -26,7 +26,7 @@
             </table>
         </div>
 
-        <{if $smarty.session.tad_honor_adm or $post_power}>
+        <{if $tad_honor_adm or $post_power}>
             <div class="text-right text-end">
                 <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
             </div>

@@ -64,10 +64,9 @@ $modversion['templates'] = [
     ['file' => 'tad_honor_index.tpl', 'description' => 'tad_honor_index.tpl'],
 ];
 
-//---區塊設定---//
-
+//---區塊設定 (索引為固定值，若欲刪除區塊記得補上索引，避免區塊重複)---//
 $modversion['blocks'] = [
-    [
+    1 => [
         'file' => 'tad_honor_list.php',
         'name' => _MI_TADHONOR_LIST_BLOCK_NAME,
         'description' => _MI_TADHONOR_LIST_BLOCK_DESC,
@@ -75,7 +74,8 @@ $modversion['blocks'] = [
         'template' => 'tad_honor_list.tpl',
         'edit_func' => 'tad_honor_list_edit',
         'options' => '10',
-    ], [
+    ],
+    2 => [
         'file' => 'tad_honor_marquee.php',
         'name' => _MI_TADHONOR_MARQUEE_BLOCK_NAME,
         'description' => _MI_TADHONOR_MARQUEE_BLOCK_DESC,

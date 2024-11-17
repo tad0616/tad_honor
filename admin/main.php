@@ -20,4 +20,5 @@ $xoopsTpl->assign('permission_content', $permission_content);
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('now_op', 'tad_honor_power');
+$xoopsTpl->assign('tad_honor_adm', $tad_honor_adm);
 require_once __DIR__ . '/footer.php';
