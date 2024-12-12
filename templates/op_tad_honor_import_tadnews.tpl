@@ -4,7 +4,7 @@
         <div class="input-group-prepend input-group-addon">
             <span class="input-group-text"><{$smarty.const._MA_TADHONOR_SELECT_HONOR_CATE}></span>
         </div>
-        <select name="ncsn" id="ncsn" class="form-select">
+        <select name="ncsn" id="ncsn" class="form-control form-select">
             <{foreach from=$all_cate item=data}>
                 <option value="<{$data.ncsn}>">
                     <{$data.nc_title}>

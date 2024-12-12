@@ -25,7 +25,7 @@
           <{$smarty.const._MD_TADHONOR_HONOR_UNIT}>
         </label>
         <div class="col-sm-4">
-          <select name="honor_unit" class="form-select " size=1>
+          <select name="honor_unit" class="form-control form-select " size=1>
             <{foreach from=$unit_array item=unit}>
               <option value="<{$unit.name}>" <{if $honor_unit == $unit.name}>selected="selected"<{/if}>><{$unit.name}></option>
             <{/foreach}>
@@ -68,7 +68,7 @@
         <!--編號-->
         <input type='hidden' name="honor_sn" value="<{$honor_sn|default:''}>">
         <input type="hidden" name="op" value="<{$next_op|default:''}>">
-        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
       </div>
     </form>
   </div>

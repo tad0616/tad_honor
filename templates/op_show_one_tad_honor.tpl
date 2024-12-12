@@ -27,9 +27,9 @@
         <div class="alert alert-info">
             <div class="pull-right float-right pull-end">
                 <{if $tad_honor_adm or ($post_power and $uid==$honor_uid)}>
-                    <a href="javascript:delete_tad_honor_func(<{$honor_sn|default:''}>);" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
-                    <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn|default:''}>" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
-                    <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-sm btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
+                    <a href="javascript:delete_tad_honor_func(<{$honor_sn|default:''}>);" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
+                    <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=<{$honor_sn|default:''}>" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+                    <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-sm btn-primary"><i class="fa fa-square-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
                 <{/if}>
             </div>
             <{$lang_views_info|default:''}>

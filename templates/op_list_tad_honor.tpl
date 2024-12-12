@@ -5,7 +5,7 @@
         <{/if}>
         <h1 class="text-center"><{$smarty.const._MD_TADHONOR_SMNAME1}></h1>
         <div id="confetti_content">
-            <table data-toggle="table" data-pagination="true" data-search="true" data-mobile-responsive="true" data-url="<{$xoops_upload_url}>/tad_honor_data.json" class="table table-striped table-hover">
+            <table data-toggle="table" data-pagination="true" data-search="true" data-mobile-responsive="true" data-url="<{$xoops_upload_url|default:''}>/tad_honor_data.json" class="table table-striped table-hover">
                 <thead>
                     <tr class="info">
                         <th data-field="honor_date" data-sortable="true" class="text-center">
@@ -28,7 +28,7 @@
 
         <{if $tad_honor_adm or $post_power}>
             <div class="text-right text-end">
-                <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
+                <a href="<{$xoops_url}>/modules/tad_honor/index.php?op=tad_honor_form" class="btn btn-info"><i class="fa fa-square-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
             </div>
         <{/if}>
 

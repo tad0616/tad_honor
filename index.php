@@ -215,8 +215,8 @@ function mk_tad_honor_json()
         $honor['honor_url'] = $myts->htmlSpecialChars($honor['honor_url']);
         $honor['honor_title_link'] = "<a href='{$_SERVER['PHP_SELF']}?honor_sn={$honor['honor_sn']}'>{$honor['honor_title']}</a>{$list_file}";
         if (($tad_honor_adm || Utility::power_chk('tad_honor_post', 1) || $uid == $honor['honor_uid'])) {
-            $honor['honor_function'] = '<a href="javascript:delete_tad_honor_func(' . $honor['honor_sn'] . ');" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="' . _TAD_DEL . '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-            <a href="' . XOOPS_URL . '/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=' . $honor['honor_sn'] . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="' . _TAD_EDIT . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $honor['honor_function'] = '<a href="javascript:delete_tad_honor_func(' . $honor['honor_sn'] . ');" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="' . _TAD_DEL . '"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a href="' . XOOPS_URL . '/modules/tad_honor/index.php?op=tad_honor_form&honor_sn=' . $honor['honor_sn'] . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="' . _TAD_EDIT . '"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         }
 
         $all_content[] = $honor;
@@ -248,12 +248,12 @@ function update_tad_honor($honor_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $honor_title = $_POST['honor_title'];
-    $honor_date = $_POST['honor_date'];
-    $honor_unit = $_POST['honor_unit'];
-    $honor_content = $_POST['honor_content'];
+    $honor_title = (string) $_POST['honor_title'];
+    $honor_date = (string) $_POST['honor_date'];
+    $honor_unit = (string) $_POST['honor_unit'];
+    $honor_content = (string) $_POST['honor_content'];
     $honor_content = Wcag::amend($honor_content);
-    $honor_url = $_POST['honor_url'];
+    $honor_url = (string) $_POST['honor_url'];
 
     $sql = 'UPDATE `' . $xoopsDB->prefix('tad_honor') . '` SET
     `honor_title` = ?,
@@ -293,12 +293,12 @@ function insert_tad_honor()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $honor_title = $_POST['honor_title'];
-    $honor_date = $_POST['honor_date'];
-    $honor_unit = $_POST['honor_unit'];
-    $honor_content = $_POST['honor_content'];
+    $honor_title = (string) $_POST['honor_title'];
+    $honor_date = (string) $_POST['honor_date'];
+    $honor_unit = (string) $_POST['honor_unit'];
+    $honor_content = (string) $_POST['honor_content'];
     $honor_content = Wcag::amend($honor_content);
-    $honor_url = $_POST['honor_url'];
+    $honor_url = (string) $_POST['honor_url'];
 
     $sql = 'INSERT INTO `' . $xoopsDB->prefix('tad_honor') . '` (`honor_title`, `honor_date`, `honor_unit`, `honor_counter`, `honor_content`, `honor_url`, `honor_uid`) VALUES (?, ?, ?, 0, ?, ?, ?)';
     Utility::query($sql, 'sssssi', [$honor_title, $honor_date, $honor_unit, $honor_content, $honor_url, $uid]) or Utility::web_error($sql, __FILE__, __LINE__);
